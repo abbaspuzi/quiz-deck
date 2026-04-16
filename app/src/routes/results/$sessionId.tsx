@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Link, createFileRoute } from '@tanstack/react-router'
-import { highRiskClusters, categories } from '../../features/quiz/content'
+import { highRiskClusters } from '../../features/quiz/content'
 
 type AnswerRecord = {
   questionId: string

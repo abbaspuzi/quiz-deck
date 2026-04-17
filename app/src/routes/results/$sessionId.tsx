@@ -138,9 +138,9 @@ function ResultsPage() {
 
         <div className="grid gap-3 sm:grid-cols-2">
           <Link className={primaryButtonClass} to="/">
-            Try another round
+            Back home
           </Link>
-          <Link className={secondaryButtonClass} to="/dashboard">
+          <Link className={secondaryButtonClass} to="/leaderboard">
             View leaderboard
           </Link>
         </div>

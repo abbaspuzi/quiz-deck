@@ -21,6 +21,19 @@ export type QuizQuestion = {
   images?: [string, string]
 }
 
+export type TrainingCard = {
+  id: string
+  kind: 'image-to-name' | 'name-to-image'
+  prompt: string
+  answer: string
+  explain: string
+  cluster: string
+  category: QuestionCategory
+  image?: string
+  textOptions?: string[]
+  imageOptions?: Array<{ name: string; image: string }>
+}
+
 export const highRiskClusters = [
   {
     id: 'russian-wraps',
@@ -192,7 +205,7 @@ const sizeScaleQuestions: QuizQuestion[] = [
     options: ['Medium', 'Large'],
     answer: 'Medium',
     explain: 'Marilyn: Medium = 3 Gerberas; Large = 5 Gerberas.',
-    image: '/quiz-images/image17.png',
+    image: '/quiz-images/marilyn-pink-carnation-mothers-day-bouquet-medium.png',
   },
   {
     id: 'q18-zaylee-size',
@@ -203,7 +216,7 @@ const sizeScaleQuestions: QuizQuestion[] = [
     options: ['Medium', 'Large'],
     answer: 'Medium',
     explain: 'Zaylee: Medium = 2 Anthuriums; Large = 3 Anthuriums.',
-    image: '/quiz-images/image18.png',
+    image: '/quiz-images/zaylee-pink-mum-mothers-day-flower-box-medium.png',
   },
   {
     id: 'q19-zooey-size',
@@ -215,7 +228,7 @@ const sizeScaleQuestions: QuizQuestion[] = [
     options: ['Medium', 'Large'],
     answer: 'Large',
     explain: 'Zooey: Medium = 3 Sunflowers; Large = 5 Sunflowers.',
-    image: '/quiz-images/image20.png',
+    image: '/quiz-images/zooey-yellow-sunflower-mothers-day-bouquet.png',
   },
 ]
 
@@ -294,7 +307,7 @@ const scenarioQuestions: QuizQuestion[] = [
     answer: 'Greenheart Sunflower (Right)',
     explain:
       'The Zooey Bouquet uses Greenheart sunflowers, whereas the Zooey Box uses Blackheart.',
-    images: ['/quiz-images/image2.png', '/quiz-images/image5.png'],
+    images: ['/quiz-images/zooey-bouquet-center.png', '/quiz-images/zooey-flower-box-center.png'],
   },
   {
     id: 'q16-laycie-missing',
@@ -312,7 +325,7 @@ const scenarioQuestions: QuizQuestion[] = [
     answer: '2 Pink Rubber Ribbons',
     explain:
       'Laycie is the only product with 3 pink rubber ribbons attached directly to the cream wrapping paper. This one only has 1.',
-    image: '/quiz-images/image4.png',
+    image: '/quiz-images/laycie-lilac-rose-mothers-day-bouquet-standard.png',
   },
 ]
 
@@ -426,7 +439,7 @@ const orchidQuestions: QuizQuestion[] = [
     answer: 'Indira Pink & White Phalaenopsis Orchid',
     explain:
       'The Indira is the only orchid product that uses mixed colors (pink and white) and features the signature pink decorative base wrap.',
-    image: '/quiz-images/image1.png',
+    image: '/quiz-images/indira-pink-white-mothers-day-phalaenopsis-orchid.png',
   },
   {
     id: 'q34b-indira-scenario',
@@ -471,7 +484,7 @@ const visualIdQuestions: QuizQuestion[] = [
     options: ['Medium', 'Large'],
     answer: 'Medium',
     explain: '4 Pink Gerbera, 4 Peach Gerbera, 2 Hot Cherry Pink Carnations = Medium.',
-    image: '/quiz-images/image11.png',
+    image: '/quiz-images/izzy-pink-daisy-mothers-day-flower-box-medium.png',
   },
   {
     id: 'q21-name-zandra',
@@ -482,7 +495,7 @@ const visualIdQuestions: QuizQuestion[] = [
     options: ['Zandra', 'Zaylee', 'Ayame', 'Izzy'],
     answer: 'Zandra',
     explain: 'Zandra uses Pink Greenheart Gerbera, Hot Cherry Pink Rose, and Pink Rose Spray.',
-    image: '/quiz-images/image14.png',
+    image: '/quiz-images/zandra-pink-gerbera-mothers-day-flower-box.png',
   },
   {
     id: 'q22-name-luxe-kate',
@@ -493,7 +506,7 @@ const visualIdQuestions: QuizQuestion[] = [
     options: ['Luxe Kate', 'Zandra', 'Tessa', 'Beatrice'],
     answer: 'Luxe Kate',
     explain: 'Luxe Kate features an XL Hatbox with Red Roses formed in a mushroom shape.',
-    image: '/quiz-images/image22.png',
+    image: '/quiz-images/luxe-kate-red-rose-mothers-day-flower-box.png',
   },
   {
     id: 'q23-name-mischa',
@@ -504,7 +517,7 @@ const visualIdQuestions: QuizQuestion[] = [
     options: ['Mischa', 'Laycie', 'Miriam', 'Trixie'],
     answer: 'Mischa',
     explain: 'Mischa uses Pink Carnation, White Eustoma, White Matthiola, and Thlaspi.',
-    image: '/quiz-images/image3.png',
+    image: '/quiz-images/mischa-pink-carnation-mothers-day-bouquet-large.png',
   },
   {
     id: 'q24-name-lyndi',
@@ -515,7 +528,7 @@ const visualIdQuestions: QuizQuestion[] = [
     options: ['Lyndi', 'Marilyn', 'Miriam', 'Laycie'],
     answer: 'Lyndi',
     explain: 'Lyndi features Heart Shaped Red Roses in a White Wrapper with Pink Rubber Ribbons.',
-    image: '/quiz-images/image12.png',
+    image: '/quiz-images/lyndi-red-rose-mothers-day-heart-bouquet-large.png',
   },
   {
     id: 'q25-name-izzy',
@@ -526,7 +539,7 @@ const visualIdQuestions: QuizQuestion[] = [
     options: ['Izzy', 'Zandra', 'Phoebe', 'Ayame'],
     answer: 'Izzy',
     explain: 'Izzy features Pink Gerbera, Red Carnations, Yellow Rose Spray, Mini Fruit Leaf, and Scabiosa Pod.',
-    image: '/quiz-images/image15.png',
+    image: '/quiz-images/izzy-pink-daisy-mothers-day-flower-box-large.png',
   },
   {
     id: 'q26-name-phoebe',
@@ -537,9 +550,21 @@ const visualIdQuestions: QuizQuestion[] = [
     options: ['Phoebe', 'Zandra', 'Izzy', 'Ayame'],
     answer: 'Phoebe',
     explain: 'Phoebe features Hot Cherry Pink Carnations, Pink Carnations, White Dendrobium Orchid, and Purple Capsia.',
-    image: '/quiz-images/image6.png',
+    image: '/quiz-images/phoebe-pink-carnation-mothers-day-flower-box-large.png',
   },
 ]
+
+const trainingProducts = visualIdQuestions
+  .filter((question) => question.type === 'name_product' && question.image)
+  .map((question) => ({
+    id: question.id,
+    name: question.answer,
+    image: question.image!,
+    explain: question.explain,
+    cluster: question.cluster,
+    category: question.category,
+    options: question.options,
+  }))
 
 // ─── Category: This or That (Pick the right picture) ───
 
@@ -553,7 +578,7 @@ const thisOrThatQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Miriam (yellow wrapper, white ribbon). Right is Marilyn (pink wrapper, black ribbon).',
-    images: ['/quiz-images/image8.png', '/quiz-images/image19.png'],
+    images: ['/quiz-images/miriam-pink-carnation-mothers-day-russian-bouquet-standard.png', '/quiz-images/marilyn-carnation-mothers-day-russian-bouquet-standard.png'],
   },
   {
     id: 'q28-zendaya-vs-zooey',
@@ -564,7 +589,7 @@ const thisOrThatQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Zendaya (Greenheart Sunflowers with Red Rose Spray). Right is Zooey Box (Blackheart Sunflowers, no Red Rose Spray).',
-    images: ['/quiz-images/image23.png', '/quiz-images/image21.png'],
+    images: ['/quiz-images/zendaya-yellow-sunflower-mothers-day-flower-box.png', '/quiz-images/zooey-yellow-sunflower-mothers-day-flower-box.png'],
   },
   {
     id: 'q29-tessa-vs-beatrice',
@@ -575,7 +600,7 @@ const thisOrThatQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Right',
     explain: 'Right is Tessa (Pink Lilies, Avalanche/White Roses). Left is Beatrice.',
-    images: ['/quiz-images/image9.png', '/quiz-images/image24.png'],
+    images: ['/quiz-images/beatrice-rose-lily-mothers-day-flower-box.png', '/quiz-images/tessa-pink-lily-mothers-day-flower-box-large.png'],
   },
   {
     id: 'q30-ayame-vs-zaylee',
@@ -586,7 +611,7 @@ const thisOrThatQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Ayame (1 Anthurium, Pink Gerberas). Right is Zaylee (2–3 Anthuriums, Lilac Spidermums, no Gerberas).',
-    images: ['/quiz-images/image13.png', '/quiz-images/image25.png'],
+    images: ['/quiz-images/ayame-pink-gerbera-mothers-day-flower-box-large.png', '/quiz-images/zaylee-pink-mum-mothers-day-flower-box-large.png'],
   },
   {
     id: 'q31-indira-vs-orchid',
@@ -597,7 +622,7 @@ const thisOrThatQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Right',
     explain: 'Right is Indira (mixed pink & white stalks, pink decorative base wrap). Left is the standard Pink Phalaenopsis Orchid (2 stalks, plain pot).',
-    images: ['/quiz-images/image10.png', '/quiz-images/image1.png'],
+    images: ['/quiz-images/image10.png', '/quiz-images/indira-pink-white-mothers-day-phalaenopsis-orchid.png'],
   },
   {
     id: 'q32-trixie-vs-tessa',
@@ -608,7 +633,7 @@ const thisOrThatQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Right',
     explain: 'Right is Trixie (purple wrapper). Left is Tessa Pink Lily Bouquet.',
-    images: ['/quiz-images/image7.png', '/quiz-images/image26.png'],
+    images: ['/quiz-images/tessa-pink-lily-mothers-day-bouquet-standard.png', '/quiz-images/trixie-pink-lily-mothers-day-bouquet.png'],
   },
 ]
 
@@ -624,7 +649,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Mischa (pink wrapper, Pink Carnation + White Eustoma + Matthiola). Right is Laycie (cream wrapper, 3 pink rubber ribbons, Ocean Song Rose).',
-    images: ['/quiz-images/image3.png', '/quiz-images/image4.png'],
+    images: ['/quiz-images/mischa-pink-carnation-mothers-day-bouquet-large.png', '/quiz-images/laycie-lilac-rose-mothers-day-bouquet-standard.png'],
   },
   {
     id: 'fr02-laycie-vs-mischa',
@@ -635,7 +660,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Right',
     explain: 'Right is Laycie (cream wrapper with pink rubber ribbons, Ocean Song Rose + Phalaenopsis Orchid). Left is Mischa (pink wrapper, Pink Carnation + White Eustoma).',
-    images: ['/quiz-images/image3.png', '/quiz-images/image4.png'],
+    images: ['/quiz-images/mischa-pink-carnation-mothers-day-bouquet-large.png', '/quiz-images/laycie-lilac-rose-mothers-day-bouquet-standard.png'],
   },
   {
     id: 'fr03-phoebe-vs-zandra',
@@ -646,7 +671,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Phoebe (Hot Cherry Pink Carnation, White Dendrobium Orchid, Purple Capsia). Right is Zandra (Pink Gerbera, Hot Cherry Pink Rose, Rose Spray).',
-    images: ['/quiz-images/image6.png', '/quiz-images/image14.png'],
+    images: ['/quiz-images/phoebe-pink-carnation-mothers-day-flower-box-large.png', '/quiz-images/zandra-pink-gerbera-mothers-day-flower-box.png'],
   },
   {
     id: 'fr04-izzy-vs-zandra',
@@ -657,7 +682,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Izzy (Pink Gerbera, Peach Gerbera, Red Carnations, Yellow Rose Spray). Right is Zandra (Pink Gerbera, Hot Cherry Pink Rose, no yellow flowers).',
-    images: ['/quiz-images/image11.png', '/quiz-images/image14.png'],
+    images: ['/quiz-images/izzy-pink-daisy-mothers-day-flower-box-medium.png', '/quiz-images/zandra-pink-gerbera-mothers-day-flower-box.png'],
   },
   {
     id: 'fr05-lyndi-vs-luxekate',
@@ -668,7 +693,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Lyndi (heart-shaped Red Roses in white wrapper with pink ribbons). Right is Luxe Kate (XL Hatbox with Red Roses in mushroom shape).',
-    images: ['/quiz-images/image12.png', '/quiz-images/image22.png'],
+    images: ['/quiz-images/lyndi-red-rose-mothers-day-heart-bouquet-large.png', '/quiz-images/luxe-kate-red-rose-mothers-day-flower-box.png'],
   },
   {
     id: 'fr06-zooey-bouquet-vs-box',
@@ -679,7 +704,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Zooey Bouquet (Greenheart Sunflowers in pink wrapper with Alstroemeria). Right is Zooey Box (Blackheart Sunflowers in peach hatbox).',
-    images: ['/quiz-images/image20.png', '/quiz-images/image21.png'],
+    images: ['/quiz-images/zooey-yellow-sunflower-mothers-day-bouquet.png', '/quiz-images/zooey-yellow-sunflower-mothers-day-flower-box.png'],
   },
   {
     id: 'fr07-beatrice-vs-luxekate',
@@ -690,7 +715,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Beatrice (Red Roses + White/Pink Roses + Lilies in peach hatbox). Right is Luxe Kate (XL Hatbox with ONLY Red Roses in mushroom dome shape).',
-    images: ['/quiz-images/image9.png', '/quiz-images/image22.png'],
+    images: ['/quiz-images/beatrice-rose-lily-mothers-day-flower-box.png', '/quiz-images/luxe-kate-red-rose-mothers-day-flower-box.png'],
   },
   {
     id: 'fr08-zaylee-vs-zandra',
@@ -701,7 +726,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Zaylee (2-3 Anthuriums, Lilac Spidermums, NO Gerberas). Right is Zandra (Pink Gerbera, Hot Cherry Pink Rose, Rose Spray).',
-    images: ['/quiz-images/image18.png', '/quiz-images/image14.png'],
+    images: ['/quiz-images/zaylee-pink-mum-mothers-day-flower-box-medium.png', '/quiz-images/zandra-pink-gerbera-mothers-day-flower-box.png'],
   },
   {
     id: 'fr09-marilyn-vs-mischa',
@@ -712,7 +737,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Marilyn (pink/black Russian wrapper, Pink Gerbera, no Matthiola). Right is Mischa (pink wrapper, White Eustoma + Matthiola, not Russian-style).',
-    images: ['/quiz-images/image19.png', '/quiz-images/image3.png'],
+    images: ['/quiz-images/marilyn-carnation-mothers-day-russian-bouquet-standard.png', '/quiz-images/mischa-pink-carnation-mothers-day-bouquet-large.png'],
   },
   {
     id: 'fr10-tessa-vs-phoebe',
@@ -723,7 +748,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Right',
     explain: 'Right is Tessa (Pink Lilies + Avalanche/White Roses in peach hatbox). Left is Phoebe (Hot Cherry Pink Carnations + White Dendrobium Orchid).',
-    images: ['/quiz-images/image6.png', '/quiz-images/image24.png'],
+    images: ['/quiz-images/phoebe-pink-carnation-mothers-day-flower-box-large.png', '/quiz-images/tessa-pink-lily-mothers-day-flower-box-large.png'],
   },
   {
     id: 'fr11-izzy-vs-phoebe',
@@ -734,7 +759,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Right',
     explain: 'Right is Izzy (colourful mix: Pink Gerbera, Red Carnation, Yellow Rose Spray, Scabiosa Pod). Left is Phoebe (pink-red tones: Hot Cherry Pink Carnation, White Dendrobium Orchid).',
-    images: ['/quiz-images/image6.png', '/quiz-images/image15.png'],
+    images: ['/quiz-images/phoebe-pink-carnation-mothers-day-flower-box-large.png', '/quiz-images/izzy-pink-daisy-mothers-day-flower-box-large.png'],
   },
   {
     id: 'fr12-luxekate-vs-beatrice',
@@ -745,7 +770,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Luxe Kate (XL Hatbox, ONLY Red Roses in a mushroom dome). Right is Beatrice (mixed Red Roses + White/Pink Roses + Lilies).',
-    images: ['/quiz-images/image22.png', '/quiz-images/image9.png'],
+    images: ['/quiz-images/luxe-kate-red-rose-mothers-day-flower-box.png', '/quiz-images/beatrice-rose-lily-mothers-day-flower-box.png'],
   },
   {
     id: 'fr13-zendra-vs-zooeybox',
@@ -756,7 +781,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Right',
     explain: 'Right is Zendaya (Greenheart Sunflowers WITH Red Rose Spray in peach box). Left is Zooey Box (Blackheart Sunflowers, NO Red Rose Spray).',
-    images: ['/quiz-images/image21.png', '/quiz-images/image23.png'],
+    images: ['/quiz-images/zooey-yellow-sunflower-mothers-day-flower-box.png', '/quiz-images/zendaya-yellow-sunflower-mothers-day-flower-box.png'],
   },
   {
     id: 'fr14-trixie-vs-mischa',
@@ -767,7 +792,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Right',
     explain: 'Right is Trixie (purple wrapper — the only MDAY product with purple). Left is Mischa (pink wrapper, Pink Carnation + White Eustoma).',
-    images: ['/quiz-images/image3.png', '/quiz-images/image26.png'],
+    images: ['/quiz-images/mischa-pink-carnation-mothers-day-bouquet-large.png', '/quiz-images/trixie-pink-lily-mothers-day-bouquet.png'],
   },
   {
     id: 'fr15-ayame-vs-zaylee',
@@ -778,7 +803,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Ayame (1 Anthurium + Pink Gerberas). Right is Zaylee (2-3 Anthuriums + Lilac Spidermums, NO Gerberas).',
-    images: ['/quiz-images/image13.png', '/quiz-images/image25.png'],
+    images: ['/quiz-images/ayame-pink-gerbera-mothers-day-flower-box-large.png', '/quiz-images/zaylee-pink-mum-mothers-day-flower-box-large.png'],
   },
   {
     id: 'fr16-indira-vs-orchid',
@@ -789,7 +814,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Indira (mixed pink + white stalks, pink decorative fabric wrap). Right is the standard Pink Phalaenopsis Orchid (all-pink stalks, plain white pot).',
-    images: ['/quiz-images/image1.png', '/quiz-images/image10.png'],
+    images: ['/quiz-images/indira-pink-white-mothers-day-phalaenopsis-orchid.png', '/quiz-images/image10.png'],
   },
   {
     id: 'fr17-miriam-vs-marilyn',
@@ -800,7 +825,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Right',
     explain: 'Right is Miriam (yellow wrapper, white ribbon, includes White Matthiola). Left is Marilyn (pink wrapper, black ribbon, NO Matthiola).',
-    images: ['/quiz-images/image19.png', '/quiz-images/image8.png'],
+    images: ['/quiz-images/marilyn-carnation-mothers-day-russian-bouquet-standard.png', '/quiz-images/miriam-pink-carnation-mothers-day-russian-bouquet-standard.png'],
   },
   {
     id: 'fr18-zandra-vs-ayame',
@@ -811,7 +836,7 @@ const flowerRecogniseQuestions: QuizQuestion[] = [
     options: ['Left', 'Right'],
     answer: 'Left',
     explain: 'Left is Zandra (Pink Gerbera + Hot Cherry Pink Rose + Rose Spray). Right is Ayame (1 Anthurium + Pink Gerberas, no Hot Cherry Pink Rose).',
-    images: ['/quiz-images/image14.png', '/quiz-images/image13.png'],
+    images: ['/quiz-images/zandra-pink-gerbera-mothers-day-flower-box.png', '/quiz-images/ayame-pink-gerbera-mothers-day-flower-box-large.png'],
   },
 ]
 
@@ -856,4 +881,37 @@ export function shuffle<T>(array: T[]): T[] {
 export function buildQuiz(count = 20): QuizQuestion[] {
   const shuffled = shuffle(allQuestions)
   return shuffled.slice(0, Math.min(count, shuffled.length))
+}
+
+export function buildTrainingDeck(): TrainingCard[] {
+  return trainingProducts.flatMap((product, index) => {
+    const distractors = [1, 2, 3].map((offset) => trainingProducts[(index + offset) % trainingProducts.length])
+
+    return [
+      {
+        id: `${product.id}-image-to-name`,
+        kind: 'image-to-name',
+        prompt: 'Select the correct flower name.',
+        answer: product.name,
+        explain: product.explain,
+        cluster: product.cluster,
+        category: product.category,
+        image: product.image,
+        textOptions: product.options,
+      },
+      {
+        id: `${product.id}-name-to-image`,
+        kind: 'name-to-image',
+        prompt: `Find ${product.name}.`,
+        answer: product.name,
+        explain: product.explain,
+        cluster: product.cluster,
+        category: product.category,
+        imageOptions: shuffle([
+          { name: product.name, image: product.image },
+          ...distractors.map((item) => ({ name: item.name, image: item.image })),
+        ]),
+      },
+    ]
+  })
 }

@@ -20,10 +20,10 @@ function RootLayout() {
           <div className="min-w-0">
             <Link className="inline-flex flex-col gap-1" to="/">
               <span className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
-                Bloomthis event training
+                2026 Mother's Day
               </span>
               <span className="font-display text-[1.35rem] font-semibold tracking-[-0.05em] text-[var(--text-primary)] sm:text-[1.65rem]">
-                Left / Right Quiz Deck
+                Bloomthis Product Training Deck
               </span>
             </Link>
           </div>
@@ -36,16 +36,23 @@ function RootLayout() {
               <Link
                 className={navLinkClass}
                 activeProps={{ className: activeNavLinkClass }}
-                to="/dashboard"
+                to="/training-deck"
+              >
+                Training Deck
+              </Link>
+              <Link
+                className={navLinkClass}
+                activeProps={{ className: activeNavLinkClass }}
+                to="/leaderboard"
               >
                 Leaderboard
               </Link>
               <Link
                 className={navLinkClass}
                 activeProps={{ className: activeNavLinkClass }}
-                to="/login"
+                to="/"
               >
-                {user ? 'Play' : 'Login'}
+                {user ? 'Quiz' : 'Start'}
               </Link>
             </nav>
 
@@ -54,8 +61,8 @@ function RootLayout() {
                 <span className="max-w-[14rem] truncate">{user.name}</span>
               </div>
             ) : (
-              <Link className={ghostButtonClass} to="/login">
-                Team sign in
+              <Link className={ghostButtonClass} to="/">
+                Open deck
               </Link>
             )}
           </div>

@@ -10,7 +10,7 @@ import {
   subtitleClass,
 } from '../lib/ui'
 
-function DashboardPage() {
+function LeaderboardPage() {
   const leaderboard = useQuery(api.leaderboard.topScores)
 
   const completedCount = leaderboard?.length ?? 0
@@ -20,7 +20,6 @@ function DashboardPage() {
       : 0
 
   const topThree = leaderboard?.slice(0, 3) ?? []
-  const remaining = leaderboard?.slice(3) ?? []
 
   return (
     <div className="mx-auto grid w-full max-w-6xl gap-6">
@@ -31,12 +30,11 @@ function DashboardPage() {
             <span className={badgeClass}>Live team ranking</span>
           </div>
           <div>
-            <h1 className="font-display max-w-[12ch] text-balance text-[clamp(2.4rem,5vw,4.5rem)] font-semibold leading-[0.93] tracking-[-0.07em] text-[var(--text-primary)]">
-              Leaderboard for today&apos;s flower drills.
+            <h1 className="font-display max-w-[11ch] text-balance text-[clamp(2.4rem,5vw,4.5rem)] font-semibold leading-[0.93] tracking-[-0.07em] text-[var(--text-primary)]">
+              Leaderboard
             </h1>
-            <p className={`${subtitleClass} mt-3 max-w-[62ch]`}>
-              Anyone can browse the board. Logged-in teammates can run the quiz, submit scores, and keep the
-              team&apos;s event prep moving.
+            <p className={`${subtitleClass} mt-3 max-w-[48ch]`}>
+              Quick look at who is ready. Study in the training deck, then take the quiz when you are ready.
             </p>
           </div>
         </div>
@@ -72,11 +70,11 @@ function DashboardPage() {
               The board is waiting for the first run.
             </h2>
             <p className={`${subtitleClass} mt-2`}>
-              Start a quiz round and your team can begin tracking readiness here.
+              Finish a real quiz round to appear here.
             </p>
           </div>
-          <Link className="mx-auto w-full sm:w-auto" to="/login">
-            <span className={primaryButtonClass}>Login to play</span>
+          <Link className="mx-auto w-full sm:w-auto" to="/">
+            <span className={primaryButtonClass}>Open quiz</span>
           </Link>
         </section>
       ) : (
@@ -127,8 +125,8 @@ function DashboardPage() {
                   Every completed run
                 </h2>
               </div>
-              <Link className="text-sm font-semibold text-[var(--accent-strong)]" to="/login">
-                Login to add your name
+              <Link className="text-sm font-semibold text-[var(--accent-strong)]" to="/">
+                Open quiz
               </Link>
             </div>
 
@@ -155,8 +153,6 @@ function DashboardPage() {
                 </article>
               ))}
             </div>
-
-            {remaining.length === 0 && topThree.length > 0 ? null : null}
           </section>
         </>
       )}
@@ -178,6 +174,6 @@ function formatTimeAgo(date: Date): string {
   return date.toLocaleDateString()
 }
 
-export const Route = createFileRoute('/dashboard')({
-  component: DashboardPage,
+export const Route = createFileRoute('/leaderboard')({
+  component: LeaderboardPage,
 })

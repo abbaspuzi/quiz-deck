@@ -1,67 +1,74 @@
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
 import { sampleParticipants } from '../features/quiz/content'
+import { cardClass, primaryButtonClass, secondaryButtonClass, subtitleClass } from '../lib/ui'
 
 type MatchNameSearch = {
   q?: string
 }
 
 function MatchNamePage() {
+  const navigate = useNavigate({ from: '/match-name' })
   const { q = '' } = Route.useSearch()
 
   const normalized = q.trim().toLowerCase()
-  const matches = sampleParticipants.filter((participant) =>
-    participant.toLowerCase().includes(normalized),
-  )
-
+  const matches = sampleParticipants.filter((participant) => participant.toLowerCase().includes(normalized))
   const displayName = q.trim() || 'Guest'
 
-  return (
-    <div className="username-screen">
-      <h2 className="section-title">Matches for {q || 'your name'}</h2>
-      <p className="subtitle">Confirm the right staff profile before starting.</p>
+  const handleContinue = (name: string) => {
+    void navigate({
+      to: '/quiz/$sessionId',
+      params: { sessionId: `s-${Date.now()}` },
+      search: { name },
+    })
+  }
 
-      <section className="leaderboard-list" style={{ width: '100%' }}>
+  return (
+    <div className="mx-auto grid w-full max-w-3xl gap-6">
+      <section className={`${cardClass} grid gap-5`}>
+        <div>
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+            Match teammate
+          </p>
+          <h1 className="font-display mt-2 text-[2.4rem] font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
+            Matches for {q || 'your name'}
+          </h1>
+          <p className={`${subtitleClass} mt-2`}>Confirm the right profile before starting the training deck.</p>
+        </div>
+
         {matches.length > 0 ? (
-          <div className="cluster-grid">
+          <div className="grid gap-3">
             {matches.map((match) => (
-              <article className="leaderboard-item" key={match}>
-                <div style={{ flex: 1 }}>
-                  <strong>{match}</strong>
-                  <p className="helper-text">Profile found. Continue into quiz.</p>
+              <article className="flex flex-col gap-4 rounded-[1.4rem] bg-[var(--surface)] p-4 sm:flex-row sm:items-center" key={match}>
+                <div className="min-w-0 flex-1">
+                  <p className="text-base font-semibold text-[var(--text-primary)]">{match}</p>
+                  <p className="mt-1 text-sm leading-6 text-[var(--text-secondary)]">Profile found. Continue into the quiz.</p>
                 </div>
-                <Link className="button" search={{ name: match }} to="/quiz/$sessionId" params={{ sessionId: `s-${Date.now()}` }}>
-                  Continue
-                </Link>
+                <button className="sm:w-auto" type="button" onClick={() => handleContinue(match)}>
+                  <span className={primaryButtonClass}>Continue</span>
+                </button>
               </article>
             ))}
           </div>
         ) : (
-          <div className="cluster-grid">
-            <article className="leaderboard-item">
-              <div style={{ flex: 1 }}>
-                <strong>No exact match for &ldquo;{q}&rdquo;</strong>
-                <p className="helper-text">
-                  You can still continue as a new participant.
-                </p>
-              </div>
-            </article>
-            <Link
-              className="button"
-              search={{ name: displayName }}
-              to="/quiz/$sessionId" params={{ sessionId: `s-${Date.now()}` }}
-              style={{ width: '100%', justifyContent: 'center' }}
-            >
-              Continue as {displayName}
-            </Link>
+          <div className="grid gap-4 rounded-[1.4rem] bg-[var(--surface)] p-4">
+            <div>
+              <p className="text-base font-semibold text-[var(--text-primary)]">No exact match for &ldquo;{q}&rdquo;</p>
+              <p className="mt-1 text-sm leading-6 text-[var(--text-secondary)]">
+                You can still continue as a new participant.
+              </p>
+            </div>
+            <button type="button" onClick={() => handleContinue(displayName)}>
+              <span className={primaryButtonClass}>Continue as {displayName}</span>
+            </button>
           </div>
         )}
-      </section>
 
-      <div className="cta-row" style={{ justifyContent: 'center' }}>
-        <Link className="ghost-button" to="/">
-          Back
-        </Link>
-      </div>
+        <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <Link className={secondaryButtonClass} to="/">
+            Back home
+          </Link>
+        </div>
+      </section>
     </div>
   )
 }

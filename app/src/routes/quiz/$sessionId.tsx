@@ -1,10 +1,21 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react'
 import { Link, createFileRoute } from '@tanstack/react-router'
-import { useMutation } from 'convex/react'
+import { useMutation, useQuery } from 'convex/react'
 import confetti from 'canvas-confetti'
 import { api } from '../../../convex/_generated/api'
+import { authClient } from '../../lib/auth-client'
 import { shuffle, highRiskClusters, getQuestionsForMode } from '../../features/quiz/content'
 import type { QuizQuestion, QuizMode } from '../../features/quiz/content'
+import {
+  badgeClass,
+  cardClass,
+  eyebrowClass,
+  googleButtonClass,
+  mutedPanelClass,
+  primaryButtonClass,
+  secondaryButtonClass,
+  subtitleClass,
+} from '../../lib/ui'
 
 type QuizSearch = {
   name?: string
@@ -21,6 +32,7 @@ type AnswerRecord = {
 function QuizSessionPage() {
   const { sessionId } = Route.useParams()
   const { name = 'Guest', mode = 'all' } = Route.useSearch()
+  const user = useQuery(api.auth.getCurrentUser)
 
   const questions = useMemo(() => shuffle(getQuestionsForMode(mode)), [mode])
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -30,11 +42,40 @@ function QuizSessionPage() {
 
   const question: QuizQuestion | undefined = questions[currentIndex]
   const total = questions.length
-  const progress = ((currentIndex) / total) * 100
+  const progress = total > 0 ? (currentIndex / total) * 100 : 0
   const isFinished = currentIndex >= total
+  const playerName = user?.name ?? name
 
   const score = answers.filter((a) => a.correct).length
   const scorePercent = answers.length > 0 ? Math.round((score / answers.length) * 100) : 0
+
+  const confirmAnswer = useCallback(
+    (option: string) => {
+      if (!question || revealed) return
+      const isCorrect = option === question.answer
+      setSelected(option)
+      setRevealed(true)
+      setAnswers((prev) => [
+        ...prev,
+        {
+          questionId: question.id,
+          selected: option,
+          correct: isCorrect,
+          cluster: question.cluster,
+        },
+      ])
+
+      if (isCorrect) {
+        confetti({
+          particleCount: 60,
+          spread: 54,
+          origin: { y: 0.7 },
+          colors: ['#d86d31', '#efb44d', '#7fbf7a', '#e9dcca'],
+        })
+      }
+    },
+    [question, revealed],
+  )
 
   const handleSelect = useCallback(
     (option: string) => {
@@ -45,239 +86,385 @@ function QuizSessionPage() {
   )
 
   const handleConfirm = useCallback(() => {
-    if (!selected || !question) return
-    const isCorrect = selected === question.answer
-    setRevealed(true)
-    setAnswers((prev) => [
-      ...prev,
-      {
-        questionId: question.id,
-        selected,
-        correct: isCorrect,
-        cluster: question.cluster,
-      },
-    ])
-    if (isCorrect) {
-      confetti({
-        particleCount: 80,
-        spread: 60,
-        origin: { y: 0.7 },
-        colors: ['#e91e63', '#ff4081', '#4caf50', '#8bc34a', '#9c27b0'],
-      })
-    }
-  }, [selected, question])
+    if (!selected) return
+    confirmAnswer(selected)
+  }, [selected, confirmAnswer])
 
   const handleNext = useCallback(() => {
     setSelected(null)
     setRevealed(false)
-    setCurrentIndex((i) => i + 1)
+    setCurrentIndex((index) => index + 1)
   }, [])
+
+  useEffect(() => {
+    if (!question?.images || revealed) return
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault()
+        confirmAnswer('Left')
+      }
+
+      if (event.key === 'ArrowRight') {
+        event.preventDefault()
+        confirmAnswer('Right')
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [question, revealed, confirmAnswer])
 
   const submitResult = useMutation(api.leaderboard.submitResult)
   const submitted = useRef(false)
 
   useEffect(() => {
-    if (isFinished && answers.length > 0 && !submitted.current) {
-      submitted.current = true
+    if (!isFinished || answers.length === 0 || submitted.current) return
 
-      // Compute cluster scores
-      const clusterMap = new Map<string, { correct: number; total: number; title: string }>()
-      for (const a of answers) {
-        const existing = clusterMap.get(a.cluster) ?? { correct: 0, total: 0, title: '' }
-        existing.total++
-        if (a.correct) existing.correct++
-        const info = highRiskClusters.find((c) => c.id === a.cluster)
-        existing.title = info?.title ?? a.cluster
-        clusterMap.set(a.cluster, existing)
-      }
+    submitted.current = true
 
-      submitResult({
-        name,
-        score: scorePercent,
-        totalQuestions: total,
-        clusterScores: Array.from(clusterMap.entries()).map(([id, data]) => ({
-          clusterId: id,
-          clusterTitle: data.title,
-          correct: data.correct,
-          total: data.total,
-        })),
-      }).catch(() => {
-        // Silently fail - results still shown locally
-      })
+    const clusterMap = new Map<string, { correct: number; total: number; title: string }>()
+    for (const answer of answers) {
+      const existing = clusterMap.get(answer.cluster) ?? { correct: 0, total: 0, title: '' }
+      existing.total++
+      if (answer.correct) existing.correct++
+      const info = highRiskClusters.find((cluster) => cluster.id === answer.cluster)
+      existing.title = info?.title ?? answer.cluster
+      clusterMap.set(answer.cluster, existing)
     }
-  }, [isFinished, answers, name, scorePercent, total, submitResult])
+
+    submitResult({
+      name: playerName,
+      score: scorePercent,
+      totalQuestions: total,
+      clusterScores: Array.from(clusterMap.entries()).map(([id, data]) => ({
+        clusterId: id,
+        clusterTitle: data.title,
+        correct: data.correct,
+        total: data.total,
+      })),
+    }).catch(() => {
+      // Results still render locally when submission fails.
+    })
+  }, [answers, isFinished, playerName, scorePercent, submitResult, total])
 
   useEffect(() => {
-    if (isFinished && answers.length > 0) {
-      const duration = 1500
-      const end = Date.now() + duration
-      const frame = () => {
-        confetti({
-          particleCount: 3,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0 },
-          colors: ['#e91e63', '#ff4081', '#9c27b0'],
-        })
-        confetti({
-          particleCount: 3,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1 },
-          colors: ['#4caf50', '#8bc34a', '#ff9800'],
-        })
-        if (Date.now() < end) requestAnimationFrame(frame)
-      }
-      frame()
+    if (!isFinished || answers.length === 0) return
+
+    const duration = 1200
+    const end = Date.now() + duration
+
+    const frame = () => {
+      confetti({
+        particleCount: 3,
+        angle: 60,
+        spread: 52,
+        origin: { x: 0 },
+        colors: ['#d86d31', '#efb44d', '#7fbf7a'],
+      })
+      confetti({
+        particleCount: 3,
+        angle: 120,
+        spread: 52,
+        origin: { x: 1 },
+        colors: ['#d86d31', '#7fbf7a', '#ead6b4'],
+      })
+
+      if (Date.now() < end) requestAnimationFrame(frame)
     }
-  }, [isFinished, answers.length])
 
-  if (isFinished) {
+    frame()
+  }, [answers.length, isFinished])
+
+  if (!user) {
     return (
-      <div className="results-screen">
-        <div className="results-header">
-          <span className="result-emoji">
-            {scorePercent >= 80 ? '🏆' : scorePercent >= 60 ? '💪' : '📚'}
-          </span>
-          <h2 className="headline">Quiz Complete!</h2>
-          <p className="subtitle">
-            {name}, you scored {score}/{total} ({scorePercent}%)
-          </p>
-        </div>
+      <div className="mx-auto grid w-full max-w-3xl gap-6">
+        <section className={`${cardClass} grid gap-5 px-6 py-8 text-center`}>
+          <div className="flex flex-wrap justify-center gap-2">
+            <span className={badgeClass}>Login required to answer</span>
+            <span className={badgeClass}>Leaderboard stays public</span>
+          </div>
+          <div>
+            <h1 className="font-display text-balance text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-[var(--text-primary)]">
+              This quiz deck is for signed-in teammates.
+            </h1>
+            <p className={`${subtitleClass} mt-3 max-w-[56ch] mx-auto`}>
+              Sign in first so your answers and score are tracked correctly. You can still browse the leaderboard
+              without an account.
+            </p>
+          </div>
 
-        <div className="result-actions" style={{ justifyContent: 'center' }}>
-          <Link
-            className="button"
-            to="/results/$sessionId"
-            params={{ sessionId }}
-            search={{ name, answers: JSON.stringify(answers) }}
-          >
-            View detailed results
-          </Link>
-        </div>
+          <div className="mx-auto w-full max-w-md">
+            <button
+              className={googleButtonClass}
+              type="button"
+              onClick={() =>
+                void authClient.signIn.social({
+                  provider: 'google',
+                  callbackURL: mode === 'flower-recognise' ? '/login?mode=flower-recognise' : '/login',
+                })
+              }
+            >
+              <GoogleMark />
+              Continue with Google
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Link className={secondaryButtonClass} to="/dashboard">
+              Open leaderboard
+            </Link>
+            <Link className={secondaryButtonClass} to="/login" search={{ mode: mode === 'flower-recognise' ? mode : undefined }}>
+              Go to login screen
+            </Link>
+          </div>
+        </section>
       </div>
     )
   }
 
-  const clusterInfo = highRiskClusters.find((c) => c.id === question.cluster)
+  if (isFinished) {
+    return (
+      <div className="mx-auto grid w-full max-w-3xl gap-6">
+        <section className={`${cardClass} grid gap-5 px-6 py-8 text-center`}>
+          <div className="mx-auto inline-flex h-20 w-20 items-center justify-center rounded-full bg-[var(--surface)] text-4xl">
+            {scorePercent >= 80 ? '🏆' : scorePercent >= 60 ? '💪' : '📚'}
+          </div>
+          <div>
+            <p className={eyebrowClass}>Round complete</p>
+            <h1 className="font-display mt-2 text-[clamp(2.4rem,5vw,4rem)] font-semibold tracking-[-0.07em] text-[var(--text-primary)]">
+              Nice work, {playerName.split(' ')[0] ?? 'teammate'}.
+            </h1>
+            <p className={`${subtitleClass} mt-3`}>
+              You scored {score}/{total} for {scorePercent}% accuracy. Open the result card for cluster detail.
+            </p>
+          </div>
+
+          <Link
+            className="mx-auto w-full max-w-sm"
+            to="/results/$sessionId"
+            params={{ sessionId }}
+            search={{ name: playerName, answers: JSON.stringify(answers) }}
+          >
+            <span className={primaryButtonClass}>View detailed results</span>
+          </Link>
+        </section>
+      </div>
+    )
+  }
+
+  if (!question) return null
+
+  const clusterInfo = highRiskClusters.find((cluster) => cluster.id === question.cluster)
+  const imageOptions = question.images ?? null
+  const isImageDuel = Boolean(imageOptions)
 
   return (
-    <div className="quiz-screen">
-      {/* Progress header */}
-      <div className="quiz-header">
-        <p className="eyebrow">{name} · Session {sessionId.slice(0, 8)}</p>
-        <div className="quiz-progress">
-          <div className="progress-track">
-            <div
-              className="progress-fill"
-              style={{ width: `${progress}%` }}
-            />
+    <div className="mx-auto grid w-full max-w-5xl gap-6 lg:grid-cols-[minmax(18rem,0.8fr)_minmax(0,1.2fr)] lg:items-start">
+      <aside className="grid gap-4 lg:sticky lg:top-8">
+        <section className={`${cardClass} grid gap-5`}>
+          <div>
+            <p className={eyebrowClass}>{playerName} · Session {sessionId.slice(0, 8)}</p>
+            <h1 className="font-display mt-2 text-[2rem] font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
+              {mode === 'flower-recognise' ? 'Left / right sprint' : 'Full training deck'}
+            </h1>
+            <p className={`${subtitleClass} mt-2`}>
+              Move fast, then review the explanation before the next card.
+            </p>
           </div>
-          <span className="progress-label">
-            {currentIndex + 1} / {total}
-          </span>
-        </div>
-        <div className="quiz-score-row">
-          <span className="score-pill correct-pill">{score} correct</span>
-          <span className="score-pill wrong-pill">
-            {answers.length - score} wrong
-          </span>
-        </div>
-      </div>
 
-      {/* Question card */}
-      <div className="quiz-card">
-        <div className="quiz-card-meta">
-          <span className="category-badge">{clusterInfo?.title ?? question.cluster}</span>
-          <span className="chip">{question.category.replace('-', ' ')}</span>
-        </div>
-
-        <p className="quiz-prompt">{question.prompt}</p>
-
-        {/* Single image */}
-        {question.image && (
-          <div className="quiz-image-container">
-            <img src={question.image} alt="Quiz visual" className="quiz-image" />
+          <div className="grid gap-3 rounded-[1.5rem] bg-[var(--surface)] p-4">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-sm font-semibold text-[var(--text-primary)]">
+                Question {currentIndex + 1} of {total}
+              </span>
+              <span className="text-sm font-semibold tabular-nums text-[var(--text-secondary)]">
+                {Math.round(progress)}%
+              </span>
+            </div>
+            <div className="h-3 overflow-hidden rounded-full bg-[var(--surface-strong)]">
+              <div
+                className="h-full rounded-full bg-[var(--accent-strong)] transition-[width] duration-300 ease-out"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
           </div>
-        )}
 
-        {/* Image pair (this or that) */}
-        {question.images && (
-          <div className="quiz-image-pair">
-            <button
-              type="button"
-              className={`quiz-image-side clickable${selected === 'Left' ? ' selected' : ''}${revealed && 'Left' === question.answer ? ' correct' : ''}${revealed && selected === 'Left' && 'Left' !== question.answer ? ' wrong' : ''}`}
-              onClick={() => handleSelect('Left')}
-              disabled={revealed}
-            >
-              <span className="image-label">Left</span>
-              <img src={question.images[0]} alt="Option A" className="quiz-image" />
-            </button>
-            <button
-              type="button"
-              className={`quiz-image-side clickable${selected === 'Right' ? ' selected' : ''}${revealed && 'Right' === question.answer ? ' correct' : ''}${revealed && selected === 'Right' && 'Right' !== question.answer ? ' wrong' : ''}`}
-              onClick={() => handleSelect('Right')}
-              disabled={revealed}
-            >
-              <span className="image-label">Right</span>
-              <img src={question.images[1]} alt="Option B" className="quiz-image" />
-            </button>
+          <div className="grid grid-cols-2 gap-3">
+            <article className={mutedPanelClass}>
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                Correct
+              </p>
+              <p className="font-display mt-2 text-3xl font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
+                {score}
+              </p>
+            </article>
+            <article className={mutedPanelClass}>
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                Missed
+              </p>
+              <p className="font-display mt-2 text-3xl font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
+                {answers.length - score}
+              </p>
+            </article>
           </div>
-        )}
+        </section>
+      </aside>
 
-        <div className="quiz-options">
-          {question.options.map((option) => {
-            let cls = 'quiz-option'
-            if (selected === option) cls += ' selected'
-            if (revealed) {
-              if (option === question.answer) cls += ' correct'
-              else if (option === selected) cls += ' wrong'
-            }
-            return (
-              <button
-                key={option}
-                type="button"
-                className={cls}
-                onClick={() => handleSelect(option)}
-                disabled={revealed}
-              >
-                {option}
-              </button>
-            )
-          })}
+      <section className={`${cardClass} grid gap-5`}>
+        <div className="flex flex-wrap gap-2">
+          <span className={badgeClass}>{clusterInfo?.title ?? question.cluster}</span>
+          <span className={badgeClass}>{question.category.replace('-', ' ')}</span>
+          {isImageDuel && <span className={badgeClass}>Use left or right</span>}
         </div>
 
-        {/* Feedback */}
-        {revealed && (
-          <div
-            className={`quiz-feedback ${selected === question.answer ? 'feedback-correct' : 'feedback-wrong'}`}
-          >
-            <strong>
-              {selected === question.answer ? 'Correct!' : 'Not quite.'}
-            </strong>
-            <p>{question.explain}</p>
-          </div>
-        )}
-
-        {/* Action buttons */}
-        <div className="quiz-actions">
-          {!revealed ? (
-            <button
-              type="button"
-              className="button"
-              disabled={!selected}
-              onClick={handleConfirm}
-            >
-              Confirm answer
-            </button>
-          ) : (
-            <button type="button" className="button" onClick={handleNext}>
-              {currentIndex + 1 < total ? 'Next question' : 'See results'}
-            </button>
+        <div className="grid gap-3">
+          <p className={eyebrowClass}>Question prompt</p>
+          <h2 className="font-display text-balance text-[clamp(1.8rem,3.6vw,2.7rem)] font-semibold leading-[1] tracking-[-0.06em] text-[var(--text-primary)]">
+            {question.prompt}
+          </h2>
+          {isImageDuel && (
+            <p className={subtitleClass}>Tap a side or use the keyboard arrows for a faster review loop.</p>
           )}
         </div>
-      </div>
+
+        {question.image && (
+          <div className="overflow-hidden rounded-[1.6rem] bg-[var(--surface)] p-3">
+            <img
+              src={question.image}
+              alt="Quiz visual"
+              className="max-h-[min(24rem,45vh)] w-full rounded-[1.2rem] object-contain"
+            />
+          </div>
+        )}
+
+        {imageOptions ? (
+          <div className="grid gap-4 md:grid-cols-2">
+            {(['Left', 'Right'] as const).map((side, index) => {
+              const selectedThis = selected === side
+              const correctThis = question.answer === side
+              const incorrectSelected = revealed && selectedThis && !correctThis
+
+              let cardTone = 'border-[var(--border-soft)] bg-[var(--surface)]'
+              if (revealed && correctThis) cardTone = 'border-[var(--success)] bg-[var(--success-soft)]'
+              if (incorrectSelected) cardTone = 'border-[var(--danger)] bg-[var(--danger-soft)]'
+              if (!revealed && selectedThis) cardTone = 'border-[var(--accent)] bg-[color:color-mix(in_oklab,var(--accent)_10%,white)]'
+
+              return (
+                <button
+                  key={side}
+                  type="button"
+                  className={`group grid gap-3 rounded-[1.75rem] border p-3 text-left transition duration-200 ease-out hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[var(--surface-strong)] ${cardTone}`}
+                  onClick={() => confirmAnswer(side)}
+                  disabled={revealed}
+                >
+                  <div className="flex items-center justify-between gap-3 px-1 pt-1">
+                    <span className="font-display text-[1.15rem] font-semibold tracking-[-0.05em] text-[var(--text-primary)]">
+                      {side}
+                    </span>
+                    <span className="inline-flex min-h-9 items-center justify-center rounded-full bg-[var(--surface-strong)] px-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-secondary)]">
+                      {side === 'Left' ? 'Arrow Left' : 'Arrow Right'}
+                    </span>
+                  </div>
+                  <img
+                    src={imageOptions[index]}
+                    alt={`${side} option`}
+                    className="max-h-[min(16rem,34vh)] w-full rounded-[1.25rem] object-cover"
+                  />
+                </button>
+              )
+            })}
+          </div>
+        ) : (
+          <div className="grid gap-3">
+            {question.options.map((option) => {
+              const isSelected = selected === option
+              const isCorrect = option === question.answer
+              const isIncorrectSelected = revealed && isSelected && !isCorrect
+
+              let optionTone = 'border-[var(--border-soft)] bg-[var(--surface)] text-[var(--text-primary)]'
+              if (!revealed && isSelected) {
+                optionTone = 'border-[var(--accent)] bg-[color:color-mix(in_oklab,var(--accent)_10%,white)] text-[var(--text-primary)]'
+              }
+              if (revealed && isCorrect) {
+                optionTone = 'border-[var(--success)] bg-[var(--success-soft)] text-[var(--text-primary)]'
+              }
+              if (isIncorrectSelected) {
+                optionTone = 'border-[var(--danger)] bg-[var(--danger-soft)] text-[var(--text-primary)]'
+              }
+
+              return (
+                <button
+                  key={option}
+                  type="button"
+                  className={`w-full rounded-[1.4rem] border px-4 py-4 text-left text-sm font-semibold leading-6 transition duration-200 ease-out hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[var(--surface-strong)] ${optionTone}`}
+                  onClick={() => handleSelect(option)}
+                  disabled={revealed}
+                >
+                  {option}
+                </button>
+              )
+            })}
+          </div>
+        )}
+
+        {revealed && (
+          <div
+            className="rounded-[1.5rem] px-4 py-4"
+            style={{
+              background:
+                selected === question.answer
+                  ? 'var(--success-soft)'
+                  : 'color-mix(in oklab, var(--accent) 10%, white)',
+            }}
+          >
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--text-secondary)]">
+              {selected === question.answer ? 'Correct' : 'Review note'}
+            </p>
+            <p className="mt-2 text-sm leading-7 text-[var(--text-primary)]">{question.explain}</p>
+          </div>
+        )}
+
+        <div className="flex flex-col gap-3 sm:flex-row">
+          {!revealed && !question.images ? (
+            <button type="button" className={`${primaryButtonClass} sm:flex-1`} disabled={!selected} onClick={handleConfirm}>
+              Confirm answer
+            </button>
+          ) : revealed ? (
+            <button type="button" className={`${primaryButtonClass} sm:flex-1`} onClick={handleNext}>
+              {currentIndex + 1 < total ? 'Next question' : 'See results'}
+            </button>
+          ) : null}
+
+          <Link className={`${secondaryButtonClass} sm:w-auto`} to="/dashboard">
+            Leaderboard
+          </Link>
+        </div>
+      </section>
     </div>
+  )
+}
+
+function GoogleMark() {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+      <path
+        fill="#4285F4"
+        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+      />
+    </svg>
   )
 }
 

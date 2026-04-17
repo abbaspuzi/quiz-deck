@@ -1,6 +1,14 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { useQuery } from 'convex/react'
 import { api } from '../../convex/_generated/api'
+import {
+  badgeClass,
+  cardClass,
+  panelClass,
+  primaryButtonClass,
+  statCardClass,
+  subtitleClass,
+} from '../lib/ui'
 
 function DashboardPage() {
   const leaderboard = useQuery(api.leaderboard.topScores)
@@ -8,76 +16,150 @@ function DashboardPage() {
   const completedCount = leaderboard?.length ?? 0
   const avgScore =
     completedCount > 0
-      ? Math.round(
-          leaderboard!.reduce((sum, r) => sum + r.score, 0) / completedCount,
-        )
+      ? Math.round(leaderboard!.reduce((sum, r) => sum + r.score, 0) / completedCount)
       : 0
 
+  const topThree = leaderboard?.slice(0, 3) ?? []
+  const remaining = leaderboard?.slice(3) ?? []
+
   return (
-    <div className="dashboard-screen">
-      <div className="header">
-        <h2>Leaderboard</h2>
-        <p className="subtitle">Live quiz results from the team</p>
-      </div>
-
-      {/* Stats row */}
-      <div className="stats-grid" style={{ marginBottom: '1.25rem' }}>
-        <article className="stat-card">
-          <p className="stat-label">Completed</p>
-          <p className="stat-value">{completedCount}</p>
-        </article>
-        <article className="stat-card">
-          <p className="stat-label">Avg score</p>
-          <p className="stat-value">{avgScore}%</p>
-        </article>
-      </div>
-
-      {/* Leaderboard list */}
-      <section className="leaderboard-list">
-        <h3 className="section-title">Top Scores</h3>
-        {leaderboard === undefined ? (
-          <div className="loading-state">Loading...</div>
-        ) : leaderboard.length === 0 ? (
-          <div className="empty-state">
-            <p>No results yet.</p>
-            <p className="helper-text">Complete the quiz to appear here!</p>
+    <div className="mx-auto grid w-full max-w-6xl gap-6">
+      <section className={`${cardClass} grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-end`}>
+        <div className="grid gap-4">
+          <div className="flex flex-wrap gap-2">
+            <span className={badgeClass}>Open without login</span>
+            <span className={badgeClass}>Live team ranking</span>
           </div>
-        ) : (
-          <div className="leaderboard-items">
-            {leaderboard.map((entry, index) => {
-              const rank = index + 1
-              const isTopThree = rank <= 3
-              const rankDisplay =
-                rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `${rank}`
-
-              const date = new Date(entry.completedAt)
-              const timeAgo = formatTimeAgo(date)
-
-              return (
-                <article
-                  className={`leaderboard-item${isTopThree ? ' top-three' : ''}`}
-                  key={entry._id}
-                >
-                  <span className="rank">{rankDisplay}</span>
-                  <div className="player-info">
-                    <span className="player-name">{entry.name}</span>
-                    <span className="player-date">{timeAgo}</span>
-                  </div>
-                  <div className="player-score">
-                    <span className="score-percent">{entry.score}%</span>
-                    {entry.clusterScores.length > 0 && (
-                      <span className="score-detail">
-                        {entry.clusterScores.length} clusters
-                      </span>
-                    )}
-                  </div>
-                </article>
-              )
-            })}
+          <div>
+            <h1 className="font-display max-w-[12ch] text-balance text-[clamp(2.4rem,5vw,4.5rem)] font-semibold leading-[0.93] tracking-[-0.07em] text-[var(--text-primary)]">
+              Leaderboard for today&apos;s flower drills.
+            </h1>
+            <p className={`${subtitleClass} mt-3 max-w-[62ch]`}>
+              Anyone can browse the board. Logged-in teammates can run the quiz, submit scores, and keep the
+              team&apos;s event prep moving.
+            </p>
           </div>
-        )}
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          <article className={statCardClass}>
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+              Completed runs
+            </p>
+            <p className="font-display mt-2 text-4xl font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
+              {completedCount}
+            </p>
+          </article>
+          <article className={statCardClass}>
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+              Average score
+            </p>
+            <p className="font-display mt-2 text-4xl font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
+              {avgScore}%
+            </p>
+          </article>
+        </div>
       </section>
 
+      {leaderboard === undefined ? (
+        <section className={`${panelClass} px-6 py-10 text-center text-sm text-[var(--text-secondary)]`}>
+          Loading live scores...
+        </section>
+      ) : leaderboard.length === 0 ? (
+        <section className={`${panelClass} grid gap-5 px-6 py-10 text-center`}>
+          <div>
+            <h2 className="font-display text-3xl font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
+              The board is waiting for the first run.
+            </h2>
+            <p className={`${subtitleClass} mt-2`}>
+              Start a quiz round and your team can begin tracking readiness here.
+            </p>
+          </div>
+          <Link className="mx-auto w-full sm:w-auto" to="/login">
+            <span className={primaryButtonClass}>Login to play</span>
+          </Link>
+        </section>
+      ) : (
+        <>
+          <section className="grid gap-4 lg:grid-cols-3">
+            {topThree.map((entry, index) => (
+              <article className={cardClass} key={entry._id}>
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                      Rank {index + 1}
+                    </p>
+                    <h2 className="font-display mt-2 text-[1.7rem] font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
+                      {entry.name}
+                    </h2>
+                  </div>
+                  <div className="inline-flex h-12 min-w-12 items-center justify-center rounded-full bg-[var(--surface)] px-3 font-display text-xl font-semibold tracking-[-0.05em] text-[var(--accent-strong)]">
+                    {index + 1}
+                  </div>
+                </div>
+
+                <div className="mt-8 flex items-end justify-between gap-4">
+                  <div>
+                    <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                      Score
+                    </p>
+                    <p className="font-display mt-2 text-5xl font-semibold tracking-[-0.07em] text-[var(--accent-strong)]">
+                      {entry.score}%
+                    </p>
+                  </div>
+                  <p className="text-right text-sm leading-6 text-[var(--text-secondary)]">
+                    {entry.clusterScores.length} clusters
+                    <br />
+                    {formatTimeAgo(new Date(entry.completedAt))}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </section>
+
+          <section className={panelClass}>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                  Full ranking
+                </p>
+                <h2 className="font-display mt-2 text-[1.8rem] font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
+                  Every completed run
+                </h2>
+              </div>
+              <Link className="text-sm font-semibold text-[var(--accent-strong)]" to="/login">
+                Login to add your name
+              </Link>
+            </div>
+
+            <div className="mt-5 grid gap-3">
+              {leaderboard.map((entry, index) => (
+                <article
+                  className="grid gap-3 rounded-[1.4rem] bg-[var(--surface)] px-4 py-4 sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:items-center"
+                  key={entry._id}
+                >
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[var(--surface-strong)] font-display text-lg font-semibold tracking-[-0.05em] text-[var(--text-primary)]">
+                    {index + 1}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="truncate text-base font-semibold text-[var(--text-primary)]">{entry.name}</p>
+                    <p className="mt-1 text-sm leading-6 text-[var(--text-secondary)]">
+                      {entry.clusterScores.length} clusters covered · {formatTimeAgo(new Date(entry.completedAt))}
+                    </p>
+                  </div>
+                  <div className="text-left sm:text-right">
+                    <p className="font-display text-[1.8rem] font-semibold tracking-[-0.06em] text-[var(--accent-strong)]">
+                      {entry.score}%
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {remaining.length === 0 && topThree.length > 0 ? null : null}
+          </section>
+        </>
+      )}
     </div>
   )
 }

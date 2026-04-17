@@ -6,18 +6,21 @@ import { query } from "./_generated/server";
 import { betterAuth, type BetterAuthOptions } from "better-auth/minimal";
 import authConfig from "./auth.config";
 
-const siteUrl = process.env.SITE_URL!;
+const siteUrl = process.env.VITE_SITE_URL!;
+const extraOrigins = process.env.EXTRA_ORIGINS
+  ? process.env.EXTRA_ORIGINS.split(",")
+  : [];
 
 export const authComponent = createClient<DataModel>(components.betterAuth);
 
 export const createAuth = (ctx: GenericCtx<DataModel>) => {
   return betterAuth({
-    trustedOrigins: [siteUrl],
+    trustedOrigins: [siteUrl, ...extraOrigins],
     database: authComponent.adapter(ctx),
     socialProviders: {
       google: {
-        clientId: process.env.VITE_CONVEX_URL!,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        clientId: process.env.VITE_GOOGLE_CLIENT_ID!,
+        clientSecret: process.env.VITE_GOOGLE_CLIENT_SECRET,
       },
     },
     plugins: [

@@ -1,7 +1,6 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery } from "convex/react";
-import confetti from "canvas-confetti";
 import { api } from "../../../convex/_generated/api";
 import { authClient } from "../../lib/auth-client";
 import {
@@ -70,14 +69,6 @@ function QuizSessionPage() {
         },
       ]);
 
-      if (isCorrect) {
-        confetti({
-          particleCount: 60,
-          spread: 54,
-          origin: { y: 0.7 },
-          colors: ["#d86d31", "#efb44d", "#7fbf7a", "#e9dcca"],
-        });
-      }
     },
     [question, revealed],
   );
@@ -143,33 +134,6 @@ function QuizSessionPage() {
     });
   }, [answers, isFinished, playerName, scorePercent, submitResult, total]);
 
-  useEffect(() => {
-    if (!isFinished || answers.length === 0) return;
-
-    const duration = 1200;
-    const end = Date.now() + duration;
-
-    const frame = () => {
-      confetti({
-        particleCount: 3,
-        angle: 60,
-        spread: 52,
-        origin: { x: 0 },
-        colors: ["#d86d31", "#efb44d", "#7fbf7a"],
-      });
-      confetti({
-        particleCount: 3,
-        angle: 120,
-        spread: 52,
-        origin: { x: 1 },
-        colors: ["#d86d31", "#7fbf7a", "#ead6b4"],
-      });
-
-      if (Date.now() < end) requestAnimationFrame(frame);
-    };
-
-    frame();
-  }, [answers.length, isFinished]);
 
   if (!user) {
     return (

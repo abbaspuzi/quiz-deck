@@ -259,7 +259,33 @@ function QuizSessionPage() {
 
   return (
     <div className="mx-auto grid w-full max-w-5xl gap-6 lg:grid-cols-[minmax(18rem,0.8fr)_minmax(0,1.2fr)] lg:items-start">
-      <aside className="grid gap-4 lg:sticky lg:top-8">
+      {/* Mobile compact nav */}
+      <aside className="lg:hidden">
+        <section className={`${cardClass} grid gap-3 px-4 py-3`}>
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-sm font-semibold text-[var(--text-primary)]">
+              Q{currentIndex + 1}/{total}
+            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-semibold text-[var(--success)]">
+                {score} correct
+              </span>
+              <span className="text-xs font-semibold text-[var(--danger)]">
+                {answers.length - score} missed
+              </span>
+            </div>
+          </div>
+          <div className="h-2 overflow-hidden rounded-full bg-[var(--surface-strong)]">
+            <div
+              className="h-full rounded-full bg-[var(--accent-strong)] transition-[width] duration-300 ease-out"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </section>
+      </aside>
+
+      {/* Desktop full sidebar */}
+      <aside className="hidden lg:grid gap-4 lg:sticky lg:top-8">
         <section className={`${cardClass} grid gap-5`}>
           <div>
             <p className={eyebrowClass}>
@@ -372,7 +398,7 @@ function QuizSessionPage() {
                   <img
                     src={imageOptions[index]}
                     alt={`${side} option`}
-                    className="w-full rounded-[1.25rem] max-h-[min(16rem,34vh)] object-cover"
+                    className="w-full rounded-[1.25rem] max-h-[min(16rem,34vh)] object-contain"
                   />
                 </button>
               );

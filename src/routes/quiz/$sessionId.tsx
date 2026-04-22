@@ -10,7 +10,6 @@ import {
 } from "../../features/quiz/content";
 import type { QuizQuestion, QuizMode } from "../../features/quiz/content";
 import {
-  badgeClass,
   cardClass,
   eyebrowClass,
   googleButtonClass,
@@ -68,7 +67,6 @@ function QuizSessionPage() {
           cluster: question.cluster,
         },
       ]);
-
     },
     [question, revealed],
   );
@@ -134,15 +132,10 @@ function QuizSessionPage() {
     });
   }, [answers, isFinished, playerName, scorePercent, submitResult, total]);
 
-
   if (!user) {
     return (
       <div className="mx-auto grid w-full max-w-3xl gap-6">
         <section className={`${cardClass} grid gap-5 px-6 py-8 text-center`}>
-          <div className="flex flex-wrap justify-center gap-2">
-            <span className={badgeClass}>Login required to answer</span>
-            <span className={badgeClass}>Leaderboard stays public</span>
-          </div>
           <div>
             <h1 className="font-display text-balance text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-[var(--text-primary)]">
               This quiz deck is for signed-in teammates.
@@ -215,9 +208,6 @@ function QuizSessionPage() {
 
   if (!question) return null;
 
-  const clusterInfo = highRiskClusters.find(
-    (cluster) => cluster.id === question.cluster,
-  );
   const imageOptions = question.images ?? null;
   const isImageDuel = Boolean(imageOptions);
 
@@ -302,18 +292,7 @@ function QuizSessionPage() {
       </aside>
 
       <section className={`${cardClass} grid gap-5`}>
-        <div className="flex flex-wrap gap-2">
-          <span className={badgeClass}>
-            {clusterInfo?.title ?? question.cluster}
-          </span>
-          <span className={badgeClass}>
-            {question.category.replace("-", " ")}
-          </span>
-          {isImageDuel && <span className={badgeClass}>Use left or right</span>}
-        </div>
-
         <div className="grid gap-3">
-          <p className={eyebrowClass}>Question prompt</p>
           <h2 className="font-display text-balance text-[clamp(1.8rem,3.6vw,2.7rem)] font-semibold leading-none tracking-[-0.06em] text-(--text-primary)">
             {question.prompt}
           </h2>
@@ -356,7 +335,7 @@ function QuizSessionPage() {
                   key={side}
                   type="button"
                   className={`group grid gap-3 rounded-[1.75rem] border p-3 text-left transition duration-200 ease-out hover:-translate-y-0.5 hover:border-(--accent) hover:bg-(--surface-strong) ${cardTone}`}
-                  onClick={() => confirmAnswer(side)}
+                  onClick={() => handleSelect(side)}
                   disabled={revealed}
                 >
                   <img
@@ -425,7 +404,7 @@ function QuizSessionPage() {
         )}
 
         <div className="flex flex-col gap-3 sm:flex-row">
-          {!revealed && !question.images ? (
+          {!revealed ? (
             <button
               type="button"
               className={`${primaryButtonClass} sm:flex-1`}

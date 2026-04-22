@@ -2,7 +2,6 @@ import { useMemo } from 'react'
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { highRiskClusters } from '../../features/quiz/content'
 import {
-  badgeClass,
   cardClass,
   panelClass,
   primaryButtonClass,
@@ -99,11 +98,6 @@ function ResultsPage() {
   return (
     <div className="mx-auto grid w-full max-w-5xl gap-6 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:items-start">
       <section className={`${cardClass} grid gap-6`}>
-        <div className="flex flex-wrap gap-2">
-          <span className={badgeClass}>{performanceTone.badge}</span>
-          <span className={badgeClass}>Session {sessionId.slice(0, 8)}</span>
-        </div>
-
         <div>
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
             Score summary

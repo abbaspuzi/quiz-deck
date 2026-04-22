@@ -1,40 +1,40 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { useQuery } from 'convex/react'
-import { api } from '../../convex/_generated/api'
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 import {
-  badgeClass,
   cardClass,
   panelClass,
   primaryButtonClass,
   statCardClass,
   subtitleClass,
-} from '../lib/ui'
+} from "../lib/ui";
 
 function LeaderboardPage() {
-  const leaderboard = useQuery(api.leaderboard.topScores)
+  const leaderboard = useQuery(api.leaderboard.topScores);
 
-  const completedCount = leaderboard?.length ?? 0
+  const completedCount = leaderboard?.length ?? 0;
   const avgScore =
     completedCount > 0
-      ? Math.round(leaderboard!.reduce((sum, r) => sum + r.score, 0) / completedCount)
-      : 0
+      ? Math.round(
+          leaderboard!.reduce((sum, r) => sum + r.score, 0) / completedCount,
+        )
+      : 0;
 
-  const topThree = leaderboard?.slice(0, 3) ?? []
+  const topThree = leaderboard?.slice(0, 3) ?? [];
 
   return (
     <div className="mx-auto grid w-full max-w-6xl gap-6">
-      <section className={`${cardClass} grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-end`}>
+      <section
+        className={`${cardClass} grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-end`}
+      >
         <div className="grid gap-4">
-          <div className="flex flex-wrap gap-2">
-            <span className={badgeClass}>Open without login</span>
-            <span className={badgeClass}>Live team ranking</span>
-          </div>
           <div>
             <h1 className="font-display max-w-[11ch] text-balance text-[clamp(2.4rem,5vw,4.5rem)] font-semibold leading-[0.93] tracking-[-0.07em] text-[var(--text-primary)]">
               Leaderboard
             </h1>
             <p className={`${subtitleClass} mt-3 max-w-[48ch]`}>
-              Quick look at who is ready. Study in the training deck, then take the quiz when you are ready.
+              Quick look at who is ready. Study in the training deck, then take
+              the quiz when you are ready.
             </p>
           </div>
         </div>
@@ -60,7 +60,9 @@ function LeaderboardPage() {
       </section>
 
       {leaderboard === undefined ? (
-        <section className={`${panelClass} px-6 py-10 text-center text-sm text-[var(--text-secondary)]`}>
+        <section
+          className={`${panelClass} px-6 py-10 text-center text-sm text-[var(--text-secondary)]`}
+        >
           Loading live scores...
         </section>
       ) : leaderboard.length === 0 ? (
@@ -125,7 +127,10 @@ function LeaderboardPage() {
                   Every completed run
                 </h2>
               </div>
-              <Link className="text-sm font-semibold text-[var(--accent-strong)]" to="/">
+              <Link
+                className="text-sm font-semibold text-[var(--accent-strong)]"
+                to="/"
+              >
                 Open quiz
               </Link>
             </div>
@@ -140,9 +145,12 @@ function LeaderboardPage() {
                     {index + 1}
                   </div>
                   <div className="min-w-0">
-                    <p className="truncate text-base font-semibold text-[var(--text-primary)]">{entry.name}</p>
+                    <p className="truncate text-base font-semibold text-[var(--text-primary)]">
+                      {entry.name}
+                    </p>
                     <p className="mt-1 text-sm leading-6 text-[var(--text-secondary)]">
-                      {entry.clusterScores.length} clusters covered · {formatTimeAgo(new Date(entry.completedAt))}
+                      {entry.clusterScores.length} clusters covered ·{" "}
+                      {formatTimeAgo(new Date(entry.completedAt))}
                     </p>
                   </div>
                   <div className="text-left sm:text-right">
@@ -157,23 +165,23 @@ function LeaderboardPage() {
         </>
       )}
     </div>
-  )
+  );
 }
 
 function formatTimeAgo(date: Date): string {
-  const now = Date.now()
-  const diff = now - date.getTime()
-  const minutes = Math.floor(diff / 60_000)
-  const hours = Math.floor(diff / 3_600_000)
-  const days = Math.floor(diff / 86_400_000)
+  const now = Date.now();
+  const diff = now - date.getTime();
+  const minutes = Math.floor(diff / 60_000);
+  const hours = Math.floor(diff / 3_600_000);
+  const days = Math.floor(diff / 86_400_000);
 
-  if (minutes < 1) return 'Just now'
-  if (minutes < 60) return `${minutes}m ago`
-  if (hours < 24) return `${hours}h ago`
-  if (days < 7) return `${days}d ago`
-  return date.toLocaleDateString()
+  if (minutes < 1) return "Just now";
+  if (minutes < 60) return `${minutes}m ago`;
+  if (hours < 24) return `${hours}h ago`;
+  if (days < 7) return `${days}d ago`;
+  return date.toLocaleDateString();
 }
 
-export const Route = createFileRoute('/leaderboard')({
+export const Route = createFileRoute("/leaderboard")({
   component: LeaderboardPage,
-})
+});

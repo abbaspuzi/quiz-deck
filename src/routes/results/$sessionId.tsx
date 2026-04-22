@@ -22,7 +22,6 @@ type ResultsSearch = {
 }
 
 function ResultsPage() {
-  const { sessionId } = Route.useParams()
   const { name = 'Guest', answers: answersRaw } = Route.useSearch()
 
   const answers: AnswerRecord[] = useMemo(() => {

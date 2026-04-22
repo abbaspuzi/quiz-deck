@@ -54,9 +54,6 @@ function IndexPage() {
         <section className={cardClass}>
           <div className="grid gap-4">
             <div>
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-(--text-muted)">
-                Training deck
-              </p>
               <h1 className="font-display mt-2 text-[2.2rem] font-semibold tracking-[-0.06em] text-(--text-primary)">
                 Learn flowers like flashcards.
               </h1>
@@ -108,19 +105,10 @@ function IndexPage() {
                         </p>
                         <p className="mt-1 text-sm leading-6 text-(--text-secondary)">
                           {mode.id === "flower-recognise"
-                            ? "Left or right picture quiz."
+                            ? "Picture quiz."
                             : "Mixed scored quiz."}
                         </p>
                       </div>
-                      <span
-                        className={
-                          active
-                            ? "mt-0.5 inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-(--accent-strong) px-2 text-xs font-bold text-(--accent-contrast)"
-                            : "mt-0.5 inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-(--surface-strong) px-2 text-xs font-bold text-(--text-muted)"
-                        }
-                      >
-                        {mode.id === "flower-recognise" ? "L/R" : "Quiz"}
-                      </span>
                     </div>
                   </button>
                 );
@@ -136,7 +124,7 @@ function IndexPage() {
                 >
                   Start{" "}
                   {selectedMode === "flower-recognise"
-                    ? "left / right quiz"
+                    ? "Picture quiz"
                     : "full quiz"}
                 </button>
                 <button
@@ -163,14 +151,9 @@ function IndexPage() {
 
       <aside className={cardClass}>
         <div className="flex items-end justify-between gap-3">
-          <div>
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-(--text-muted)">
-              Quick look
-            </p>
-            <h2 className="font-display mt-2 text-[1.6rem] font-semibold tracking-[-0.06em] text-(--text-primary)">
-              Leaderboard
-            </h2>
-          </div>
+          <h2 className="font-display mt-2 text-[1.6rem] font-semibold tracking-[-0.06em] text-(--text-primary)">
+            Leaderboard
+          </h2>
           <Link
             className="text-sm font-semibold text-(--accent-strong)"
             to="/leaderboard"

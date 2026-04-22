@@ -256,7 +256,7 @@ function QuizSessionPage() {
               {playerName} · Session {sessionId.slice(0, 8)}
             </p>
             <h1 className="font-display mt-2 text-[2rem] font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
-              {mode === "flower-recognise" ? "Left / right quiz" : "Full quiz"}
+              {mode === "flower-recognise" ? "Picture quiz" : "Full quiz"}
             </h1>
             <p className={`${subtitleClass} mt-2`}>
               Move fast, then review the explanation before the next card.
@@ -314,7 +314,7 @@ function QuizSessionPage() {
 
         <div className="grid gap-3">
           <p className={eyebrowClass}>Question prompt</p>
-          <h2 className="font-display text-balance text-[clamp(1.8rem,3.6vw,2.7rem)] font-semibold leading-[1] tracking-[-0.06em] text-[var(--text-primary)]">
+          <h2 className="font-display text-balance text-[clamp(1.8rem,3.6vw,2.7rem)] font-semibold leading-none tracking-[-0.06em] text-(--text-primary)">
             {question.prompt}
           </h2>
           {isImageDuel && (
@@ -325,7 +325,7 @@ function QuizSessionPage() {
         </div>
 
         {question.image && (
-          <div className="overflow-hidden rounded-[1.6rem] bg-[var(--surface)] p-3">
+          <div className="overflow-hidden rounded-[1.6rem] bg-(--surface) p-3">
             <img
               src={question.image}
               alt="Quiz visual"
@@ -335,7 +335,7 @@ function QuizSessionPage() {
         )}
 
         {imageOptions ? (
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 grid-cols-2">
             {(["Left", "Right"] as const).map((side, index) => {
               const selectedThis = selected === side;
               const correctThis = question.answer === side;

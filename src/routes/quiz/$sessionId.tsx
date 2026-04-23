@@ -7,6 +7,7 @@ import {
   shuffle,
   highRiskClusters,
   getQuestionsForMode,
+  isCorrectSelection,
 } from "../../features/quiz/content";
 import type { QuizQuestion, QuizMode } from "../../features/quiz/content";
 import {
@@ -55,7 +56,7 @@ function QuizSessionPage() {
   const confirmAnswer = useCallback(
     (option: string) => {
       if (!question || revealed) return;
-      const isCorrect = option === question.answer;
+      const isCorrect = isCorrectSelection(question, option);
       setSelected(option);
       setRevealed(true);
       setAnswers((prev) => [
@@ -317,7 +318,7 @@ function QuizSessionPage() {
           <div className="grid gap-4 grid-cols-2">
             {(["Left", "Right"] as const).map((side, index) => {
               const selectedThis = selected === side;
-              const correctThis = question.answer === side;
+              const correctThis = isCorrectSelection(question, side);
               const incorrectSelected =
                 revealed && selectedThis && !correctThis;
 
@@ -351,7 +352,7 @@ function QuizSessionPage() {
           <div className="grid gap-3">
             {question.options.map((option) => {
               const isSelected = selected === option;
-              const isCorrect = option === question.answer;
+               const isCorrect = isCorrectSelection(question, option);
               const isIncorrectSelected = revealed && isSelected && !isCorrect;
 
               let optionTone =
@@ -389,13 +390,13 @@ function QuizSessionPage() {
             className="rounded-[1.5rem] px-4 py-4"
             style={{
               background:
-                selected === question.answer
+                (selected ? isCorrectSelection(question, selected) : false)
                   ? "var(--success-soft)"
                   : "color-mix(in oklab, var(--accent) 10%, white)",
             }}
           >
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--text-secondary)]">
-              {selected === question.answer ? "Correct" : "Review note"}
+              {selected && isCorrectSelection(question, selected) ? "Correct" : "Review note"}
             </p>
             <p className="mt-2 text-sm leading-7 text-[var(--text-primary)]">
               {question.explain}

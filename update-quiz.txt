@@ -1,0 +1,305 @@
+1. You see a bouquet with a Purple wrapper on the line. Which product is it?
+   a) Laycie
+   b) Trixie
+   c) Mischa
+   d) Miriam
+Answer: Trixie
+Explanation: Trixie is the only Mother's Day product with a purple exterior.
+
+2. A bouquet features a cream wrapper with 3 pink rubber ribbons, and a white cut orchid. Which product is this?
+   a) Trixie
+   b) Mischa
+   c) Laycie
+   d) Miriam
+Answer: Laycie
+Explanation: The 3-ribbon count on the cream wrap & white cut orchid is a unique technical identifier for Laycie.
+
+3. Which Russian-style bouquet uses a yellow wrapper and a white ribbon?
+   a) Marilyn
+   b) Miriam
+   c) Mischa
+   d) Laycie
+Answer: Miriam
+Explanation: Miriam = Yellow/White wrapper. Marilyn = Pink/Black wrapper.
+
+4. A Marilyn LARGE bouquet should have how many Pink Gerberas?
+   a) 3 Gerberas
+   b) 5 Gerberas
+   c) 4 Gerberas
+   d) 6 Gerberas
+Answer: 5 Gerberas
+Explanation: Marilyn: Medium (M) = 3 stems; Large (L) = 5 stems.
+
+5. If a Zooey bouquet contains only 3 Sunflowers, which size should be marked on the order tag?
+   a) Medium (M)
+   b) Large (L)
+Answer: Medium (M)
+Explanation: 3 sunflowers = Medium; 5 sunflowers = Large.
+
+6. What size is this Marilyn Pink Carnation Bouquet?
+   a) Medium
+   b) Large
+Answer: Medium
+Explanation: Marilyn: Medium = 3 Gerberas; Large = 5 Gerberas.
+
+7. What size is this Zaylee Pink Mum Box?
+   a) Medium
+   b) Large
+Answer: Medium
+Explanation: Zaylee: Medium = 2 Anthuriums; Large = 3 Anthuriums.
+
+8. You are auditing a Marilyn Russian bouquet. You notice White Matthiola has been added as a filler. Is this correct?
+   a) Yes, it is correct
+   b) No, it should not be there
+Answer: No, it should not be there
+Explanation: The Marilyn Russian Bouquet is the one without White Matthiola. If Matthiola is present, it is likely a Miriam or an assembly error.
+
+9. A packer has two peach hatboxes. Box A has 3 Anthuriums and Lilac Spidermums. Box B has 1 Anthurium and Pink Gerberas. What is Box A?
+   a) Zaylee
+   b) Ayame
+   c) Zandra
+   d) Tessa
+Answer: Zaylee
+Explanation: The Anthurium count (3 vs 1) is the decisive factor. 3 Anthuriums + Spidermums = Zaylee; 1 Anthurium + Gerberas = Ayame.
+
+10. A packer has two peach hatboxes. Box A has 3 Anthuriums and Lilac Spidermums. Box B has 1 Anthurium and Pink Gerberas. What is Box B?
+    a) Ayame
+    b) Zaylee
+    c) Zandra
+    d) Tessa
+Answer: Ayame
+Explanation: Box B with 1 Anthurium and Pink Gerberas = Ayame. Zaylee uses 2–3 Anthuriums and has 0 Gerberas.
+
+11. Look at the photo. Is this an Ayame or a Zaylee?
+    a) Ayame
+    b) Zaylee
+Answer: Zaylee
+Explanation: Ayame typically features only 1 Anthurium and uses Gerbera. 2–3 Anthuriums is the signature of Zaylee, which does not contain Gerberas.
+
+12. You are holding a Zooey BOUQUET. Which of these two sunflower centers should be in the arrangement?
+    a) Blackheart Sunflower (Left)
+    b) Greenheart Sunflower (Right)
+Answer: Greenheart Sunflower (Right)
+Explanation: The Zooey Bouquet uses Greenheart sunflowers, the only sunflower bouquet.
+
+13. Look at this Laycie. Something is missing. What is it?
+    a) 2 Pink Rubber Ribbons
+    b) 3 Pink Rubber Ribbons
+    c) A black ribbon
+    d) Nothing, it is correct
+Answer: 2 Pink Rubber Ribbons
+Explanation: Laycie is the only product with 3 pink rubber ribbons attached directly to the cream wrapping paper. This one only has 1.
+
+14. What are the key components of the Laycie Lilac Rose Bouquet?
+    a) Ocean Song Rose, White Cut Orchid, White Matthiola
+    b) Ocean Song Rose, Pink Anthurium, White Statice, Thlaspi, Eucalyptus
+    c) Lilac Rose, White Lily, Pink Eustoma, Snow Willow
+    d) Ocean Song Rose, White Matthiola,  Eucalyptus
+Answer: Ocean Song Rose, White Phalaenopsis Orchid, White Matthiola
+Explanation: Look for theWhite Cut orchid 
+
+15. To correctly identify the Zaylee Flower Box, which ingredients must be present?
+    a) Lilac Spidermum, Light Peach Carnation, 2–3 Anthuriums
+    b) Pink Gerbera, Lilac Spidermum, 1 Anthurium, Ruscus
+    c) Lilac Spidermum, Hot Cherry Pink Rose, 2–3 Anthuriums
+    d) Pink Gerbera, Hot Cherry Pink Rose, 1 Anthurium
+Answer: Lilac Spidermum, Light Peach Carnation, 2–3 Anthuriums 
+Explanation: Remember Zaylee has 0 Gerberas. If you see a Gerbera, it is likely a Zandra or Ayame.
+
+16. What specific mix defines the Zooey Sunflower Mother's Day Bouquet?
+    a) Greenheart Sunflower, Alstroemeria, Oxypetalum
+    b) Blackheart Sunflower, Red Rose Spray, White Statice
+    c) Greenheart Sunflower, Red Rose Spray, Oxypetalum, Thlaspi
+    d) Blackheart Sunflower, Alstroemeria, White Matthiola
+Answer: Greenheart Sunflower, Alstroemeria, Oxypetalum
+Explanation: The Zooey Bouquet must use the Greenheart center and the specific pairing of Alstroemeria and Oxypetalum.
+
+17. Which of the following best describes the ingredient list for the Miriam Russian Bouquet?
+    a) Pink Carnation, White Matthiola, Pale Pink Roses
+    b) Hot Cherry Pink Rose, Pink Carnation, White Statice
+    c) Pink Carnation, White Eustoma, 2–3 Anthuriums
+    d) Pink Rose, White Matthiola, Light Pink Carnation Spray
+Answer: Pink Carnation, White Matthiola, Pale Pink Roses
+Explanation: Miriam is distinguished by its paler palette and the inclusion of Matthiola, unlike the Marilyn.
+
+18. Which product is this?
+    a) Mother's Day Pink Phalaenopsis Orchid (2 stalks)
+    b) Indira Pink & White Phalaenopsis Orchid
+    c) Luxe Orchid Arrangement
+    d) Tessa Pink Lily Box
+Answer: Mother's Day Pink Phalaenopsis Orchid (2 stalks)
+Explanation: Standard orchids are identified by the plain white pot without extra decorative wrapping.
+
+19. You are auditing an orchid pot. It has three stalks, but all of them are pink, and it is in a plain white pot with no decorative wrapping. Is this an Indira?
+    a) Yes, it is an Indira
+    b) No, it is not an Indira
+Answer: No, it is not an Indira
+Explanation: An Indira must have a mix of 2 pink and 1 white stalks AND the pink decorative wrap around the pot. A 3-stalk pink-only arrangement in a plain pot would be a production error.
+
+20. What size is this Izzy Pink Daisy Flower Box?
+    a) Medium
+    b) Large
+Answer: Medium
+Explanation: 4 Pink Gerbera, 4 Peach Gerbera, 2 Hot Cherry Pink Carnations = Medium.
+
+21. Name this product.
+    a) Zandra Pink Gerbera Mother's Day Flower Box (MD)
+    b) Zaylee Pink Mum Mother's Day Flower Box (MD)
+    c) Ayame Pink Gerbera Mother's Day Flower Box (MD)
+    d) Izzy Pink Daisy Mother's Day Flower Box (MD)
+Answer: Zandra Pink Gerbera Mother's Day Flower Box (MD)
+Explanation: Zandra uses Pink Greenheart Gerbera, Hot Cherry Pink Rose, and Pink Rose Spray.
+
+22. Name this product.
+    a) Luxe Kate Red Rose Mother's Day Flower Box (MD)
+    b) Zandra Pink Gerbera Mother's Day Flower Box (MD)
+    c) Tessa Pink Lily Mother's Day Flower Box (MD)
+    d) Beatrice Rose Lily Mother's Day Flower Box (MD)
+Answer: Luxe Kate Red Rose Mother's Day Flower Box (MD)
+Explanation: Luxe Kate features an XL Hatbox with Red Roses formed in a mushroom shape.
+
+23. Name this product.
+    a) Mischa Pink Carnation Mother's Day Bouquet (MD)
+    b) Laycie Lilac Rose Mother's Day Bouquet (MD)
+    c) Miriam Pink Carnation Mother's Day Russian Bouquet (MD)
+    d) Trixie Pink Lily Mother's Day Bouquet (MD)
+Answer: Mischa Pink Carnation Mother's Day Bouquet (MD)
+Explanation: Mischa uses Pink Carnations, White Eustoma, White Matthiola, and Thlaspi.
+
+24. Name this product.
+    a) Lyndi Red Rose Mother's Day Heart Bouquet (MD)
+    b) Marilyn Pink Carnation Mother's Day Bouquet (MD)
+    c) Miriam Pink Carnation Mother's Day Russian Bouquet (MD)
+    d) Laycie Lilac Rose Mother's Day Bouquet (MD)
+Answer: Lyndi Red Rose Mother's Day Heart Bouquet (MD)
+Explanation: Lyndi features Heart Shaped Red Roses in a White Wrapper with Pink Rubber Ribbons.
+
+25. Name this product.
+    a) Izzy Pink Daisy Mother's Day Flower Box (MD)
+    b) Zandra Pink Gerbera Mother's Day Flower Box (MD)
+    c) Phoebe Pink Carnation Mother's Day Flower Box (MD)
+    d) Ayame Pink Gerbera Mother's Day Flower Box (MD)
+Answer: Izzy Pink Daisy Mother's Day Flower Box (MD)
+Explanation: Izzy features Pink Gerbera, Red Carnations, Yellow Rose Spray, Mini Fruit Leaf, and Scabiosa Pod.
+
+26. Name this product.
+    a) Phoebe Pink Carnation Mother's Day Flower Box (MD)
+    b) Zandra Pink Gerbera Mother's Day Flower Box (MD)
+    c) Izzy Pink Daisy Mother's Day Flower Box (MD)
+    d) Ayame Pink Gerbera Mother's Day Flower Box (MD)
+Answer: Phoebe Pink Carnation Mother's Day Flower Box (MD)
+Explanation: Phoebe features Hot Cherry Pink Carnations, Pink Carnations, White Dendrobium Orchid, and Purple Capsia.
+
+27. Which one is the Miriam Pink Carnation Russian Bouquet?
+    a) Left
+    b) Right
+Answer: Left
+Explanation: Left is Miriam (yellow wrapper, white ribbon). Right is Marilyn (pink wrapper, black ribbon).
+
+28. Which one is the Tessa Pink Lily Flower Box?
+    a) Left
+    b) Right
+Answer: Right
+Explanation: Right is Tessa (Pink Lilies, Avalanche/White Roses). Left is Beatrice.
+
+29. Which one is the Ayame Pink Gerbera Flower Box?
+    a) Left
+    b) Right
+Answer: Left
+Explanation: Left is Ayame (1 Anthurium, Pink Gerberas). Right is Zaylee (2–3 Anthuriums, Lilac Spidermums, no Gerberas).
+
+30. Which one is the Indira Pink & White Phalaenopsis Orchid?
+    a) Left
+    b) Right
+Answer: Right
+Explanation: Right is Indira (2 pink & 1 white stalks, pink decorative base wrap). Left is the standard Pink Phalaenopsis Orchid (2 stalks, plain pot).
+
+31. Which one is the Trixie Pink Lily Bouquet?
+    a) Left
+    b) Right
+Answer: Right
+Explanation: Right is Trixie (purple wrapper). Left is Tessa Pink Lily Bouquet.
+
+32. Which one is the Mischa Pink Carnation Bouquet?
+    a) Left
+    b) Right
+Answer: Left
+Explanation: Left is Mischa (pink wrapper, Pink Carnation + White Eustoma + Matthiola). Right is Laycie (cream wrapper, 3 pink rubber ribbons, Ocean Song Rose).
+
+33. Which one is the Laycie Lilac Rose Bouquet?
+    a) Left
+    b) Right
+Answer: Right
+Explanation: Right is Laycie (cream wrapper with pink rubber ribbons, Ocean Song Rose + Phalaenopsis Orchid). Left is Mischa (pink wrapper, Pink Carnation + White Eustoma).
+
+34. Which one is the Phoebe Carnation Flower Box?
+    a) Left
+    b) Right
+Answer: Left
+Explanation: Left is Phoebe (Hot Cherry Pink Carnation, White Dendrobium Orchid, Purple Capsia). Right is Zandra (Pink Gerbera, Hot Cherry Pink Rose, Rose Spray).
+
+35. Which one is the Izzy Pink Daisy Flower Box?
+    a) Left
+    b) Right
+Answer: Left
+Explanation: Left is Izzy (Pink Gerbera, Peach Gerbera, Red Carnations, Yellow Rose Spray). Right is Zandra (Pink Gerbera, Hot Cherry Pink Rose, no yellow flowers).
+
+36. Which one is the Lyndi Heart Rose Bouquet?
+    a) Left
+    b) Right
+Answer: Left
+Explanation: Left is Lyndi (heart-shaped Red Roses in white wrapper with pink ribbons). Right is Luxe Kate (XL Hatbox with Red Roses in mushroom shape).
+
+37. Which one is the Zooey Sunflower Box? (Zooey Box vs Zendaya Box)
+    a) Left
+    b) Right
+Answer: Left
+Explanation: Left is the Zooey Box (Blackheart Sunflowers, no red rose spray). Right is the Zendaya Box (Greenheart Sunflowers with red rose spray).
+
+38. Which one is the Beatrice Lily & Rose Box?
+    a) Left
+    b) Right
+Answer: Left
+Explanation: Left is Beatrice (Red Roses + White/Pink Roses + Lilies in peach hatbox). Right is Luxe Kate (XL Hatbox with ONLY Red Roses in mushroom dome shape).
+
+39. Which one is the Zaylee Pink Mum Box?
+    a) Left
+    b) Right
+Answer: Left
+Explanation: Left is Zaylee (2-3 Anthuriums, Lilac Spidermums, NO Gerberas). Right is Zandra (Pink Gerbera, Hot Cherry Pink Rose, Rose Spray).
+
+40. Which one is the Marilyn Pink Carnation Russian Bouquet?
+    a) Left
+    b) Right
+Answer: Left
+Explanation: Left is Marilyn (pink/black Russian wrapper, Pink Gerbera, no Matthiola). Right is Mischa (pink wrapper, White Eustoma + Matthiola, not Russian-style).
+
+41. Which one is the Tessa Pink Lily Flower Box?
+    a) Left
+    b) Right
+Answer: Right
+Explanation: Right is Tessa (Pink Lilies + Avalanche/White Roses in peach hatbox). Left is Phoebe (Hot Cherry Pink Carnations + White Dendrobium Orchid).
+
+42. Which one is the Izzy Pink Daisy Flower Box?
+    a) Left
+    b) Right
+Answer: Right
+Explanation: Right is Izzy (colourful mix: Pink Gerbera, Red Carnation, Yellow Rose Spray, Scabiosa Pod). Left is Phoebe (pink-red tones: Hot Cherry Pink Carnation, White Dendrobium Orchid).
+
+43. Which one is the Zendaya Yellow Sunflower Box?
+    a) Left
+    b) Right
+Answer: Right
+Explanation: Right is Zendaya (Greenheart Sunflowers WITH Red Rose Spray in peach box). Left is Zooey Box (Blackheart Sunflowers, NO Red Rose Spray).
+
+44. Which one is the Trixie Pink Lily Bouquet?
+    a) Left
+    b) Right
+Answer: Right
+Explanation: Right is Trixie (purple wrapper - the only MDAY product with purple). Left is Mischa (pink wrapper, Pink Carnation + White Eustoma).
+
+45. Which one is the Miriam Pink Carnation Russian Bouquet?
+    a) Left
+    b) Right
+Answer: Right
+Explanation: Right is Miriam (yellow wrapper, white ribbon, includes White Matthiola). Left is Marilyn (pink wrapper, black ribbon, NO Matthiola).

@@ -5,12 +5,7 @@
     "category": "visual-tells",
     "type": "single_choice",
     "prompt": "You see a bouquet with a Purple wrapper on the line. Which product is it?",
-    "options": [
-      "Laycie",
-      "Trixie",
-      "Mischa",
-      "Miriam"
-    ],
+    "options": ["Laycie", "Trixie", "Mischa", "Miriam"],
     "answer": "Trixie",
     "explain": "Trixie is the only Mother's Day product with a purple exterior."
   },
@@ -19,15 +14,10 @@
     "cluster": "technical-wraps",
     "category": "visual-tells",
     "type": "single_choice",
-    "prompt": "A bouquet features a cream wrapper with 3 pink rubber ribbons attached directly to the paper. Which product is this?",
-    "options": [
-      "Trixie",
-      "Mischa",
-      "Laycie",
-      "Miriam"
-    ],
+    "prompt": "A bouquet features a cream wrapper with 3 pink rubber ribbons, and a white cut orchid. Which product is this?",
+    "options": ["Trixie", "Mischa", "Laycie", "Miriam"],
     "answer": "Laycie",
-    "explain": "The 3-ribbon count on the cream wrap is a unique technical identifier for Laycie."
+    "explain": "The 3-ribbon count on the cream wrap & white cut orchid is a unique technical identifier for Laycie."
   },
   {
     "id": "q3-yellow-russian",
@@ -35,12 +25,7 @@
     "category": "visual-tells",
     "type": "single_choice",
     "prompt": "Which Russian-style bouquet uses a yellow wrapper and a white ribbon?",
-    "options": [
-      "Marilyn",
-      "Miriam",
-      "Mischa",
-      "Laycie"
-    ],
+    "options": ["Marilyn", "Miriam", "Mischa", "Laycie"],
     "answer": "Miriam",
     "explain": "Miriam = Yellow/White wrapper. Marilyn = Pink/Black wrapper."
   },
@@ -50,12 +35,7 @@
     "category": "size-scale",
     "type": "counting",
     "prompt": "A Marilyn LARGE bouquet should have how many Pink Gerberas?",
-    "options": [
-      "3 Gerberas",
-      "5 Gerberas",
-      "4 Gerberas",
-      "6 Gerberas"
-    ],
+    "options": ["3 Gerberas", "5 Gerberas", "4 Gerberas", "6 Gerberas"],
     "answer": "5 Gerberas",
     "explain": "Marilyn: Medium (M) = 3 stems; Large (L) = 5 stems."
   },
@@ -65,82 +45,31 @@
     "category": "size-scale",
     "type": "counting",
     "prompt": "If a Zooey bouquet contains only 3 Sunflowers, which size should be marked on the order tag?",
-    "options": [
-      "Medium (M)",
-      "Large (L)"
-    ],
+    "options": ["Medium (M)", "Large (L)"],
     "answer": "Medium (M)",
     "explain": "3 sunflowers = Medium; 5 sunflowers = Large."
   },
   {
-    "id": "q6-beatrice-luxe",
-    "cluster": "pink-hatboxes",
-    "category": "size-scale",
-    "type": "counting",
-    "prompt": "For a Beatrice LUXE order, what is the required hardware and hero lily count?",
-    "options": [
-      "XL Hatbox and 5 Lilies",
-      "Standard Hatbox and 3 Lilies",
-      "XL Hatbox and 3 Lilies",
-      "Standard Hatbox and 5 Lilies"
-    ],
-    "answer": "XL Hatbox and 5 Lilies",
-    "explain": "Standard = 3 Lilies in a Standard box; Luxe = 5 Lilies in an XL box."
-  },
-  {
-    "id": "q17-marilyn-size",
+    "id": "q6-marilyn-size",
     "cluster": "russian-wraps",
     "category": "size-scale",
     "type": "counting",
     "prompt": "What size is this Marilyn Pink Carnation Bouquet?",
-    "options": [
-      "Medium",
-      "Large"
-    ],
+    "options": ["Medium", "Large"],
     "answer": "Medium",
     "explain": "Marilyn: Medium = 3 Gerberas; Large = 5 Gerberas.",
     "image": "/quiz-images/marilyn-pink-carnation-mothers-day-bouquet-medium.png"
   },
   {
-    "id": "q18-zaylee-size",
+    "id": "q7-zaylee-size",
     "cluster": "pink-hatboxes",
     "category": "size-scale",
     "type": "counting",
     "prompt": "What size is this Zaylee Pink Mum Box?",
-    "options": [
-      "Medium",
-      "Large"
-    ],
+    "options": ["Medium", "Large"],
     "answer": "Medium",
     "explain": "Zaylee: Medium = 2 Anthuriums; Large = 3 Anthuriums.",
     "image": "/quiz-images/zaylee-pink-mum-mothers-day-flower-box-medium.png"
-  },
-  {
-    "id": "q19-zooey-size",
-    "cluster": "sunflower-hearts",
-    "category": "size-scale",
-    "type": "counting",
-    "prompt": "What size is this Zooey Yellow Sunflower Bouquet?",
-    "options": [
-      "Medium",
-      "Large"
-    ],
-    "answer": "Large",
-    "explain": "Zooey: Medium = 3 Sunflowers; Large = 5 Sunflowers.",
-    "image": "/quiz-images/zooey-yellow-sunflower-mothers-day-bouquet.png"
-  },
-  {
-    "id": "q7-zendaya-vs-zooey",
-    "cluster": "sunflower-hearts",
-    "category": "scenario",
-    "type": "scenario",
-    "prompt": "A runner brings a Peach Hatbox to the QC station. It contains Greenheart Sunflowers and Red Rose Spray. Which product is this?",
-    "options": [
-      "Zooey Box",
-      "Zendaya Box"
-    ],
-    "answer": "Zendaya Box",
-    "explain": "While both can use Greenheart centers, only Zendaya includes the Red Rose Spray."
   },
   {
     "id": "q8-marilyn-matthiola",
@@ -148,12 +77,9 @@
     "category": "scenario",
     "type": "true_false",
     "prompt": "You are auditing a Marilyn Russian bouquet. You notice White Matthiola has been added as a filler. Is this correct?",
-    "options": [
-      "Yes, it is correct",
-      "No, it should not be there"
-    ],
+    "options": ["Yes, it is correct", "No, it should not be there"],
     "answer": "No, it should not be there",
-    "explain": "Marilyn is specifically characterized by the absence of White Matthiola. If Matthiola is present, it is likely a Miriam or an assembly error."
+    "explain": "The Marilyn Russian Bouquet is the one without White Matthiola. If Matthiola is present, it is likely a Miriam or an assembly error."
   },
   {
     "id": "q9-zaylee-vs-ayame",
@@ -161,63 +87,47 @@
     "category": "scenario",
     "type": "scenario",
     "prompt": "A packer has two peach hatboxes. Box A has 3 Anthuriums and Lilac Spidermums. Box B has 1 Anthurium and Pink Gerberas. What is Box A?",
-    "options": [
-      "Zaylee",
-      "Ayame",
-      "Zandra",
-      "Tessa"
-    ],
+    "options": ["Zaylee", "Ayame", "Zandra", "Tessa"],
     "answer": "Zaylee",
     "explain": "The Anthurium count (3 vs 1) is the decisive factor. 3 Anthuriums + Spidermums = Zaylee; 1 Anthurium + Gerberas = Ayame."
   },
   {
-    "id": "q9b-box-b",
+    "id": "q10-box-b",
     "cluster": "pink-hatboxes",
     "category": "scenario",
     "type": "scenario",
     "prompt": "A packer has two peach hatboxes. Box A has 3 Anthuriums and Lilac Spidermums. Box B has 1 Anthurium and Pink Gerberas. What is Box B?",
-    "options": [
-      "Ayame",
-      "Zaylee",
-      "Zandra",
-      "Tessa"
-    ],
+    "options": ["Ayame", "Zaylee", "Zandra", "Tessa"],
     "answer": "Ayame",
     "explain": "Box B with 1 Anthurium and Pink Gerberas = Ayame. Zaylee uses 2–3 Anthuriums and has 0 Gerberas."
   },
   {
-    "id": "q14-anthurium-count",
+    "id": "q11-anthurium-count",
     "cluster": "pink-hatboxes",
     "category": "scenario",
     "type": "scenario",
     "prompt": "Look at the photo. Is this an Ayame or a Zaylee?",
-    "options": [
-      "Ayame",
-      "Zaylee"
-    ],
+    "options": ["Ayame", "Zaylee"],
     "answer": "Zaylee",
     "explain": "Ayame typically features only 1 Anthurium and uses Gerbera. 2–3 Anthuriums is the signature of Zaylee, which does not contain Gerberas.",
     "image": "/quiz-images/image16.png"
   },
   {
-    "id": "q15-sunflower-heart",
+    "id": "q12-sunflower-heart",
     "cluster": "sunflower-hearts",
     "category": "scenario",
     "type": "single_choice",
     "prompt": "You are holding a Zooey BOUQUET. Which of these two sunflower centers should be in the arrangement?",
-    "options": [
-      "Blackheart Sunflower (Left)",
-      "Greenheart Sunflower (Right)"
-    ],
+    "options": ["Blackheart Sunflower (Left)", "Greenheart Sunflower (Right)"],
     "answer": "Greenheart Sunflower (Right)",
-    "explain": "The Zooey Bouquet uses Greenheart sunflowers, whereas the Zooey Box uses Blackheart.",
+    "explain": "The Zooey Bouquet uses Greenheart sunflowers, the only sunflower bouquet.",
     "images": [
       "/quiz-images/zooey-bouquet-center.png",
       "/quiz-images/zooey-flower-box-center.png"
     ]
   },
   {
-    "id": "q16-laycie-missing",
+    "id": "q13-laycie-missing",
     "cluster": "technical-wraps",
     "category": "scenario",
     "type": "single_choice",
@@ -233,67 +143,67 @@
     "image": "/quiz-images/laycie-lilac-rose-mothers-day-bouquet-standard.png"
   },
   {
-    "id": "q10-laycie-ingredients",
+    "id": "q14-laycie-ingredients",
     "cluster": "technical-wraps",
     "category": "ingredient-audit",
     "type": "single_choice",
     "prompt": "What are the key components of the Laycie Lilac Rose Bouquet?",
     "options": [
-      "Ocean Song Rose, White Phalaenopsis Orchid, White Matthiola, Blue Eryngium, Snow Willow",
+      "Ocean Song Rose, White Cut Orchid, White Matthiola",
       "Ocean Song Rose, Pink Anthurium, White Statice, Thlaspi, Eucalyptus",
-      "Lilac Rose, White Lily, Pink Eustoma, Blue Eryngium, Snow Willow",
-      "Ocean Song Rose, White Matthiola, Pink Phlox, Blue Eryngium, Eucalyptus"
+      "Lilac Rose, White Lily, Pink Eustoma, Snow Willow",
+      "Ocean Song Rose, White Matthiola,  Eucalyptus"
     ],
-    "answer": "Ocean Song Rose, White Phalaenopsis Orchid, White Matthiola, Blue Eryngium, Snow Willow",
-    "explain": "This is the most premium lilac bouquet. Look for the \"Luxe\" touch of the Phalaenopsis orchid and the unique blue eryngium."
+    "answer": "Ocean Song Rose, White Phalaenopsis Orchid, White Matthiola",
+    "explain": "Look for theWhite Cut orchid "
   },
   {
-    "id": "q11-zaylee-ingredients",
+    "id": "q15-zaylee-ingredients",
     "cluster": "pink-hatboxes",
     "category": "ingredient-audit",
     "type": "single_choice",
     "prompt": "To correctly identify the Zaylee Flower Box, which ingredients must be present?",
     "options": [
-      "Lilac Spidermum, Light Peach Carnation, 2–3 Anthuriums, Eucalyptus",
+      "Lilac Spidermum, Light Peach Carnation, 2–3 Anthuriums ",
       "Pink Gerbera, Lilac Spidermum, 1 Anthurium, Ruscus",
-      "Lilac Spidermum, Hot Cherry Pink Rose, 2–3 Anthuriums, Eucalyptus",
-      "Pink Gerbera, Hot Cherry Pink Rose, 1 Anthurium, Ruscus"
+      "Lilac Spidermum, Hot Cherry Pink Rose, 2–3 Anthuriums",
+      "Pink Gerbera, Hot Cherry Pink Rose, 1 Anthurium"
     ],
-    "answer": "Lilac Spidermum, Light Peach Carnation, 2–3 Anthuriums, Eucalyptus",
+    "answer": "Lilac Spidermum, Light Peach Carnation, 2–3 Anthuriums ",
     "explain": "Remember Zaylee has 0 Gerberas. If you see a Gerbera, it is likely a Zandra or Ayame."
   },
   {
-    "id": "q12-zooey-bouquet-mix",
+    "id": "q16-zooey-bouquet-mix",
     "cluster": "sunflower-hearts",
     "category": "ingredient-audit",
     "type": "single_choice",
     "prompt": "What specific mix defines the Zooey Sunflower Mother's Day Bouquet?",
     "options": [
-      "Greenheart Sunflower, Alstroemeria, Oxypetalum, Eucalyptus",
-      "Blackheart Sunflower, Red Rose Spray, White Statice, Ruscus",
+      "Greenheart Sunflower, Alstroemeria, Oxypetalum",
+      "Blackheart Sunflower, Red Rose Spray, White Statice",
       "Greenheart Sunflower, Red Rose Spray, Oxypetalum, Thlaspi",
-      "Blackheart Sunflower, Alstroemeria, White Matthiola, Eucalyptus"
+      "Blackheart Sunflower, Alstroemeria, White Matthiola"
     ],
-    "answer": "Greenheart Sunflower, Alstroemeria, Oxypetalum, Eucalyptus",
+    "answer": "Greenheart Sunflower, Alstroemeria, Oxypetalum",
     "explain": "The Zooey Bouquet must use the Greenheart center and the specific pairing of Alstroemeria and Oxypetalum."
   },
   {
-    "id": "q13-miriam-ingredients",
+    "id": "q17-miriam-ingredients",
     "cluster": "russian-wraps",
     "category": "ingredient-audit",
     "type": "single_choice",
     "prompt": "Which of the following best describes the ingredient list for the Miriam Russian Bouquet?",
     "options": [
-      "Pink Carnation, White Matthiola, Pale Pink Roses, Eucalyptus",
-      "Hot Cherry Pink Rose, Pink Carnation, White Statice, Thlaspi",
-      "Pink Carnation, White Eustoma, 2–3 Anthuriums, Snow Willow",
-      "Pink Rose, White Matthiola, Light Pink Carnation Spray, Thlaspi"
+      "Pink Carnation, White Matthiola, Pale Pink Roses",
+      "Hot Cherry Pink Rose, Pink Carnation, White Statice",
+      "Pink Carnation, White Eustoma, 2–3 Anthuriums",
+      "Pink Rose, White Matthiola, Light Pink Carnation Spray"
     ],
-    "answer": "Pink Carnation, White Matthiola, Pale Pink Roses, Eucalyptus",
+    "answer": "Pink Carnation, White Matthiola, Pale Pink Roses",
     "explain": "Miriam is distinguished by its paler palette and the inclusion of Matthiola, unlike the Marilyn."
   },
   {
-    "id": "q33-orchid-plain",
+    "id": "q18-orchid-plain",
     "cluster": "technical-wraps",
     "category": "orchid-id",
     "type": "single_choice",
@@ -309,48 +219,14 @@
     "image": "/quiz-images/image10.png"
   },
   {
-    "id": "q34-indira-id",
-    "cluster": "technical-wraps",
-    "category": "orchid-id",
-    "type": "single_choice",
-    "prompt": "What is the product name of this orchid?",
-    "options": [
-      "Indira Pink & White Phalaenopsis Orchid",
-      "Mother's Day Pink Phalaenopsis Orchid (2 stalks)",
-      "Mother's Day Pink Phalaenopsis Orchid (3 stalks)",
-      "Luxe Orchid Arrangement"
-    ],
-    "answer": "Indira Pink & White Phalaenopsis Orchid",
-    "explain": "The Indira is the only orchid product that uses mixed colors (pink and white) and features the signature pink decorative base wrap.",
-    "image": "/quiz-images/indira-pink-white-mothers-day-phalaenopsis-orchid.png"
-  },
-  {
-    "id": "q34b-indira-scenario",
+    "id": "q19-indira-scenario",
     "cluster": "technical-wraps",
     "category": "orchid-id",
     "type": "true_false",
     "prompt": "You are auditing an orchid pot. It has three stalks, but all of them are pink, and it is in a plain white pot with no decorative wrapping. Is this an Indira?",
-    "options": [
-      "Yes, it is an Indira",
-      "No, it is not an Indira"
-    ],
+    "options": ["Yes, it is an Indira", "No, it is not an Indira"],
     "answer": "No, it is not an Indira",
-    "explain": "An Indira must have a mix of pink and white stalks AND the pink decorative wrap around the pot. A 3-stalk pink-only arrangement in a plain pot would be a production error."
-  },
-  {
-    "id": "q35-indira-ingredients",
-    "cluster": "technical-wraps",
-    "category": "orchid-id",
-    "type": "single_choice",
-    "prompt": "What specific ingredients make up the Indira Pink & White Orchid arrangement?",
-    "options": [
-      "2 Stalks (1 Pink, 1 White), Ceramic Pot, Pink Decorative Fabric Wrap",
-      "3 Stalks (All Pink), Glass Vase, White Ribbon",
-      "1 Stalk (White), Ceramic Pot, No Decorative Wrapping",
-      "4 Stalks (Mixed Pink & White), Glass Vase, Pink Decorative Cloth Wrap"
-    ],
-    "answer": "2 Stalks (1 Pink, 1 White), Ceramic Pot, Pink Decorative Fabric Wrap",
-    "explain": "The Indira is the \"Luxe\" version of the orchids. Always look for the pink fabric around the pot and the mixed stalk colors."
+    "explain": "An Indira must have a mix of 2 pink and 1 white stalks AND the pink decorative wrap around the pot. A 3-stalk pink-only arrangement in a plain pot would be a production error."
   },
   {
     "id": "q20-izzy-size",
@@ -358,10 +234,7 @@
     "category": "visual-id",
     "type": "counting",
     "prompt": "What size is this Izzy Pink Daisy Flower Box?",
-    "options": [
-      "Medium",
-      "Large"
-    ],
+    "options": ["Medium", "Large"],
     "answer": "Medium",
     "explain": "4 Pink Gerbera, 4 Peach Gerbera, 2 Hot Cherry Pink Carnations = Medium.",
     "image": "/quiz-images/izzy-pink-daisy-mothers-day-flower-box-medium.png"
@@ -411,7 +284,7 @@
       "Trixie Pink Lily Mother's Day Bouquet (MD)"
     ],
     "answer": "Mischa Pink Carnation Mother's Day Bouquet (MD)",
-    "explain": "Mischa uses Pink Carnation, White Eustoma, White Matthiola, and Thlaspi.",
+    "explain": "Mischa uses Pink Carnations, White Eustoma, White Matthiola, and Thlaspi.",
     "image": "/quiz-images/mischa-pink-carnation-mothers-day-bouquet-large.png"
   },
   {
@@ -468,10 +341,7 @@
     "category": "this-or-that",
     "type": "this_or_that",
     "prompt": "Which one is the Miriam Pink Carnation Russian Bouquet?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Left",
     "explain": "Left is Miriam (yellow wrapper, white ribbon). Right is Marilyn (pink wrapper, black ribbon).",
     "images": [
@@ -480,32 +350,12 @@
     ]
   },
   {
-    "id": "q28-zendaya-vs-zooey",
-    "cluster": "sunflower-hearts",
-    "category": "this-or-that",
-    "type": "this_or_that",
-    "prompt": "Which one is the Zendaya Yellow Sunflower Flower Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
-    "answer": "Left",
-    "explain": "Left is Zendaya (Greenheart Sunflowers with Red Rose Spray). Right is Zooey Box (Blackheart Sunflowers, no Red Rose Spray).",
-    "images": [
-      "/quiz-images/zendaya-yellow-sunflower-mothers-day-flower-box.png",
-      "/quiz-images/zooey-yellow-sunflower-mothers-day-flower-box.png"
-    ]
-  },
-  {
-    "id": "q29-tessa-vs-beatrice",
+    "id": "q28-tessa-vs-beatrice",
     "cluster": "pink-hatboxes",
     "category": "this-or-that",
     "type": "this_or_that",
     "prompt": "Which one is the Tessa Pink Lily Flower Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Right",
     "explain": "Right is Tessa (Pink Lilies, Avalanche/White Roses). Left is Beatrice.",
     "images": [
@@ -514,15 +364,12 @@
     ]
   },
   {
-    "id": "q30-ayame-vs-zaylee",
+    "id": "q29-ayame-vs-zaylee",
     "cluster": "pink-hatboxes",
     "category": "this-or-that",
     "type": "this_or_that",
     "prompt": "Which one is the Ayame Pink Gerbera Flower Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Left",
     "explain": "Left is Ayame (1 Anthurium, Pink Gerberas). Right is Zaylee (2–3 Anthuriums, Lilac Spidermums, no Gerberas).",
     "images": [
@@ -531,32 +378,26 @@
     ]
   },
   {
-    "id": "q31-indira-vs-orchid",
+    "id": "q30-indira-vs-orchid",
     "cluster": "technical-wraps",
     "category": "this-or-that",
     "type": "this_or_that",
     "prompt": "Which one is the Indira Pink & White Phalaenopsis Orchid?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Right",
-    "explain": "Right is Indira (mixed pink & white stalks, pink decorative base wrap). Left is the standard Pink Phalaenopsis Orchid (2 stalks, plain pot).",
+    "explain": "Right is Indira (2 pink & 1 white stalks, pink decorative base wrap). Left is the standard Pink Phalaenopsis Orchid (2 stalks, plain pot).",
     "images": [
       "/quiz-images/image10.png",
       "/quiz-images/indira-pink-white-mothers-day-phalaenopsis-orchid.png"
     ]
   },
   {
-    "id": "q32-trixie-vs-tessa",
+    "id": "q31-trixie-vs-tessa",
     "cluster": "technical-wraps",
     "category": "this-or-that",
     "type": "this_or_that",
     "prompt": "Which one is the Trixie Pink Lily Bouquet?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Right",
     "explain": "Right is Trixie (purple wrapper). Left is Tessa Pink Lily Bouquet.",
     "images": [
@@ -565,15 +406,12 @@
     ]
   },
   {
-    "id": "fr01-mischa-vs-laycie",
+    "id": "q32-mischa-vs-laycie",
     "cluster": "technical-wraps",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Mischa Pink Carnation Bouquet?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Left",
     "explain": "Left is Mischa (pink wrapper, Pink Carnation + White Eustoma + Matthiola). Right is Laycie (cream wrapper, 3 pink rubber ribbons, Ocean Song Rose).",
     "images": [
@@ -582,15 +420,12 @@
     ]
   },
   {
-    "id": "fr02-laycie-vs-mischa",
+    "id": "q33-laycie-vs-mischa",
     "cluster": "technical-wraps",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Laycie Lilac Rose Bouquet?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Right",
     "explain": "Right is Laycie (cream wrapper with pink rubber ribbons, Ocean Song Rose + Phalaenopsis Orchid). Left is Mischa (pink wrapper, Pink Carnation + White Eustoma).",
     "images": [
@@ -599,15 +434,12 @@
     ]
   },
   {
-    "id": "fr03-phoebe-vs-zandra",
+    "id": "q34-phoebe-vs-zandra",
     "cluster": "pink-hatboxes",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Phoebe Carnation Flower Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Left",
     "explain": "Left is Phoebe (Hot Cherry Pink Carnation, White Dendrobium Orchid, Purple Capsia). Right is Zandra (Pink Gerbera, Hot Cherry Pink Rose, Rose Spray).",
     "images": [
@@ -616,15 +448,12 @@
     ]
   },
   {
-    "id": "fr04-izzy-vs-zandra",
+    "id": "q35-izzy-vs-zandra",
     "cluster": "pink-hatboxes",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Izzy Pink Daisy Flower Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Left",
     "explain": "Left is Izzy (Pink Gerbera, Peach Gerbera, Red Carnations, Yellow Rose Spray). Right is Zandra (Pink Gerbera, Hot Cherry Pink Rose, no yellow flowers).",
     "images": [
@@ -633,15 +462,12 @@
     ]
   },
   {
-    "id": "fr05-lyndi-vs-luxekate",
+    "id": "q36-lyndi-vs-luxe-kate",
     "cluster": "technical-wraps",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Lyndi Heart Rose Bouquet?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Left",
     "explain": "Left is Lyndi (heart-shaped Red Roses in white wrapper with pink ribbons). Right is Luxe Kate (XL Hatbox with Red Roses in mushroom shape).",
     "images": [
@@ -650,32 +476,26 @@
     ]
   },
   {
-    "id": "fr06-zooey-bouquet-vs-box",
+    "id": "q37-zooey-box-vs-zendaya",
     "cluster": "sunflower-hearts",
     "category": "flower-recognise",
     "type": "this_or_that",
-    "prompt": "Which one is the Zooey Sunflower Bouquet (not the Box)?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "prompt": "Which one is the Zooey Sunflower Box? (Zooey Box vs Zendaya Box)",
+    "options": ["Left", "Right"],
     "answer": "Left",
-    "explain": "Left is Zooey Bouquet (Greenheart Sunflowers in pink wrapper with Alstroemeria). Right is Zooey Box (Blackheart Sunflowers in peach hatbox).",
+    "explain": "Left is the Zooey Box (Blackheart Sunflowers, no red rose spray). Right is the Zendaya Box (Greenheart Sunflowers with red rose spray).",
     "images": [
-      "/quiz-images/zooey-yellow-sunflower-mothers-day-bouquet.png",
-      "/quiz-images/zooey-yellow-sunflower-mothers-day-flower-box.png"
+      "/quiz-images/zooey-yellow-sunflower-mothers-day-flower-box.png",
+      "/quiz-images/zendaya-yellow-sunflower-mothers-day-flower-box.png"
     ]
   },
   {
-    "id": "fr07-beatrice-vs-luxekate",
+    "id": "q38-beatrice-vs-luxe-kate",
     "cluster": "pink-hatboxes",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Beatrice Lily & Rose Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Left",
     "explain": "Left is Beatrice (Red Roses + White/Pink Roses + Lilies in peach hatbox). Right is Luxe Kate (XL Hatbox with ONLY Red Roses in mushroom dome shape).",
     "images": [
@@ -684,15 +504,12 @@
     ]
   },
   {
-    "id": "fr08-zaylee-vs-zandra",
+    "id": "q39-zaylee-vs-zandra",
     "cluster": "pink-hatboxes",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Zaylee Pink Mum Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Left",
     "explain": "Left is Zaylee (2-3 Anthuriums, Lilac Spidermums, NO Gerberas). Right is Zandra (Pink Gerbera, Hot Cherry Pink Rose, Rose Spray).",
     "images": [
@@ -701,15 +518,12 @@
     ]
   },
   {
-    "id": "fr09-marilyn-vs-mischa",
+    "id": "q40-marilyn-vs-mischa",
     "cluster": "russian-wraps",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Marilyn Pink Carnation Russian Bouquet?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Left",
     "explain": "Left is Marilyn (pink/black Russian wrapper, Pink Gerbera, no Matthiola). Right is Mischa (pink wrapper, White Eustoma + Matthiola, not Russian-style).",
     "images": [
@@ -718,15 +532,12 @@
     ]
   },
   {
-    "id": "fr10-tessa-vs-phoebe",
+    "id": "q41-tessa-vs-phoebe",
     "cluster": "pink-hatboxes",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Tessa Pink Lily Flower Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Right",
     "explain": "Right is Tessa (Pink Lilies + Avalanche/White Roses in peach hatbox). Left is Phoebe (Hot Cherry Pink Carnations + White Dendrobium Orchid).",
     "images": [
@@ -735,15 +546,12 @@
     ]
   },
   {
-    "id": "fr11-izzy-vs-phoebe",
+    "id": "q42-izzy-vs-phoebe",
     "cluster": "pink-hatboxes",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Izzy Pink Daisy Flower Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Right",
     "explain": "Right is Izzy (colourful mix: Pink Gerbera, Red Carnation, Yellow Rose Spray, Scabiosa Pod). Left is Phoebe (pink-red tones: Hot Cherry Pink Carnation, White Dendrobium Orchid).",
     "images": [
@@ -752,32 +560,12 @@
     ]
   },
   {
-    "id": "fr12-luxekate-vs-beatrice",
-    "cluster": "pink-hatboxes",
-    "category": "flower-recognise",
-    "type": "this_or_that",
-    "prompt": "Which one is the Luxe Kate Red Rose Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
-    "answer": "Left",
-    "explain": "Left is Luxe Kate (XL Hatbox, ONLY Red Roses in a mushroom dome). Right is Beatrice (mixed Red Roses + White/Pink Roses + Lilies).",
-    "images": [
-      "/quiz-images/luxe-kate-red-rose-mothers-day-flower-box.png",
-      "/quiz-images/beatrice-rose-lily-mothers-day-flower-box.png"
-    ]
-  },
-  {
-    "id": "fr13-zendra-vs-zooeybox",
+    "id": "q43-zendaya-vs-zooey-box",
     "cluster": "sunflower-hearts",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Zendaya Yellow Sunflower Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Right",
     "explain": "Right is Zendaya (Greenheart Sunflowers WITH Red Rose Spray in peach box). Left is Zooey Box (Blackheart Sunflowers, NO Red Rose Spray).",
     "images": [
@@ -786,88 +574,31 @@
     ]
   },
   {
-    "id": "fr14-trixie-vs-mischa",
+    "id": "q44-trixie-vs-mischa",
     "cluster": "technical-wraps",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Trixie Pink Lily Bouquet?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Right",
-    "explain": "Right is Trixie (purple wrapper — the only MDAY product with purple). Left is Mischa (pink wrapper, Pink Carnation + White Eustoma).",
+    "explain": "Right is Trixie (purple wrapper - the only MDAY product with purple). Left is Mischa (pink wrapper, Pink Carnation + White Eustoma).",
     "images": [
       "/quiz-images/mischa-pink-carnation-mothers-day-bouquet-large.png",
       "/quiz-images/trixie-pink-lily-mothers-day-bouquet.png"
     ]
   },
   {
-    "id": "fr15-ayame-vs-zaylee",
-    "cluster": "pink-hatboxes",
-    "category": "flower-recognise",
-    "type": "this_or_that",
-    "prompt": "Which one is the Ayame Pink Gerbera Flower Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
-    "answer": "Left",
-    "explain": "Left is Ayame (1 Anthurium + Pink Gerberas). Right is Zaylee (2-3 Anthuriums + Lilac Spidermums, NO Gerberas).",
-    "images": [
-      "/quiz-images/ayame-pink-gerbera-mothers-day-flower-box-large.png",
-      "/quiz-images/zaylee-pink-mum-mothers-day-flower-box-large.png"
-    ]
-  },
-  {
-    "id": "fr16-indira-vs-orchid",
-    "cluster": "technical-wraps",
-    "category": "flower-recognise",
-    "type": "this_or_that",
-    "prompt": "Which one is the Indira Pink & White Phalaenopsis Orchid?",
-    "options": [
-      "Left",
-      "Right"
-    ],
-    "answer": "Left",
-    "explain": "Left is Indira (mixed pink + white stalks, pink decorative fabric wrap). Right is the standard Pink Phalaenopsis Orchid (all-pink stalks, plain white pot).",
-    "images": [
-      "/quiz-images/indira-pink-white-mothers-day-phalaenopsis-orchid.png",
-      "/quiz-images/image10.png"
-    ]
-  },
-  {
-    "id": "fr17-miriam-vs-marilyn",
+    "id": "q45-miriam-vs-marilyn",
     "cluster": "russian-wraps",
     "category": "flower-recognise",
     "type": "this_or_that",
     "prompt": "Which one is the Miriam Pink Carnation Russian Bouquet?",
-    "options": [
-      "Left",
-      "Right"
-    ],
+    "options": ["Left", "Right"],
     "answer": "Right",
     "explain": "Right is Miriam (yellow wrapper, white ribbon, includes White Matthiola). Left is Marilyn (pink wrapper, black ribbon, NO Matthiola).",
     "images": [
       "/quiz-images/marilyn-carnation-mothers-day-russian-bouquet-standard.png",
       "/quiz-images/miriam-pink-carnation-mothers-day-russian-bouquet-standard.png"
-    ]
-  },
-  {
-    "id": "fr18-zandra-vs-ayame",
-    "cluster": "pink-hatboxes",
-    "category": "flower-recognise",
-    "type": "this_or_that",
-    "prompt": "Which one is the Zandra Pink Gerbera Box?",
-    "options": [
-      "Left",
-      "Right"
-    ],
-    "answer": "Left",
-    "explain": "Left is Zandra (Pink Gerbera + Hot Cherry Pink Rose + Rose Spray). Right is Ayame (1 Anthurium + Pink Gerberas, no Hot Cherry Pink Rose).",
-    "images": [
-      "/quiz-images/zandra-pink-gerbera-mothers-day-flower-box.png",
-      "/quiz-images/ayame-pink-gerbera-mothers-day-flower-box-large.png"
     ]
   }
 ]

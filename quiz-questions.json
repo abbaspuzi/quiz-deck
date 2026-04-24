@@ -5,8 +5,13 @@
     "category": "visual-tells",
     "type": "single_choice",
     "prompt": "You see a bouquet with a Purple wrapper on the line. Which product is it?",
-    "options": ["Laycie", "Trixie", "Mischa", "Miriam"],
-    "answer": "Trixie",
+    "options": [
+      "Laycie Lilac Rose Mother's Day Bouquet",
+      "Trixie Pink Lily Mother's Day Bouquet",
+      "Mischa Pink Carnation Mother's Day Bouquet",
+      "Miriam Pink Carnation Mother's Day Russian Bouquet"
+    ],
+    "answer": "Trixie Pink Lily Mother's Day Bouquet",
     "explain": "Trixie is the only Mother's Day product with a purple exterior."
   },
   {
@@ -15,8 +20,13 @@
     "category": "visual-tells",
     "type": "single_choice",
     "prompt": "A bouquet features a cream wrapper with 3 pink rubber ribbons, and a white cut orchid. Which product is this?",
-    "options": ["Trixie", "Mischa", "Laycie", "Miriam"],
-    "answer": "Laycie",
+    "options": [
+      "Trixie Pink Lily Mother's Day Bouquet",
+      "Mischa Pink Carnation Mother's Day Bouquet",
+      "Laycie Lilac Rose Mother's Day Bouquet",
+      "Miriam Pink Carnation Mother's Day Russian Bouquet"
+    ],
+    "answer": "Laycie Lilac Rose Mother's Day Bouquet",
     "explain": "The 3-ribbon count on the cream wrap & white cut orchid is a unique technical identifier for Laycie."
   },
   {
@@ -25,8 +35,13 @@
     "category": "visual-tells",
     "type": "single_choice",
     "prompt": "Which Russian-style bouquet uses a yellow wrapper and a white ribbon?",
-    "options": ["Marilyn", "Miriam", "Mischa", "Laycie"],
-    "answer": "Miriam",
+    "options": [
+      "Marilyn Carnation Mother's Day Russian Bouquet",
+      "Miriam Pink Carnation Mother's Day Russian Bouquet",
+      "Mischa Pink Carnation Mother's Day Bouquet",
+      "Laycie Lilac Rose Mother's Day Bouquet"
+    ],
+    "answer": "Miriam Pink Carnation Mother's Day Russian Bouquet",
     "explain": "Miriam = Yellow/White wrapper. Marilyn = Pink/Black wrapper."
   },
   {
@@ -87,8 +102,13 @@
     "category": "scenario",
     "type": "scenario",
     "prompt": "A packer has two peach hatboxes. Box A has 3 Anthuriums and Lilac Spidermums. Box B has 1 Anthurium and Pink Gerberas. What is Box A?",
-    "options": ["Zaylee", "Ayame", "Zandra", "Tessa"],
-    "answer": "Zaylee",
+    "options": [
+      "Zaylee Pink Mum Mother's Day Flower Box",
+      "Ayame Pink Gerbera Mother's Day Flower Box",
+      "Zandra Pink Gerbera Mother's Day Flower Box",
+      "Tessa Pink Lily Mother's Day Flower Box"
+    ],
+    "answer": "Zaylee Pink Mum Mother's Day Flower Box",
     "explain": "The Anthurium count (3 vs 1) is the decisive factor. 3 Anthuriums + Spidermums = Zaylee; 1 Anthurium + Gerberas = Ayame."
   },
   {
@@ -97,8 +117,13 @@
     "category": "scenario",
     "type": "scenario",
     "prompt": "A packer has two peach hatboxes. Box A has 3 Anthuriums and Lilac Spidermums. Box B has 1 Anthurium and Pink Gerberas. What is Box B?",
-    "options": ["Ayame", "Zaylee", "Zandra", "Tessa"],
-    "answer": "Ayame",
+    "options": [
+      "Ayame Pink Gerbera Mother's Day Flower Box",
+      "Zaylee Pink Mum Mother's Day Flower Box",
+      "Zandra Pink Gerbera Mother's Day Flower Box",
+      "Tessa Pink Lily Mother's Day Flower Box"
+    ],
+    "answer": "Ayame Pink Gerbera Mother's Day Flower Box",
     "explain": "Box B with 1 Anthurium and Pink Gerberas = Ayame. Zaylee uses 2–3 Anthuriums and has 0 Gerberas."
   },
   {
@@ -107,8 +132,11 @@
     "category": "scenario",
     "type": "scenario",
     "prompt": "Look at the photo. Is this an Ayame or a Zaylee?",
-    "options": ["Ayame", "Zaylee"],
-    "answer": "Zaylee",
+    "options": [
+      "Ayame Pink Gerbera Mother's Day Flower Box",
+      "Zaylee Pink Mum Mother's Day Flower Box"
+    ],
+    "answer": "Zaylee Pink Mum Mother's Day Flower Box",
     "explain": "Ayame typically features only 1 Anthurium and uses Gerbera. 2–3 Anthuriums is the signature of Zaylee, which does not contain Gerberas.",
     "image": "/quiz-images/image16.png"
   },
@@ -117,7 +145,7 @@
     "cluster": "sunflower-hearts",
     "category": "scenario",
     "type": "single_choice",
-    "prompt": "You are holding a Zooey BOUQUET. Which of these two sunflower centers should be in the arrangement?",
+    "prompt": "You are holding a Zooey bouquet. Which of these two sunflower centers should be in the arrangement?",
     "options": ["Blackheart Sunflower (Left)", "Greenheart Sunflower (Right)"],
     "answer": "Greenheart Sunflower (Right)",
     "explain": "The Zooey Bouquet uses Greenheart sunflowers, the only sunflower bouquet.",
@@ -164,12 +192,12 @@
     "type": "single_choice",
     "prompt": "To correctly identify the Zaylee Flower Box, which ingredients must be present?",
     "options": [
-      "Lilac Spidermum, Light Peach Carnation, 2–3 Anthuriums ",
+      "Lilac Spidermum, Light Peach Carnation, 2–3 Anthuriums",
       "Pink Gerbera, Lilac Spidermum, 1 Anthurium, Ruscus",
       "Lilac Spidermum, Hot Cherry Pink Rose, 2–3 Anthuriums",
       "Pink Gerbera, Hot Cherry Pink Rose, 1 Anthurium"
     ],
-    "answer": "Lilac Spidermum, Light Peach Carnation, 2–3 Anthuriums ",
+    "answer": "Lilac Spidermum, Light Peach Carnation, 2–3 Anthuriums",
     "explain": "Remember Zaylee has 0 Gerberas. If you see a Gerbera, it is likely a Zandra or Ayame."
   },
   {
@@ -246,12 +274,12 @@
     "type": "name_product",
     "prompt": "Name this product.",
     "options": [
-      "Zandra Pink Gerbera Mother's Day Flower Box (MD)",
-      "Zaylee Pink Mum Mother's Day Flower Box (MD)",
-      "Ayame Pink Gerbera Mother's Day Flower Box (MD)",
-      "Izzy Pink Daisy Mother's Day Flower Box (MD)"
+      "Zandra Pink Gerbera Mother's Day Flower Box",
+      "Zaylee Pink Mum Mother's Day Flower Box",
+      "Ayame Pink Gerbera Mother's Day Flower Box",
+      "Izzy Pink Daisy Mother's Day Flower Box "
     ],
-    "answer": "Zandra Pink Gerbera Mother's Day Flower Box (MD)",
+    "answer": "Zandra Pink Gerbera Mother's Day Flower Box",
     "explain": "Zandra uses Pink Greenheart Gerbera, Hot Cherry Pink Rose, and Pink Rose Spray.",
     "image": "/quiz-images/zandra-pink-gerbera-mothers-day-flower-box.png"
   },
@@ -262,12 +290,12 @@
     "type": "name_product",
     "prompt": "Name this product.",
     "options": [
-      "Luxe Kate Red Rose Mother's Day Flower Box (MD)",
-      "Zandra Pink Gerbera Mother's Day Flower Box (MD)",
-      "Tessa Pink Lily Mother's Day Flower Box (MD)",
-      "Beatrice Rose Lily Mother's Day Flower Box (MD)"
+      "Luxe Kate Red Rose Mother's Day Flower Box",
+      "Zandra Pink Gerbera Mother's Day Flower Box",
+      "Tessa Pink Lily Mother's Day Flower Box",
+      "Beatrice Rose Lily Mother's Day Flower Box "
     ],
-    "answer": "Luxe Kate Red Rose Mother's Day Flower Box (MD)",
+    "answer": "Luxe Kate Red Rose Mother's Day Flower Box",
     "explain": "Luxe Kate features an XL Hatbox with Red Roses formed in a mushroom shape.",
     "image": "/quiz-images/luxe-kate-red-rose-mothers-day-flower-box.png"
   },
@@ -278,12 +306,12 @@
     "type": "name_product",
     "prompt": "Name this product.",
     "options": [
-      "Mischa Pink Carnation Mother's Day Bouquet (MD)",
-      "Laycie Lilac Rose Mother's Day Bouquet (MD)",
-      "Miriam Pink Carnation Mother's Day Russian Bouquet (MD)",
-      "Trixie Pink Lily Mother's Day Bouquet (MD)"
+      "Mischa Pink Carnation Mother's Day Bouquet",
+      "Laycie Lilac Rose Mother's Day Bouquet",
+      "Miriam Pink Carnation Mother's Day Russian Bouquet",
+      "Trixie Pink Lily Mother's Day Bouquet "
     ],
-    "answer": "Mischa Pink Carnation Mother's Day Bouquet (MD)",
+    "answer": "Mischa Pink Carnation Mother's Day Bouquet",
     "explain": "Mischa uses Pink Carnations, White Eustoma, White Matthiola, and Thlaspi.",
     "image": "/quiz-images/mischa-pink-carnation-mothers-day-bouquet-large.png"
   },
@@ -294,12 +322,12 @@
     "type": "name_product",
     "prompt": "Name this product.",
     "options": [
-      "Lyndi Red Rose Mother's Day Heart Bouquet (MD)",
-      "Marilyn Pink Carnation Mother's Day Bouquet (MD)",
-      "Miriam Pink Carnation Mother's Day Russian Bouquet (MD)",
-      "Laycie Lilac Rose Mother's Day Bouquet (MD)"
+      "Lyndi Red Rose Mother's Day Heart Bouquet",
+      "Marilyn Pink Carnation Mother's Day Bouquet",
+      "Miriam Pink Carnation Mother's Day Russian Bouquet",
+      "Laycie Lilac Rose Mother's Day Bouquet "
     ],
-    "answer": "Lyndi Red Rose Mother's Day Heart Bouquet (MD)",
+    "answer": "Lyndi Red Rose Mother's Day Heart Bouquet",
     "explain": "Lyndi features Heart Shaped Red Roses in a White Wrapper with Pink Rubber Ribbons.",
     "image": "/quiz-images/lyndi-red-rose-mothers-day-heart-bouquet-large.png"
   },
@@ -310,12 +338,12 @@
     "type": "name_product",
     "prompt": "Name this product.",
     "options": [
-      "Izzy Pink Daisy Mother's Day Flower Box (MD)",
-      "Zandra Pink Gerbera Mother's Day Flower Box (MD)",
-      "Phoebe Pink Carnation Mother's Day Flower Box (MD)",
-      "Ayame Pink Gerbera Mother's Day Flower Box (MD)"
+      "Izzy Pink Daisy Mother's Day Flower Box",
+      "Zandra Pink Gerbera Mother's Day Flower Box",
+      "Phoebe Pink Carnation Mother's Day Flower Box",
+      "Ayame Pink Gerbera Mother's Day Flower Box "
     ],
-    "answer": "Izzy Pink Daisy Mother's Day Flower Box (MD)",
+    "answer": "Izzy Pink Daisy Mother's Day Flower Box",
     "explain": "Izzy features Pink Gerbera, Red Carnations, Yellow Rose Spray, Mini Fruit Leaf, and Scabiosa Pod.",
     "image": "/quiz-images/izzy-pink-daisy-mothers-day-flower-box-large.png"
   },
@@ -326,12 +354,12 @@
     "type": "name_product",
     "prompt": "Name this product.",
     "options": [
-      "Phoebe Pink Carnation Mother's Day Flower Box (MD)",
-      "Zandra Pink Gerbera Mother's Day Flower Box (MD)",
-      "Izzy Pink Daisy Mother's Day Flower Box (MD)",
-      "Ayame Pink Gerbera Mother's Day Flower Box (MD)"
+      "Phoebe Pink Carnation Mother's Day Flower Box",
+      "Zandra Pink Gerbera Mother's Day Flower Box",
+      "Izzy Pink Daisy Mother's Day Flower Box",
+      "Ayame Pink Gerbera Mother's Day Flower Box "
     ],
-    "answer": "Phoebe Pink Carnation Mother's Day Flower Box (MD)",
+    "answer": "Phoebe Pink Carnation Mother's Day Flower Box",
     "explain": "Phoebe features Hot Cherry Pink Carnations, Pink Carnations, White Dendrobium Orchid, and Purple Capsia.",
     "image": "/quiz-images/phoebe-pink-carnation-mothers-day-flower-box-large.png"
   },
@@ -480,7 +508,7 @@
     "cluster": "sunflower-hearts",
     "category": "flower-recognise",
     "type": "this_or_that",
-    "prompt": "Which one is the Zooey Sunflower Box? (Zooey Box vs Zendaya Box)",
+    "prompt": "Which one is the Zooey Sunflower Box?",
     "options": ["Left", "Right"],
     "answer": "Left",
     "explain": "Left is the Zooey Box (Blackheart Sunflowers, no red rose spray). Right is the Zendaya Box (Greenheart Sunflowers with red rose spray).",

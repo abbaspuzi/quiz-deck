@@ -151,8 +151,8 @@
     "answer": "Greenheart Sunflower (Right)",
     "explain": "The Zooey Bouquet uses Greenheart sunflowers, the only sunflower bouquet.",
     "images": [
-      "/quiz-images/zooey-bouquet-center.png",
-      "/quiz-images/zooey-flower-box-center.png"
+      "/quiz-images/zooey-flower-box-center.png",
+      "/quiz-images/zooey-bouquet-center.png"
     ]
   },
   {
@@ -223,12 +223,12 @@
     "type": "single_choice",
     "prompt": "Which of the following best describes the ingredient list for the Miriam Russian Bouquet?",
     "options": [
-      "Pink Carnation, White Matthiola, Pale Pink Roses",
+      "Pink Carnation, White Matthiola, White Carnation",
       "Hot Cherry Pink Rose, Pink Carnation, White Statice",
       "Pink Carnation, White Eustoma, 2–3 Anthuriums",
       "Pink Rose, White Matthiola, Light Pink Carnation Spray"
     ],
-    "answer": "Pink Carnation, White Matthiola, Pale Pink Roses",
+    "answer": "Pink Carnation, White Matthiola, White Carnation",
     "explain": "Miriam is distinguished by its paler palette and the inclusion of Matthiola, unlike the Marilyn."
   },
   {

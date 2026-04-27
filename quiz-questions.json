@@ -127,18 +127,19 @@
     "explain": "Box B with 1 Anthurium and Pink Gerberas = Ayame. Zaylee uses 2–3 Anthuriums and has 0 Gerberas."
   },
   {
-    "id": "q11-anthurium-count",
-    "cluster": "pink-hatboxes",
-    "category": "scenario",
+    "id": "q11-ingrid-orchid",
+    "cluster": "technical-wraps",
+    "category": "orchid-id",
     "type": "scenario",
-    "prompt": "Look at the photo. Is this an Ayame or a Zaylee?",
+    "prompt": "Look at the photo. What product is this?",
     "options": [
-      "Ayame Pink Gerbera Mother's Day Flower Box",
-      "Zaylee Pink Mum Mother's Day Flower Box"
+      "Ingrid Mother's Day Pink Phalaenopsis Orchid (2 Stalks)",
+      "Mother's Day Pink Phalaenopsis Orchid (2 stalks)",
+      "Indira Pink & White Mother's Day Phalaenopsis Orchid (3 Stalks)"
     ],
-    "answer": "Zaylee Pink Mum Mother's Day Flower Box",
-    "explain": "Ayame typically features only 1 Anthurium and uses Gerbera. 2–3 Anthuriums is the signature of Zaylee, which does not contain Gerberas.",
-    "image": "/quiz-images/image16.png"
+    "answer": "Ingrid Mother's Day Pink Phalaenopsis Orchid (2 Stalks)",
+    "explain": "The Ingrid Mother's Day Orchid uses only pink orchids and has a pink wrapper with ribbons.",
+    "image": "/quiz-images/ingrid-pink-phalaenopsis-orchid-2-stalks.jpg"
   },
   {
     "id": "q12-sunflower-heart",
@@ -406,17 +407,17 @@
     ]
   },
   {
-    "id": "q30-indira-vs-orchid",
+    "id": "q30-standard-orchid-vs-ingrid",
     "cluster": "technical-wraps",
     "category": "this-or-that",
     "type": "this_or_that",
-    "prompt": "Which one is the Indira Pink & White Phalaenopsis Orchid?",
+    "prompt": "Which one is the Mother's Day Pink Phalaenopsis Orchid (1 stalk)?",
     "options": ["Left", "Right"],
-    "answer": "Right",
-    "explain": "Right is Indira (2 pink & 1 white stalks, pink decorative base wrap). Left is the standard Pink Phalaenopsis Orchid (2 stalks, plain pot).",
+    "answer": "Left",
+    "explain": "Right is Ingrid (pink decorative base wrap + peach & pink ribbon). Left is the standard Pink Phalaenopsis Orchid (1 stalk, plain pot with Bloomthis Ribbon).",
     "images": [
-      "/quiz-images/image10.png",
-      "/quiz-images/indira-pink-white-mothers-day-phalaenopsis-orchid.png"
+      "/quiz-images/mothers-day-pink-phalaenopsis-orchid-1-stalk.jpg",
+      "/quiz-images/ingrid-pink-phalaenopsis-orchid-2-stalks.jpg"
     ]
   },
   {

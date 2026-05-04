@@ -148,7 +148,7 @@
     "type": "this_or_that",
     "prompt": "You are holding a Zooey bouquet. Which of these two sunflower centers should be in the arrangement?",
     "options": ["Left", "Right"],
-    "answer": "Right",
+    "answer": "Left",
     "explain": "The Zooey Bouquet uses Greenheart sunflowers, the only sunflower bouquet.",
     "images": [
       "/quiz-images/zooey-flower-box-center.png",
@@ -213,7 +213,7 @@
       "Greenheart Sunflower, Red Rose Spray, Oxypetalum, Thlaspi",
       "Blackheart Sunflower, Alstroemeria, White Matthiola"
     ],
-    "answer": "Greenheart Sunflower, Alstroemeria, Oxypetalum",
+    "answer": "Blackheart Sunflower, Red Rose Spray, White Statice",
     "explain": "The Zooey Bouquet must use the Greenheart center and the specific pairing of Alstroemeria and Oxypetalum."
   },
   {

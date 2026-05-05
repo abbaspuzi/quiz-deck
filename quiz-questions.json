@@ -148,7 +148,7 @@
     "type": "this_or_that",
     "prompt": "You are holding a Zooey bouquet. Which of these two sunflower centers should be in the arrangement?",
     "options": ["Left", "Right"],
-    "answer": "Left",
+    "answer": "Right",
     "explain": "The Zooey Bouquet uses Greenheart sunflowers, the only sunflower bouquet.",
     "images": [
       "/quiz-images/zooey-flower-box-center.png",

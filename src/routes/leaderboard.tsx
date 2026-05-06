@@ -53,7 +53,7 @@ function LeaderboardPage() {
               Average score
             </p>
             <p className="font-display mt-2 text-4xl font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
-              {avgScore}%
+              {avgScore}
             </p>
           </article>
         </div>
@@ -104,11 +104,14 @@ function LeaderboardPage() {
                       Score
                     </p>
                     <p className="font-display mt-2 text-5xl font-semibold tracking-[-0.07em] text-[var(--accent-strong)]">
-                      {entry.score}%
+                      {entry.score}
+                    </p>
+                    <p className="mt-1 text-xs text-[var(--text-secondary)]">
+                      {entry.accuracy}% acc · +{entry.speedBonus} speed
                     </p>
                   </div>
                   <p className="text-right text-sm leading-6 text-[var(--text-secondary)]">
-                    {entry.clusterScores.length} clusters
+                    {formatDuration(entry.durationMs)}
                     <br />
                     {formatTimeAgo(new Date(entry.completedAt))}
                   </p>
@@ -149,13 +152,16 @@ function LeaderboardPage() {
                       {entry.name}
                     </p>
                     <p className="mt-1 text-sm leading-6 text-[var(--text-secondary)]">
-                      {entry.clusterScores.length} clusters covered ·{" "}
+                      {entry.accuracy}% accuracy · {formatDuration(entry.durationMs)} ·{' '}
                       {formatTimeAgo(new Date(entry.completedAt))}
                     </p>
                   </div>
                   <div className="text-left sm:text-right">
                     <p className="font-display text-[1.8rem] font-semibold tracking-[-0.06em] text-[var(--accent-strong)]">
-                      {entry.score}%
+                      {entry.score}
+                    </p>
+                    <p className="mt-0.5 text-xs text-[var(--text-secondary)]">
+                      +{entry.speedBonus} speed
                     </p>
                   </div>
                 </article>
@@ -166,6 +172,15 @@ function LeaderboardPage() {
       )}
     </div>
   );
+}
+
+function formatDuration(ms: number): string {
+  if (!ms || ms <= 0) return "—";
+  const totalSeconds = Math.round(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  if (minutes <= 0) return `${seconds}s`;
+  return `${minutes}m ${seconds.toString().padStart(2, "0")}s`;
 }
 
 function formatTimeAgo(date: Date): string {

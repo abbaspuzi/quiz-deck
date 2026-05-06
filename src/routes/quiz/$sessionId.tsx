@@ -1,15 +1,15 @@
-import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery } from "convex/react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../../../convex/_generated/api";
-import { authClient } from "../../lib/auth-client";
+import type { QuizMode, QuizQuestion } from "../../features/quiz/content";
 import {
-  shuffle,
-  highRiskClusters,
   getQuestionsForMode,
+  highRiskClusters,
   isCorrectSelection,
+  shuffle,
 } from "../../features/quiz/content";
-import type { QuizQuestion, QuizMode } from "../../features/quiz/content";
+import { authClient } from "../../lib/auth-client";
 import {
   cardClass,
   eyebrowClass,
@@ -30,6 +30,7 @@ type AnswerRecord = {
   selected: string;
   correct: boolean;
   cluster: string;
+  questionMs?: number;
 };
 
 function QuizSessionPage() {
@@ -42,12 +43,27 @@ function QuizSessionPage() {
   const [selected, setSelected] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [answers, setAnswers] = useState<AnswerRecord[]>([]);
+  const questionStartRef = useRef<number>(Date.now());
+  const [elapsedMs, setElapsedMs] = useState(0);
 
   const question: QuizQuestion | undefined = questions[currentIndex];
   const total = questions.length;
   const progress = total > 0 ? (currentIndex / total) * 100 : 0;
   const isFinished = currentIndex >= total;
   const playerName = user?.name ?? name;
+
+  useEffect(() => {
+    questionStartRef.current = Date.now();
+    setElapsedMs(0);
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (isFinished || revealed) return;
+    const id = window.setInterval(() => {
+      setElapsedMs(Date.now() - questionStartRef.current);
+    }, 100);
+    return () => window.clearInterval(id);
+  }, [currentIndex, isFinished, revealed]);
 
   const score = answers.filter((a) => a.correct).length;
   const scorePercent =
@@ -56,9 +72,11 @@ function QuizSessionPage() {
   const confirmAnswer = useCallback(
     (option: string) => {
       if (!question || revealed) return;
+      const elapsed = Date.now() - questionStartRef.current;
       const isCorrect = isCorrectSelection(question, option);
       setSelected(option);
       setRevealed(true);
+      setElapsedMs(elapsed);
       setAnswers((prev) => [
         ...prev,
         {
@@ -66,6 +84,7 @@ function QuizSessionPage() {
           selected: option,
           correct: isCorrect,
           cluster: question.cluster,
+          questionMs: elapsed,
         },
       ]);
     },
@@ -94,8 +113,13 @@ function QuizSessionPage() {
   const submitResult = useMutation(api.leaderboard.submitResult);
   const submitted = useRef(false);
 
+  const allTimed =
+    answers.length === total &&
+    answers.every((a) => a.questionMs !== undefined);
+
   useEffect(() => {
     if (!isFinished || answers.length === 0 || submitted.current) return;
+    if (!allTimed) return;
 
     submitted.current = true;
 
@@ -120,8 +144,9 @@ function QuizSessionPage() {
 
     submitResult({
       name: playerName,
-      score: scorePercent,
+      correct: score,
       totalQuestions: total,
+      questionTimings: answers.map((a) => a.questionMs ?? 0),
       clusterScores: Array.from(clusterMap.entries()).map(([id, data]) => ({
         clusterId: id,
         clusterTitle: data.title,
@@ -131,7 +156,7 @@ function QuizSessionPage() {
     }).catch(() => {
       // Results still render locally when submission fails.
     });
-  }, [answers, isFinished, playerName, scorePercent, submitResult, total]);
+  }, [answers, isFinished, playerName, score, submitResult, total, allTimed]);
 
   if (!user) {
     return (
@@ -198,7 +223,13 @@ function QuizSessionPage() {
             className="mx-auto w-full max-w-sm"
             to="/results/$sessionId"
             params={{ sessionId }}
-            search={{ name: playerName, answers: JSON.stringify(answers) }}
+            search={{
+              name: playerName,
+              answers: JSON.stringify(answers),
+              questionTimings: JSON.stringify(
+                answers.map((a) => a.questionMs ?? 0),
+              ),
+            }}
           >
             <span className={primaryButtonClass}>View quiz recap</span>
           </Link>
@@ -293,6 +324,7 @@ function QuizSessionPage() {
       </aside>
 
       <section className={`${cardClass} grid gap-5`}>
+        <QuestionTimer elapsedMs={elapsedMs} totalQuestions={total} />
         <div className="grid gap-3">
           <h2 className="font-display text-balance text-[clamp(1.8rem,3.6vw,2.7rem)] font-semibold leading-none tracking-[-0.06em] text-(--text-primary)">
             {question.prompt}
@@ -428,6 +460,51 @@ function QuizSessionPage() {
           ) : null}
         </div>
       </section>
+    </div>
+  );
+}
+
+const QUESTION_TARGET_MS = 15_000;
+
+function QuestionTimer({
+  elapsedMs,
+}: {
+  elapsedMs: number;
+  totalQuestions: number;
+}) {
+  const cap = 10;
+  const ratio = Math.max(0, 1 - elapsedMs / QUESTION_TARGET_MS);
+  const bonus = ratio * cap;
+  const fillPercent = Math.min(100, (elapsedMs / QUESTION_TARGET_MS) * 100);
+  const expired = ratio === 0;
+  const fillColor = expired ? "var(--text-muted)" : "var(--accent-strong)";
+
+  return (
+    <div className="grid gap-2 rounded-[1.4rem] bg-(--surface) px-4 py-3">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-baseline gap-2">
+          <span
+            className="font-display text-2xl font-semibold tabular-nums tracking-[-0.05em]"
+            style={{
+              color: expired ? "var(--text-muted)" : "var(--text-primary)",
+            }}
+          >
+            {(elapsedMs / 1000).toFixed(1)}s
+          </span>
+          <span
+            className="text-xs font-semibold tabular-nums"
+            style={{ color: fillColor }}
+          >
+            {expired ? "no bonus" : `+${bonus.toFixed(1)} bonus`}
+          </span>
+        </div>
+      </div>
+      <div className="h-1.5 overflow-hidden rounded-full bg-(--surface-strong)">
+        <div
+          className="h-full rounded-full transition-[width] duration-100 ease-linear"
+          style={{ width: `${fillPercent}%`, background: fillColor }}
+        />
+      </div>
     </div>
   );
 }

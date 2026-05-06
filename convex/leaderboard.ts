@@ -1,12 +1,33 @@
 import { query, mutation } from './_generated/server'
 import { v } from 'convex/values'
 
+const TARGET_MS_PER_QUESTION = 15_000
+const MAX_SPEED_BONUS = 50
+
+function calculateScore(
+  correct: number,
+  totalQuestions: number,
+  questionTimings: number[],
+) {
+  const accuracy =
+    totalQuestions > 0 ? Math.round((correct / totalQuestions) * 100) : 0
+  const perQuestionCap = totalQuestions > 0 ? MAX_SPEED_BONUS / totalQuestions : 0
+  const rawSpeed = questionTimings.reduce((sum, ms) => {
+    const ratio = Math.max(0, 1 - ms / TARGET_MS_PER_QUESTION)
+    return sum + ratio * perQuestionCap
+  }, 0)
+  const speedBonus = Math.min(MAX_SPEED_BONUS, Math.round(rawSpeed))
+  const durationMs = questionTimings.reduce((sum, ms) => sum + ms, 0)
+  return { accuracy, speedBonus, score: accuracy + speedBonus, durationMs }
+}
+
 /** Save a completed quiz result to the leaderboard */
 export const submitResult = mutation({
   args: {
     name: v.string(),
-    score: v.number(),
+    correct: v.number(),
     totalQuestions: v.number(),
+    questionTimings: v.array(v.number()),
     clusterScores: v.array(
       v.object({
         clusterId: v.string(),
@@ -19,7 +40,6 @@ export const submitResult = mutation({
   handler: async (ctx, args) => {
     const normalizedName = args.name.trim().toLowerCase()
 
-    // Find or create participant
     let participant = await ctx.db
       .query('participants')
       .withIndex('by_normalized_name', (q) => q.eq('normalizedName', normalizedName))
@@ -33,14 +53,22 @@ export const submitResult = mutation({
       participant = (await ctx.db.get(id))!
     }
 
-    // Create a quiz session
+    const { accuracy, speedBonus, score, durationMs } = calculateScore(
+      args.correct,
+      args.totalQuestions,
+      args.questionTimings,
+    )
+
     const now = Date.now()
     const sessionId = await ctx.db.insert('quizSessions', {
       participantId: participant._id,
       status: 'completed',
-      startedAt: now,
+      startedAt: now - durationMs,
       completedAt: now,
-      score: args.score,
+      score,
+      accuracy,
+      durationMs,
+      speedBonus,
       clusterScores: args.clusterScores.map((c) => ({
         clusterId: c.clusterId,
         score: c.total > 0 ? Math.round((c.correct / c.total) * 100) : 0,
@@ -61,7 +89,6 @@ export const topScores = query({
       .order('desc')
       .collect()
 
-    // Join with participants to get names
     const results = await Promise.all(
       sessions.map(async (session) => {
         const participant = await ctx.db.get(session.participantId)
@@ -69,15 +96,19 @@ export const topScores = query({
           _id: session._id,
           name: participant?.name ?? 'Unknown',
           score: session.score ?? 0,
+          accuracy: session.accuracy ?? session.score ?? 0,
+          durationMs: session.durationMs ?? 0,
+          speedBonus: session.speedBonus ?? 0,
           completedAt: session.completedAt ?? session.startedAt,
           clusterScores: session.clusterScores ?? [],
         }
       }),
     )
 
-    // Sort by score descending, then by completion time ascending
+    // Sort by composite score desc, then by faster duration, then by earlier completion
     results.sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score
+      if (a.durationMs !== b.durationMs) return a.durationMs - b.durationMs
       return a.completedAt - b.completedAt
     })
 

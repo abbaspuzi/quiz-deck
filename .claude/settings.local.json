@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npx convex:*)",
       "Bash(ls:*)",
-      "Bash(pnpm run:*)"
+      "Bash(pnpm run:*)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(npx vite *)"
     ]
   }
 }

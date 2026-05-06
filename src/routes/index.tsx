@@ -190,7 +190,7 @@ function IndexPage() {
                 </div>
                 <div className="text-right">
                   <p className="font-display text-[1.3rem] font-semibold tracking-[-0.05em] text-(--accent-strong)">
-                    {entry.score}%
+                    {entry.score}
                   </p>
                 </div>
               </article>

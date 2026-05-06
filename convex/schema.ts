@@ -14,6 +14,9 @@ export default defineSchema({
     startedAt: v.number(),
     completedAt: v.optional(v.number()),
     score: v.optional(v.number()),
+    accuracy: v.optional(v.number()),
+    durationMs: v.optional(v.number()),
+    speedBonus: v.optional(v.number()),
     clusterScores: v.optional(v.array(v.object({
       clusterId: v.string(),
       score: v.number(),

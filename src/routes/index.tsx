@@ -11,7 +11,7 @@ function IndexPage() {
   const navigate = useNavigate({ from: "/" });
   const user = useQuery(api.auth.getCurrentUser);
   const leaderboard = useQuery(api.leaderboard.topScores);
-  const [selectedMode, setSelectedMode] = useState<QuizMode>("flower-recognise");
+  const [selectedMode, setSelectedMode] = useState<QuizMode>("all");
 
   const handleGoogleSignIn = () => {
     void authClient.signIn.social({

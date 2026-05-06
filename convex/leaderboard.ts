@@ -7,17 +7,18 @@ const MAX_SPEED_BONUS = 50
 function calculateScore(
   correct: number,
   totalQuestions: number,
-  questionTimings: number[],
+  questionResults: { ms: number; correct: boolean }[],
 ) {
   const accuracy =
     totalQuestions > 0 ? Math.round((correct / totalQuestions) * 100) : 0
   const perQuestionCap = totalQuestions > 0 ? MAX_SPEED_BONUS / totalQuestions : 0
-  const rawSpeed = questionTimings.reduce((sum, ms) => {
-    const ratio = Math.max(0, 1 - ms / TARGET_MS_PER_QUESTION)
+  const rawSpeed = questionResults.reduce((sum, r) => {
+    if (!r.correct) return sum
+    const ratio = Math.max(0, 1 - r.ms / TARGET_MS_PER_QUESTION)
     return sum + ratio * perQuestionCap
   }, 0)
   const speedBonus = Math.min(MAX_SPEED_BONUS, Math.round(rawSpeed))
-  const durationMs = questionTimings.reduce((sum, ms) => sum + ms, 0)
+  const durationMs = questionResults.reduce((sum, r) => sum + r.ms, 0)
   return { accuracy, speedBonus, score: accuracy + speedBonus, durationMs }
 }
 
@@ -27,7 +28,12 @@ export const submitResult = mutation({
     name: v.string(),
     correct: v.number(),
     totalQuestions: v.number(),
-    questionTimings: v.array(v.number()),
+    questionResults: v.array(
+      v.object({
+        ms: v.number(),
+        correct: v.boolean(),
+      }),
+    ),
     clusterScores: v.array(
       v.object({
         clusterId: v.string(),
@@ -56,7 +62,7 @@ export const submitResult = mutation({
     const { accuracy, speedBonus, score, durationMs } = calculateScore(
       args.correct,
       args.totalQuestions,
-      args.questionTimings,
+      args.questionResults,
     )
 
     const now = Date.now()

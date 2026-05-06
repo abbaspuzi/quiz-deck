@@ -113,10 +113,7 @@ function LeaderboardPage() {
           <section className={panelClass}>
             <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
-                  Full ranking
-                </p>
-                <h2 className="font-display mt-2 text-[1.8rem] font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
+                <h2 className="font-display text-[1.8rem] font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
                   Every completed run
                 </h2>
               </div>

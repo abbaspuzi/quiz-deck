@@ -12,7 +12,12 @@ type AnswerRecord = {
 type ResultsSearch = {
   name?: string;
   answers?: string;
-  questionTimings?: string;
+  questionResults?: string;
+};
+
+type QuestionResult = {
+  ms: number;
+  correct: boolean;
 };
 
 const TARGET_MS_PER_QUESTION = 15_000;
@@ -27,7 +32,11 @@ function formatDuration(ms: number): string {
 }
 
 function ResultsPage() {
-  const { name = "Guest", answers: answersRaw, questionTimings: timingsRaw } = Route.useSearch();
+  const {
+    name = "Guest",
+    answers: answersRaw,
+    questionResults: resultsRaw,
+  } = Route.useSearch();
 
   const answers: AnswerRecord[] = useMemo(() => {
     if (!answersRaw) return [];
@@ -38,28 +47,37 @@ function ResultsPage() {
     }
   }, [answersRaw]);
 
-  const questionTimings: number[] = useMemo(() => {
-    if (!timingsRaw) return [];
+  const questionResults: QuestionResult[] = useMemo(() => {
+    if (!resultsRaw) return [];
     try {
-      const parsed = JSON.parse(timingsRaw);
-      return Array.isArray(parsed) ? parsed.map((n) => (typeof n === "number" ? n : 0)) : [];
+      const parsed = JSON.parse(resultsRaw);
+      if (!Array.isArray(parsed)) return [];
+      return parsed.map((entry) => ({
+        ms:
+          typeof entry === "object" && entry && typeof entry.ms === "number"
+            ? entry.ms
+            : 0,
+        correct:
+          typeof entry === "object" && entry && entry.correct === true,
+      }));
     } catch {
       return [];
     }
-  }, [timingsRaw]);
+  }, [resultsRaw]);
 
   const totalCorrect = answers.filter((a) => a.correct).length;
   const totalQuestions = answers.length;
   const accuracy = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
 
   const perQuestionCap = totalQuestions > 0 ? MAX_SPEED_BONUS / totalQuestions : 0;
-  const rawSpeed = questionTimings.reduce((sum, ms) => {
-    const ratio = Math.max(0, 1 - ms / TARGET_MS_PER_QUESTION);
+  const rawSpeed = questionResults.reduce((sum, r) => {
+    if (!r.correct) return sum;
+    const ratio = Math.max(0, 1 - r.ms / TARGET_MS_PER_QUESTION);
     return sum + ratio * perQuestionCap;
   }, 0);
   const speedBonus =
-    questionTimings.length > 0 ? Math.min(MAX_SPEED_BONUS, Math.round(rawSpeed)) : 0;
-  const durationMs = questionTimings.reduce((sum, ms) => sum + ms, 0);
+    questionResults.length > 0 ? Math.min(MAX_SPEED_BONUS, Math.round(rawSpeed)) : 0;
+  const durationMs = questionResults.reduce((sum, r) => sum + r.ms, 0);
   const finalScore = accuracy + speedBonus;
   const avgPerQuestionMs = totalQuestions > 0 ? durationMs / totalQuestions : 0;
   const scorePercent = accuracy;
@@ -274,8 +292,10 @@ export const Route = createFileRoute("/results/$sessionId")({
   validateSearch: (search: Record<string, unknown>): ResultsSearch => ({
     name: typeof search.name === "string" ? search.name : undefined,
     answers: typeof search.answers === "string" ? search.answers : undefined,
-    questionTimings:
-      typeof search.questionTimings === "string" ? search.questionTimings : undefined,
+    questionResults:
+      typeof search.questionResults === "string"
+        ? search.questionResults
+        : undefined,
   }),
   component: ResultsPage,
 });

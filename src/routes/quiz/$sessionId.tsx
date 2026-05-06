@@ -90,19 +90,6 @@ function QuizSessionPage() {
     [question, revealed],
   );
 
-  const handleSelect = useCallback(
-    (option: string) => {
-      if (revealed) return;
-      setSelected(option);
-    },
-    [revealed],
-  );
-
-  const handleConfirm = useCallback(() => {
-    if (!selected) return;
-    confirmAnswer(selected);
-  }, [selected, confirmAnswer]);
-
   const handleNext = useCallback(() => {
     setSelected(null);
     setRevealed(false);
@@ -138,7 +125,10 @@ function QuizSessionPage() {
       name: playerName,
       correct: score,
       totalQuestions: total,
-      questionTimings: answers.map((a) => a.questionMs ?? 0),
+      questionResults: answers.map((a) => ({
+        ms: a.questionMs ?? 0,
+        correct: a.correct,
+      })),
       clusterScores: Array.from(clusterMap.entries()).map(([id, data]) => ({
         clusterId: id,
         clusterTitle: data.title,
@@ -194,35 +184,129 @@ function QuizSessionPage() {
   }
 
   if (isFinished) {
+    const totalDurationMs = answers.reduce((sum, a) => sum + (a.questionMs ?? 0), 0);
+    const perQuestionCap = total > 0 ? MAX_SPEED_BONUS / total : 0;
+    const rawSpeedBonus = answers.reduce((sum, a) => {
+      if (!a.correct) return sum;
+      const ms = a.questionMs ?? 0;
+      const ratio = Math.max(0, 1 - ms / SCORE_TARGET_MS_PER_QUESTION);
+      return sum + ratio * perQuestionCap;
+    }, 0);
+    const speedBonus =
+      answers.length > 0 ? Math.min(MAX_SPEED_BONUS, Math.round(rawSpeedBonus)) : 0;
+    const finalScore = scorePercent + speedBonus;
+    const avgPerQuestionMs = total > 0 ? totalDurationMs / total : 0;
+    const finishTone =
+      finalScore >= 120
+        ? {
+            emoji: "🏆",
+            ring: "var(--success)",
+            surface: "var(--success-soft)",
+          }
+        : finalScore >= 80
+          ? {
+              emoji: "💪",
+              ring: "var(--warning)",
+              surface: "var(--warning-soft)",
+            }
+          : {
+              emoji: "📚",
+              ring: "var(--accent-strong)",
+              surface: "color-mix(in oklab, var(--accent) 16%, white)",
+            };
+    const dialFillDeg = Math.min(360, (finalScore / 150) * 360);
+
     return (
-      <div className="mx-auto grid w-full max-w-3xl gap-6">
-        <section className={`${cardClass} grid gap-4 px-4 py-6 text-center`}>
-          <div className="mx-auto inline-flex h-20 w-20 items-center justify-center rounded-full bg-[var(--surface)] text-4xl">
-            {scorePercent >= 80 ? "🏆" : scorePercent >= 60 ? "💪" : "📚"}
-          </div>
-          <div>
+      <div className="mx-auto grid w-full max-w-3xl gap-4">
+        <section className={`${cardClass} grid gap-5`}>
+          <div className="text-center">
             <p className={eyebrowClass}>Round complete</p>
-            <h1 className="font-display mt-2 text-[clamp(2.4rem,5vw,4rem)] font-semibold tracking-[-0.07em] text-[var(--text-primary)]">
+            <h1 className="font-display mt-1 text-[clamp(1.6rem,4vw,2.2rem)] font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
               Nice work, {playerName.split(" ")[0] ?? "teammate"}.
             </h1>
-            <p className={`${subtitleClass} mt-3`}>
-              You scored {score}/{total} for {scorePercent}% accuracy. Open the quiz recap for
-              cluster detail.
+          </div>
+
+          <div
+            className="grid place-items-center rounded-[1.8rem] p-4"
+            style={{ background: finishTone.surface }}
+          >
+            <div
+              className="relative grid h-[12rem] w-[12rem] place-items-center rounded-full"
+              style={{
+                background: `conic-gradient(${finishTone.ring} ${dialFillDeg}deg, color-mix(in oklab, var(--surface) 92%, white) 0deg)`,
+              }}
+            >
+              <div className="absolute h-[9.6rem] w-[9.6rem] rounded-full bg-[var(--surface-strong)]" />
+              <div className="relative flex flex-col items-center leading-none">
+                <span className="text-3xl">{finishTone.emoji}</span>
+                <span className="font-display mt-2 text-[2.6rem] font-semibold tracking-[-0.07em] text-[var(--text-primary)]">
+                  {finalScore}
+                </span>
+                <span className="mt-1 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                  final score
+                </span>
+              </div>
+            </div>
+            <p className="mt-3 text-center text-xs text-[var(--text-secondary)]">
+              out of 150 (accuracy + speed)
             </p>
           </div>
 
-          <Link
-            className="mx-auto w-full max-w-sm"
-            to="/results/$sessionId"
-            params={{ sessionId }}
-            search={{
-              name: playerName,
-              answers: JSON.stringify(answers),
-              questionTimings: JSON.stringify(answers.map((a) => a.questionMs ?? 0)),
-            }}
-          >
-            <span className={primaryButtonClass}>View quiz recap</span>
-          </Link>
+          <div className="grid grid-cols-3 gap-3">
+            <article className="rounded-[1.2rem] bg-[var(--surface)] px-3 py-3 text-center">
+              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                Accuracy
+              </p>
+              <p className="font-display mt-1.5 text-2xl font-semibold tracking-[-0.05em] text-[var(--text-primary)]">
+                {scorePercent}
+              </p>
+              <p className="mt-0.5 text-xs text-[var(--text-secondary)]">
+                {score}/{total}
+              </p>
+            </article>
+            <article className="rounded-[1.2rem] bg-[var(--surface)] px-3 py-3 text-center">
+              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                Speed
+              </p>
+              <p className="font-display mt-1.5 text-2xl font-semibold tracking-[-0.05em] text-[var(--text-primary)]">
+                +{speedBonus}
+              </p>
+              <p className="mt-0.5 text-xs text-[var(--text-secondary)]">of {MAX_SPEED_BONUS}</p>
+            </article>
+            <article className="rounded-[1.2rem] bg-[var(--surface)] px-3 py-3 text-center">
+              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                Time
+              </p>
+              <p className="font-display mt-1.5 text-2xl font-semibold tracking-[-0.05em] text-[var(--text-primary)]">
+                {formatRoundDuration(totalDurationMs)}
+              </p>
+              <p className="mt-0.5 text-xs text-[var(--text-secondary)]">
+                {avgPerQuestionMs > 0 ? `${(avgPerQuestionMs / 1000).toFixed(1)}s/q` : "—"}
+              </p>
+            </article>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
+            <Link
+              to="/results/$sessionId"
+              params={{ sessionId }}
+              search={{
+                name: playerName,
+                answers: JSON.stringify(answers),
+                questionResults: JSON.stringify(
+                  answers.map((a) => ({
+                    ms: a.questionMs ?? 0,
+                    correct: a.correct,
+                  })),
+                ),
+              }}
+            >
+              <span className={primaryButtonClass}>View quiz recap</span>
+            </Link>
+            <Link className={secondaryButtonClass} to="/leaderboard">
+              See leaderboard
+            </Link>
+          </div>
         </section>
       </div>
     );
@@ -262,25 +346,19 @@ function QuizSessionPage() {
 
       {/* Desktop full sidebar */}
       <aside className="hidden lg:grid gap-4 lg:sticky lg:top-8">
-        <section className={`${cardClass} grid gap-5`}>
+        <section className={`${cardClass} grid gap-3`}>
           <div>
             <p className={eyebrowClass}>
               {playerName} · Session {sessionId.slice(0, 8)}
             </p>
-            <h1 className="font-display mt-2 text-[2rem] font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
-              {mode === "flower-recognise" ? "Picture quiz" : "Full quiz"}
-            </h1>
-            <p className={`${subtitleClass} mt-2`}>
-              Move fast, then review the explanation before the next card.
-            </p>
           </div>
 
-          <div className="grid gap-3 rounded-[1.5rem] bg-[var(--surface)] p-3">
+          <div className="grid gap-3 rounded-3xl bg-(--surface) p-3">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-sm font-semibold text-[var(--text-primary)]">
+              <span className="text-sm font-semibold text-(--text-primary)">
                 Question {currentIndex + 1} of {total}
               </span>
-              <span className="text-sm font-semibold tabular-nums text-[var(--text-secondary)]">
+              <span className="text-sm font-semibold tabular-nums text-(--text-secondary)">
                 {Math.round(progress)}%
               </span>
             </div>
@@ -346,16 +424,13 @@ function QuizSessionPage() {
               if (revealed && correctThis)
                 cardTone = "border-[var(--success)] bg-[var(--success-soft)]";
               if (incorrectSelected) cardTone = "border-[var(--danger)] bg-[var(--danger-soft)]";
-              if (!revealed && selectedThis)
-                cardTone =
-                  "border-[var(--accent)] bg-[color:color-mix(in_oklab,var(--accent)_10%,white)]";
 
               return (
                 <button
                   key={side}
                   type="button"
                   className={`group grid gap-2.5 rounded-[1.75rem] border p-2.5 text-left transition duration-200 ease-out hover:-translate-y-0.5 hover:border-(--accent) hover:bg-(--surface-strong) ${cardTone}`}
-                  onClick={() => handleSelect(side)}
+                  onClick={() => confirmAnswer(side)}
                   disabled={revealed}
                 >
                   <img
@@ -376,10 +451,6 @@ function QuizSessionPage() {
 
               let optionTone =
                 "border-[var(--border-soft)] bg-[var(--surface)] text-[var(--text-primary)]";
-              if (!revealed && isSelected) {
-                optionTone =
-                  "border-[var(--accent)] bg-[color:color-mix(in_oklab,var(--accent)_10%,white)] text-[var(--text-primary)]";
-              }
               if (revealed && isCorrect) {
                 optionTone =
                   "border-[var(--success)] bg-[var(--success-soft)] text-[var(--text-primary)]";
@@ -394,7 +465,7 @@ function QuizSessionPage() {
                   key={option}
                   type="button"
                   className={`w-full rounded-[1.4rem] border px-3 py-3 text-left text-sm font-semibold leading-6 transition duration-200 ease-out hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[var(--surface-strong)] ${optionTone}`}
-                  onClick={() => handleSelect(option)}
+                  onClick={() => confirmAnswer(option)}
                   disabled={revealed}
                 >
                   {option}
@@ -420,17 +491,8 @@ function QuizSessionPage() {
           </div>
         )}
 
-        <div className="flex flex-col">
-          {!revealed ? (
-            <button
-              type="button"
-              className={`${primaryButtonClass} sm:flex-1`}
-              disabled={!selected}
-              onClick={handleConfirm}
-            >
-              Confirm answer
-            </button>
-          ) : revealed ? (
+        {revealed && (
+          <div className="flex flex-col">
             <button
               type="button"
               className={`${primaryButtonClass} sm:flex-1`}
@@ -438,14 +500,24 @@ function QuizSessionPage() {
             >
               {currentIndex + 1 < total ? "Next question" : "See results"}
             </button>
-          ) : null}
-        </div>
+          </div>
+        )}
       </section>
     </div>
   );
 }
 
-const QUESTION_TARGET_MS = 15_000;
+const QUESTION_TARGET_MS = 30_000;
+const SCORE_TARGET_MS_PER_QUESTION = 15_000;
+const MAX_SPEED_BONUS = 100;
+
+function formatRoundDuration(ms: number): string {
+  const totalSeconds = Math.max(0, Math.round(ms / 1000));
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  if (minutes <= 0) return `${seconds}s`;
+  return `${minutes}m ${seconds.toString().padStart(2, "0")}s`;
+}
 
 function QuestionTimer({ elapsedMs }: { elapsedMs: number; totalQuestions: number }) {
   const cap = 10;

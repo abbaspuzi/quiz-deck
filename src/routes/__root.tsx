@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link, Outlet, createRootRoute, useRouterState } from "@tanstack/react-router";
+import {
+  Link,
+  Outlet,
+  createRootRoute,
+  useRouterState,
+} from "@tanstack/react-router";
 import { useQuery } from "convex/react";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { api } from "../../convex/_generated/api";
@@ -76,7 +81,11 @@ function RootLayout() {
         {menuOpen && (
           <div className="mt-2 grid gap-2 border-t border-(--border-soft) pt-2 lg:hidden">
             <nav className="grid gap-1" aria-label="Primary">
-              <Link className={navLinkClass} activeProps={{ className: activeNavLinkClass }} to="/">
+              <Link
+                className={navLinkClass}
+                activeProps={{ className: activeNavLinkClass }}
+                to="/"
+              >
                 Home
               </Link>
               <Link
@@ -93,7 +102,11 @@ function RootLayout() {
               >
                 Leaderboard
               </Link>
-              <Link className={navLinkClass} activeProps={{ className: activeNavLinkClass }} to="/">
+              <Link
+                className={navLinkClass}
+                activeProps={{ className: activeNavLinkClass }}
+                to="/"
+              >
                 {user ? "Quiz" : "Start"}
               </Link>
             </nav>
@@ -113,18 +126,19 @@ function RootLayout() {
         <div className="hidden lg:flex lg:items-center lg:justify-between">
           <div className="min-w-0">
             <Link className="inline-flex flex-col gap-1" to="/">
-              <span className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-(--text-muted)">
-                2026 Mother's Day
-              </span>
               <span className="font-display text-[1.65rem] font-semibold tracking-[-0.05em] text-(--text-primary)">
-                Bloomthis Product Training Deck
+                Bloomthis Mother's Day Quiz
               </span>
             </Link>
           </div>
 
           <div className="flex items-center gap-3">
             <nav className="flex flex-wrap gap-2" aria-label="Primary">
-              <Link className={navLinkClass} activeProps={{ className: activeNavLinkClass }} to="/">
+              <Link
+                className={navLinkClass}
+                activeProps={{ className: activeNavLinkClass }}
+                to="/"
+              >
                 Home
               </Link>
               <Link
@@ -141,7 +155,11 @@ function RootLayout() {
               >
                 Leaderboard
               </Link>
-              <Link className={navLinkClass} activeProps={{ className: activeNavLinkClass }} to="/">
+              <Link
+                className={navLinkClass}
+                activeProps={{ className: activeNavLinkClass }}
+                to="/"
+              >
                 {user ? "Quiz" : "Start"}
               </Link>
             </nav>

@@ -38,7 +38,7 @@ function MatchNamePage() {
         {matches.length > 0 ? (
           <div className="grid gap-3">
             {matches.map((match) => (
-              <article className="flex flex-col gap-4 rounded-[1.4rem] bg-[var(--surface)] p-4 sm:flex-row sm:items-center" key={match}>
+              <article className="flex flex-col gap-3 rounded-[1.4rem] bg-[var(--surface)] p-3 sm:flex-row sm:items-center" key={match}>
                 <div className="min-w-0 flex-1">
                   <p className="text-base font-semibold text-[var(--text-primary)]">{match}</p>
                   <p className="mt-1 text-sm leading-6 text-[var(--text-secondary)]">Profile found. Continue into the quiz.</p>
@@ -50,7 +50,7 @@ function MatchNamePage() {
             ))}
           </div>
         ) : (
-          <div className="grid gap-4 rounded-[1.4rem] bg-[var(--surface)] p-4">
+          <div className="grid gap-3 rounded-[1.4rem] bg-[var(--surface)] p-3">
             <div>
               <p className="text-base font-semibold text-[var(--text-primary)]">No exact match for &ldquo;{q}&rdquo;</p>
               <p className="mt-1 text-sm leading-6 text-[var(--text-secondary)]">

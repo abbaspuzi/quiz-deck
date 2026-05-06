@@ -44,9 +44,9 @@ function TrainingDeckPage() {
   return (
     <div className="mx-auto grid w-full max-w-5xl gap-5">
       <section className={`${cardClass} grid gap-5 ${cardSurfaceTone}`}>
-        <div className="flex flex-col gap-4 rounded-[1.4rem] bg-(--surface) p-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 rounded-[1.4rem] bg-(--surface) p-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0">
-            <p className="mt-1 text-sm leading-6 text-(--text-secondary)">
+            <p className="text-sm leading-6 text-(--text-secondary)">
               Card {currentIndex + 1} of {cards.length}
             </p>
           </div>
@@ -73,7 +73,7 @@ function TrainingDeckPage() {
         {card.kind === "image-to-name" ? (
           <>
             {card.image && (
-              <div className="overflow-hidden rounded-[1.6rem] bg-(--surface) p-3">
+              <div className="overflow-hidden rounded-[1.6rem] bg-(--surface) p-2">
                 <img
                   src={card.image}
                   alt={card.answer}
@@ -99,7 +99,7 @@ function TrainingDeckPage() {
                   <button
                     key={option}
                     type="button"
-                    className={`grid w-full gap-3 rounded-[1.4rem] border px-4 py-4 text-left text-[1.08rem] font-semibold leading-8 text-(--text-primary) transition duration-200 ease-out hover:-translate-y-0.5 hover:border-(--accent) hover:bg-(--surface-strong) sm:text-[1.18rem] ${tone}`}
+                    className={`grid w-full gap-3 rounded-[1.4rem] border px-3 py-3 text-left text-[1.08rem] font-semibold leading-8 text-(--text-primary) transition duration-200 ease-out hover:-translate-y-0.5 hover:border-(--accent) hover:bg-(--surface-strong) sm:text-[1.18rem] ${tone}`}
                     onClick={() => reveal(option)}
                     disabled={revealed}
                   >
@@ -144,7 +144,7 @@ function TrainingDeckPage() {
 
         {revealed && (
           <div
-            className="rounded-3xl border border-[color:color-mix(in_oklab,var(--border-soft)_88%,white)] px-4 py-4"
+            className="rounded-3xl border border-[color:color-mix(in_oklab,var(--border-soft)_88%,white)] px-3 py-3"
             style={{
               background:
                 selected === card.answer

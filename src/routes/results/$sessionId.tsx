@@ -82,7 +82,7 @@ function ResultsPage() {
   if (totalQuestions === 0) {
     return (
       <div className="mx-auto grid w-full max-w-3xl gap-6">
-        <section className={`${cardClass} grid gap-4 px-6 py-8 text-center`}>
+        <section className={`${cardClass} grid gap-3 px-4 py-6 text-center`}>
           <div className="mx-auto inline-flex h-20 w-20 items-center justify-center rounded-full bg-[var(--surface)] text-4xl">
             🤔
           </div>
@@ -142,7 +142,7 @@ function ResultsPage() {
         </div>
 
         <div
-          className="grid place-items-center rounded-[2rem] p-6"
+          className="grid place-items-center rounded-[2rem] p-5"
           style={{ background: performanceTone.surface }}
         >
           <div
@@ -169,7 +169,7 @@ function ResultsPage() {
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-          <article className="rounded-[1.4rem] bg-[var(--surface)] px-4 py-4 text-center">
+          <article className="rounded-[1.4rem] bg-[var(--surface)] px-3 py-3 text-center">
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
               Accuracy
             </p>
@@ -178,7 +178,7 @@ function ResultsPage() {
             </p>
             <p className="mt-1 text-xs text-[var(--text-secondary)]">of 100</p>
           </article>
-          <article className="rounded-[1.4rem] bg-[var(--surface)] px-4 py-4 text-center">
+          <article className="rounded-[1.4rem] bg-[var(--surface)] px-3 py-3 text-center">
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
               Speed bonus
             </p>
@@ -189,7 +189,7 @@ function ResultsPage() {
               of {MAX_SPEED_BONUS}
             </p>
           </article>
-          <article className="rounded-[1.4rem] bg-[var(--surface)] px-4 py-4 text-center">
+          <article className="rounded-[1.4rem] bg-[var(--surface)] px-3 py-3 text-center">
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
               Avg / question
             </p>
@@ -240,7 +240,7 @@ function ResultsPage() {
 
                 return (
                   <article
-                    className="rounded-[1.4rem] bg-[var(--surface)] px-4 py-4"
+                    className="rounded-[1.4rem] bg-[var(--surface)] px-3 py-3"
                     key={cluster.id}
                   >
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -251,7 +251,7 @@ function ResultsPage() {
                         </p>
                       </div>
                       <div
-                        className="inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm font-bold"
+                        className="inline-flex min-h-10 items-center justify-center rounded-full px-3 text-sm font-bold"
                         style={{ background: tone.bg, color: tone.fg }}
                       >
                         {cluster.percent}%
@@ -275,7 +275,7 @@ function ResultsPage() {
             <div className="mt-5 grid gap-3">
               {weakClusters.map((cluster) => (
                 <article
-                  className="rounded-[1.4rem] bg-[color:color-mix(in_oklab,var(--accent)_10%,white)] px-4 py-4"
+                  className="rounded-[1.4rem] bg-[color:color-mix(in_oklab,var(--accent)_10%,white)] px-3 py-3"
                   key={cluster.id}
                 >
                   <p className="text-base font-semibold text-[var(--text-primary)]">{cluster.title}</p>

@@ -61,12 +61,12 @@ function LeaderboardPage() {
 
       {leaderboard === undefined ? (
         <section
-          className={`${panelClass} px-6 py-10 text-center text-sm text-[var(--text-secondary)]`}
+          className={`${panelClass} px-4 py-7 text-center text-sm text-[var(--text-secondary)]`}
         >
           Loading live scores...
         </section>
       ) : leaderboard.length === 0 ? (
-        <section className={`${panelClass} grid gap-5 px-6 py-10 text-center`}>
+        <section className={`${panelClass} grid gap-4 px-4 py-7 text-center`}>
           <div>
             <h2 className="font-display text-3xl font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
               The board is waiting for the first run.
@@ -93,7 +93,7 @@ function LeaderboardPage() {
                       {entry.name}
                     </h2>
                   </div>
-                  <div className="inline-flex h-12 min-w-12 items-center justify-center rounded-full bg-[var(--surface)] px-3 font-display text-xl font-semibold tracking-[-0.05em] text-[var(--accent-strong)]">
+                  <div className="inline-flex h-11 min-w-11 items-center justify-center rounded-full bg-[var(--surface)] px-2.5 font-display text-xl font-semibold tracking-[-0.05em] text-[var(--accent-strong)]">
                     {index + 1}
                   </div>
                 </div>
@@ -141,7 +141,7 @@ function LeaderboardPage() {
             <div className="mt-5 grid gap-3">
               {leaderboard.map((entry, index) => (
                 <article
-                  className="grid gap-3 rounded-[1.4rem] bg-[var(--surface)] px-4 py-4 sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:items-center"
+                  className="grid gap-3 rounded-[1.4rem] bg-[var(--surface)] px-3 py-3 sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:items-center"
                   key={entry._id}
                 >
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[var(--surface-strong)] font-display text-lg font-semibold tracking-[-0.05em] text-[var(--text-primary)]">

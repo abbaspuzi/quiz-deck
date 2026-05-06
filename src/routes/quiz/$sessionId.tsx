@@ -161,7 +161,7 @@ function QuizSessionPage() {
   if (!user) {
     return (
       <div className="mx-auto grid w-full max-w-3xl gap-6">
-        <section className={`${cardClass} grid gap-5 px-6 py-8 text-center`}>
+        <section className={`${cardClass} grid gap-4 px-4 py-6 text-center`}>
           <div>
             <h1 className="font-display text-balance text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-[var(--text-primary)]">
               This quiz deck is for signed-in teammates.
@@ -204,7 +204,7 @@ function QuizSessionPage() {
   if (isFinished) {
     return (
       <div className="mx-auto grid w-full max-w-3xl gap-6">
-        <section className={`${cardClass} grid gap-5 px-6 py-8 text-center`}>
+        <section className={`${cardClass} grid gap-4 px-4 py-6 text-center`}>
           <div className="mx-auto inline-flex h-20 w-20 items-center justify-center rounded-full bg-[var(--surface)] text-4xl">
             {scorePercent >= 80 ? "🏆" : scorePercent >= 60 ? "💪" : "📚"}
           </div>
@@ -244,27 +244,30 @@ function QuizSessionPage() {
   const isImageDuel = Boolean(imageOptions);
 
   return (
-    <div className="mx-auto grid w-full max-w-5xl gap-6 lg:grid-cols-[minmax(18rem,0.8fr)_minmax(0,1.2fr)] lg:items-start">
+    <div className="mx-auto grid w-full max-w-5xl gap-2 lg:grid-cols-[minmax(18rem,0.8fr)_minmax(0,1.2fr)] lg:items-start">
       {/* Mobile compact nav */}
       <aside className="lg:hidden">
-        <section className={`${cardClass} grid gap-3 px-4 py-3`}>
+        <section className={`${cardClass} grid gap-2.5 px-3 py-2.5`}>
           <div className="flex items-center justify-between gap-3">
-            <span className="text-sm font-semibold text-[var(--text-primary)]">
+            <span className="text-sm font-semibold text-(--text-primary)">
               Q{currentIndex + 1}/{total}
             </span>
             <div className="flex items-center gap-3">
-              <span className="text-xs font-semibold text-[var(--success)]">
+              <span className="text-xs font-semibold text-(--success)">
                 {score} correct
               </span>
-              <span className="text-xs font-semibold text-[var(--danger)]">
+              <span className="text-xs font-semibold text-(--danger)">
                 {answers.length - score} missed
               </span>
             </div>
           </div>
-          <div className="h-2 overflow-hidden rounded-full bg-[var(--surface-strong)]">
+
+          <div className="overflow-hidden rounded-4xl bg-(--surface-strong)">
             <div
-              className="h-full rounded-full bg-[var(--accent-strong)] transition-[width] duration-300 ease-out"
-              style={{ width: `${progress}%` }}
+              className="h-full rounded-full bg-(--accent-strong) transition-[width] duration-300 ease-out"
+              style={{
+                width: `${progress}%`,
+              }}
             />
           </div>
         </section>
@@ -285,7 +288,7 @@ function QuizSessionPage() {
             </p>
           </div>
 
-          <div className="grid gap-3 rounded-[1.5rem] bg-[var(--surface)] p-4">
+          <div className="grid gap-3 rounded-[1.5rem] bg-[var(--surface)] p-3">
             <div className="flex items-center justify-between gap-3">
               <span className="text-sm font-semibold text-[var(--text-primary)]">
                 Question {currentIndex + 1} of {total}
@@ -294,7 +297,7 @@ function QuizSessionPage() {
                 {Math.round(progress)}%
               </span>
             </div>
-            <div className="h-3 overflow-hidden rounded-full bg-[var(--surface-strong)]">
+            <div className="h-3 overflow-hidden rounded-full bg-(--surface-strong)">
               <div
                 className="h-full rounded-full bg-[var(--accent-strong)] transition-[width] duration-300 ease-out"
                 style={{ width: `${progress}%` }}
@@ -326,22 +329,17 @@ function QuizSessionPage() {
       <section className={`${cardClass} grid gap-5`}>
         <QuestionTimer elapsedMs={elapsedMs} totalQuestions={total} />
         <div className="grid gap-3">
-          <h2 className="font-display text-balance text-[clamp(1.8rem,3.6vw,2.7rem)] font-semibold leading-none tracking-[-0.06em] text-(--text-primary)">
+          <h2 className="font-display text-balance text-xl font-semibold leading-tight tracking-[-0.05em] text-(--text-primary)">
             {question.prompt}
           </h2>
-          {isImageDuel && (
-            <p className={subtitleClass}>
-              Tap a side or use the keyboard arrows for a faster review loop.
-            </p>
-          )}
         </div>
 
         {question.image && (
-          <div className="overflow-hidden rounded-[1.6rem] bg-(--surface) p-3">
+          <div className="mx-auto overflow-hidden rounded-[1.6rem] bg-(--surface) p-2">
             <img
               src={question.image}
               alt="Quiz visual"
-              className="max-h-[min(24rem,45vh)] w-full rounded-[1.2rem] object-contain"
+              className="mx-auto max-h-[min(16rem,32vh)] w-auto max-w-full rounded-[1.2rem] object-contain"
             />
           </div>
         )}
@@ -367,7 +365,7 @@ function QuizSessionPage() {
                 <button
                   key={side}
                   type="button"
-                  className={`group grid gap-3 rounded-[1.75rem] border p-3 text-left transition duration-200 ease-out hover:-translate-y-0.5 hover:border-(--accent) hover:bg-(--surface-strong) ${cardTone}`}
+                  className={`group grid gap-2.5 rounded-[1.75rem] border p-2.5 text-left transition duration-200 ease-out hover:-translate-y-0.5 hover:border-(--accent) hover:bg-(--surface-strong) ${cardTone}`}
                   onClick={() => handleSelect(side)}
                   disabled={revealed}
                 >
@@ -406,7 +404,7 @@ function QuizSessionPage() {
                 <button
                   key={option}
                   type="button"
-                  className={`w-full rounded-[1.4rem] border px-4 py-4 text-left text-sm font-semibold leading-6 transition duration-200 ease-out hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[var(--surface-strong)] ${optionTone}`}
+                  className={`w-full rounded-[1.4rem] border px-3 py-3 text-left text-sm font-semibold leading-6 transition duration-200 ease-out hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[var(--surface-strong)] ${optionTone}`}
                   onClick={() => handleSelect(option)}
                   disabled={revealed}
                 >
@@ -419,7 +417,7 @@ function QuizSessionPage() {
 
         {revealed && (
           <div
-            className="rounded-[1.5rem] px-4 py-4"
+            className="rounded-[1.5rem] px-3 py-3"
             style={{
               background: (
                 selected ? isCorrectSelection(question, selected) : false
@@ -480,7 +478,7 @@ function QuestionTimer({
   const fillColor = expired ? "var(--text-muted)" : "var(--accent-strong)";
 
   return (
-    <div className="grid gap-2 rounded-[1.4rem] bg-(--surface) px-4 py-3">
+    <div className="grid gap-2 rounded-[1.4rem] bg-(--surface) px-3 py-2.5">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-baseline gap-2">
           <span

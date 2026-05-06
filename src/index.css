@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap");
 @import "tailwindcss";
 
 @layer base {
   :root {
-    --font-body: 'Manrope', 'Segoe UI', sans-serif;
-    --font-display: 'Sora', 'Avenir Next', sans-serif;
+    --font-body: "Manrope", "Segoe UI", sans-serif;
+    --font-display: "Sora", "Avenir Next", sans-serif;
     --bg: oklch(0.975 0.012 96);
     --bg-strong: oklch(0.955 0.02 94);
     --surface: oklch(0.95 0.015 92);
@@ -49,8 +49,16 @@
     min-width: 320px;
     overflow-x: hidden;
     background:
-      radial-gradient(circle at top left, color-mix(in oklab, var(--accent) 22%, transparent) 0%, transparent 28%),
-      radial-gradient(circle at top right, oklch(0.9 0.06 145 / 0.65) 0%, transparent 24%),
+      radial-gradient(
+        circle at top left,
+        color-mix(in oklab, var(--accent) 22%, transparent) 0%,
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at top right,
+        oklch(0.9 0.06 145 / 0.65) 0%,
+        transparent 24%
+      ),
       linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
     color: var(--text-primary);
     font-family: var(--font-body);
@@ -98,6 +106,9 @@
   .text-pretty {
     text-wrap: pretty;
   }
+}
+.debug {
+  border: 1px solid red !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

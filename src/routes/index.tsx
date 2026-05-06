@@ -54,10 +54,10 @@ function IndexPage() {
         <section className={cardClass}>
           <div className="grid gap-4">
             <div>
-              <h1 className="font-display mt-2 text-[2.2rem] font-semibold tracking-[-0.06em] text-(--text-primary)">
+              <h1 className="font-display text-[2.2rem] font-semibold tracking-[-0.06em] text-(--text-primary)">
                 Learn flowers like flashcards.
               </h1>
-              <p className="mt-2 text-sm leading-6 text-(--text-secondary)">
+              <p className="text-sm leading-6 text-(--text-secondary)">
                 Study first: see a flower and pick the name, or see the name and
                 pick the picture.
               </p>
@@ -72,12 +72,12 @@ function IndexPage() {
         <section className={cardClass}>
           <div className="grid gap-4">
             <div>
-              <h2 className="font-display mt-2 text-[1.95rem] font-semibold tracking-[-0.06em] text-(--text-primary)">
+              <h2 className="font-display text-[1.95rem] font-semibold tracking-[-0.06em] text-(--text-primary)">
                 {user
                   ? `Ready, ${user.name?.split(" ")[0] ?? "teammate"}?`
                   : "Answer for score"}
               </h2>
-              <p className="mt-2 text-sm leading-6 text-(--text-secondary)">
+              <p className="text-sm leading-6 text-(--text-secondary)">
                 {user
                   ? "Pick a quiz mode and start."
                   : "Login is required to answer and join the leaderboard."}
@@ -93,8 +93,8 @@ function IndexPage() {
                     type="button"
                     className={
                       active
-                        ? "rounded-[1.4rem] border border-(--accent) bg-[color-mix(in_oklab,var(--accent)_12%,white)] p-4 text-left shadow-[0_12px_26px_rgba(192,96,55,0.12)] transition duration-200 ease-out"
-                        : "rounded-[1.4rem] border border-(--border-soft) bg-(--surface) p-4 text-left transition duration-200 ease-out hover:-translate-y-0.5 hover:border-(--accent) hover:bg-(--surface-strong)"
+                        ? "rounded-[1.4rem] border border-(--accent) bg-[color-mix(in_oklab,var(--accent)_12%,white)] p-3 text-left shadow-[0_12px_26px_rgba(192,96,55,0.12)] transition duration-200 ease-out"
+                        : "rounded-[1.4rem] border border-(--border-soft) bg-(--surface) p-3 text-left transition duration-200 ease-out hover:-translate-y-0.5 hover:border-(--accent) hover:bg-(--surface-strong)"
                     }
                     onClick={() => setSelectedMode(mode.id)}
                   >
@@ -103,7 +103,7 @@ function IndexPage() {
                         <p className="font-display text-lg font-semibold tracking-[-0.05em] text-(--text-primary)">
                           {mode.label}
                         </p>
-                        <p className="mt-1 text-sm leading-6 text-(--text-secondary)">
+                        <p className="text-sm leading-6 text-(--text-secondary)">
                           {mode.id === "flower-recognise"
                             ? "Picture quiz."
                             : "Mixed scored quiz."}
@@ -164,17 +164,17 @@ function IndexPage() {
 
         <div className="mt-4 grid gap-3">
           {leaderboard === undefined ? (
-            <div className="rounded-[1.4rem] bg-(--surface) px-4 py-6 text-center text-sm text-(--text-secondary)">
+            <div className="rounded-[1.4rem] bg-(--surface) px-3 py-5 text-center text-sm text-(--text-secondary)">
               Loading scores...
             </div>
           ) : topPreview.length === 0 ? (
-            <div className="rounded-[1.4rem] bg-(--surface) px-4 py-6 text-center text-sm text-(--text-secondary)">
+            <div className="rounded-[1.4rem] bg-(--surface) px-3 py-5 text-center text-sm text-(--text-secondary)">
               No completed runs yet.
             </div>
           ) : (
             topPreview.map((entry, index) => (
               <article
-                className="flex items-center gap-3 rounded-[1.4rem] bg-(--surface) px-4 py-3.5"
+                className="flex items-center gap-3 rounded-[1.4rem] bg-(--surface) px-3 py-3"
                 key={entry._id}
               >
                 <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-(--surface-strong) font-display text-lg font-semibold tracking-[-0.05em] text-[var(--text-primary)]">

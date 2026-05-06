@@ -295,13 +295,16 @@ function QuizSessionPage() {
               params={{ sessionId }}
               search={{
                 name: playerName,
-                answers: JSON.stringify(answers),
-                questionResults: JSON.stringify(
-                  answers.map((a) => ({
-                    ms: a.questionMs ?? 0,
-                    correct: a.correct,
-                  })),
-                ),
+                answers: answers.map((a) => ({
+                  questionId: a.questionId,
+                  selected: a.selected,
+                  correct: a.correct,
+                  cluster: a.cluster,
+                })),
+                questionResults: answers.map((a) => ({
+                  ms: a.questionMs ?? 0,
+                  correct: a.correct,
+                })),
               }}
             >
               <span className={primaryButtonClass}>View quiz recap</span>

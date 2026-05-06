@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { cardClass, primaryButtonClass, secondaryButtonClass, subtitleClass } from "../../lib/ui";
 
@@ -11,8 +10,8 @@ type AnswerRecord = {
 
 type ResultsSearch = {
   name?: string;
-  answers?: string;
-  questionResults?: string;
+  answers?: AnswerRecord[];
+  questionResults?: QuestionResult[];
 };
 
 type QuestionResult = {
@@ -34,36 +33,9 @@ function formatDuration(ms: number): string {
 function ResultsPage() {
   const {
     name = "Guest",
-    answers: answersRaw,
-    questionResults: resultsRaw,
+    answers = [],
+    questionResults = [],
   } = Route.useSearch();
-
-  const answers: AnswerRecord[] = useMemo(() => {
-    if (!answersRaw) return [];
-    try {
-      return JSON.parse(answersRaw) as AnswerRecord[];
-    } catch {
-      return [];
-    }
-  }, [answersRaw]);
-
-  const questionResults: QuestionResult[] = useMemo(() => {
-    if (!resultsRaw) return [];
-    try {
-      const parsed = JSON.parse(resultsRaw);
-      if (!Array.isArray(parsed)) return [];
-      return parsed.map((entry) => ({
-        ms:
-          typeof entry === "object" && entry && typeof entry.ms === "number"
-            ? entry.ms
-            : 0,
-        correct:
-          typeof entry === "object" && entry && entry.correct === true,
-      }));
-    } catch {
-      return [];
-    }
-  }, [resultsRaw]);
 
   const totalCorrect = answers.filter((a) => a.correct).length;
   const totalQuestions = answers.length;
@@ -291,11 +263,12 @@ function ResultsPage() {
 export const Route = createFileRoute("/results/$sessionId")({
   validateSearch: (search: Record<string, unknown>): ResultsSearch => ({
     name: typeof search.name === "string" ? search.name : undefined,
-    answers: typeof search.answers === "string" ? search.answers : undefined,
-    questionResults:
-      typeof search.questionResults === "string"
-        ? search.questionResults
-        : undefined,
+    answers: Array.isArray(search.answers)
+      ? (search.answers as AnswerRecord[])
+      : undefined,
+    questionResults: Array.isArray(search.questionResults)
+      ? (search.questionResults as QuestionResult[])
+      : undefined,
   }),
   component: ResultsPage,
 });

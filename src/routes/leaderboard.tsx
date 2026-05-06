@@ -1,13 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import {
-  cardClass,
-  panelClass,
-  primaryButtonClass,
-  statCardClass,
-  subtitleClass,
-} from "../lib/ui";
+import { cardClass, panelClass, primaryButtonClass, statCardClass, subtitleClass } from "../lib/ui";
 
 function LeaderboardPage() {
   const leaderboard = useQuery(api.leaderboard.topScores);
@@ -15,9 +9,7 @@ function LeaderboardPage() {
   const completedCount = leaderboard?.length ?? 0;
   const avgScore =
     completedCount > 0
-      ? Math.round(
-          leaderboard!.reduce((sum, r) => sum + r.score, 0) / completedCount,
-        )
+      ? Math.round(leaderboard!.reduce((sum, r) => sum + r.score, 0) / completedCount)
       : 0;
 
   const topThree = leaderboard?.slice(0, 3) ?? [];
@@ -33,8 +25,8 @@ function LeaderboardPage() {
               Leaderboard
             </h1>
             <p className={`${subtitleClass} mt-3 max-w-[48ch]`}>
-              Quick look at who is ready. Study in the training deck, then take
-              the quiz when you are ready.
+              Quick look at who is ready. Study in the training deck, then take the quiz when you
+              are ready.
             </p>
           </div>
         </div>
@@ -71,9 +63,7 @@ function LeaderboardPage() {
             <h2 className="font-display text-3xl font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
               The board is waiting for the first run.
             </h2>
-            <p className={`${subtitleClass} mt-2`}>
-              Finish a real quiz round to appear here.
-            </p>
+            <p className={`${subtitleClass} mt-2`}>Finish a real quiz round to appear here.</p>
           </div>
           <Link className="mx-auto w-full sm:w-auto" to="/">
             <span className={primaryButtonClass}>Open quiz</span>
@@ -130,10 +120,7 @@ function LeaderboardPage() {
                   Every completed run
                 </h2>
               </div>
-              <Link
-                className="text-sm font-semibold text-[var(--accent-strong)]"
-                to="/"
-              >
+              <Link className="text-sm font-semibold text-[var(--accent-strong)]" to="/">
                 Open quiz
               </Link>
             </div>
@@ -152,7 +139,7 @@ function LeaderboardPage() {
                       {entry.name}
                     </p>
                     <p className="mt-1 text-sm leading-6 text-[var(--text-secondary)]">
-                      {entry.accuracy}% accuracy · {formatDuration(entry.durationMs)} ·{' '}
+                      {entry.accuracy}% accuracy · {formatDuration(entry.durationMs)} ·{" "}
                       {formatTimeAgo(new Date(entry.completedAt))}
                     </p>
                   </div>

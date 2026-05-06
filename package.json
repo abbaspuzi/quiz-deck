@@ -1,7 +1,7 @@
 {
   "name": "mothers-day-quiz",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,8 @@
     "convex:dev": "convex dev",
     "convex:codegen": "convex codegen",
     "typecheck": "tsc -b",
-    "deploy": "pnpm run build && wrangler deploy"
+    "deploy": "pnpm run build && wrangler deploy",
+    "format": "oxfmt ./**.{ts,tsx,js,jsx} --write "
   },
   "dependencies": {
     "@convex-dev/better-auth": "^0.11.4",

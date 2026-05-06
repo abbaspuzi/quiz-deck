@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Link,
-  Outlet,
-  createRootRoute,
-  useRouterState,
-} from "@tanstack/react-router";
+import { Link, Outlet, createRootRoute, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "convex/react";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { api } from "../../convex/_generated/api";
@@ -81,11 +76,7 @@ function RootLayout() {
         {menuOpen && (
           <div className="mt-2 grid gap-2 border-t border-(--border-soft) pt-2 lg:hidden">
             <nav className="grid gap-1" aria-label="Primary">
-              <Link
-                className={navLinkClass}
-                activeProps={{ className: activeNavLinkClass }}
-                to="/"
-              >
+              <Link className={navLinkClass} activeProps={{ className: activeNavLinkClass }} to="/">
                 Home
               </Link>
               <Link
@@ -102,11 +93,7 @@ function RootLayout() {
               >
                 Leaderboard
               </Link>
-              <Link
-                className={navLinkClass}
-                activeProps={{ className: activeNavLinkClass }}
-                to="/"
-              >
+              <Link className={navLinkClass} activeProps={{ className: activeNavLinkClass }} to="/">
                 {user ? "Quiz" : "Start"}
               </Link>
             </nav>
@@ -137,11 +124,7 @@ function RootLayout() {
 
           <div className="flex items-center gap-3">
             <nav className="flex flex-wrap gap-2" aria-label="Primary">
-              <Link
-                className={navLinkClass}
-                activeProps={{ className: activeNavLinkClass }}
-                to="/"
-              >
+              <Link className={navLinkClass} activeProps={{ className: activeNavLinkClass }} to="/">
                 Home
               </Link>
               <Link
@@ -158,11 +141,7 @@ function RootLayout() {
               >
                 Leaderboard
               </Link>
-              <Link
-                className={navLinkClass}
-                activeProps={{ className: activeNavLinkClass }}
-                to="/"
-              >
+              <Link className={navLinkClass} activeProps={{ className: activeNavLinkClass }} to="/">
                 {user ? "Quiz" : "Start"}
               </Link>
             </nav>

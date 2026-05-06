@@ -156,13 +156,9 @@ function TrainingDeckPage() {
               Answer
             </p>
             <p className="mt-2 text-[1.08rem] font-semibold leading-8 text-[var(--text-primary)] sm:text-[1.18rem]">
-              {selected === card.answer
-                ? "Correct"
-                : `Correct answer: ${card.answer}`}
+              {selected === card.answer ? "Correct" : `Correct answer: ${card.answer}`}
             </p>
-            <p className="mt-3 text-sm leading-7 text-[var(--text-primary)]">
-              {card.explain}
-            </p>
+            <p className="mt-3 text-sm leading-7 text-[var(--text-primary)]">{card.explain}</p>
           </div>
         )}
 

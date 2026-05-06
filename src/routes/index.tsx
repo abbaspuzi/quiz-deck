@@ -5,19 +5,13 @@ import { api } from "../../convex/_generated/api";
 import { authClient } from "../lib/auth-client";
 import { quizModes } from "../features/quiz/content";
 import type { QuizMode } from "../features/quiz/content";
-import {
-  cardClass,
-  googleButtonClass,
-  primaryButtonClass,
-  secondaryButtonClass,
-} from "../lib/ui";
+import { cardClass, googleButtonClass, primaryButtonClass, secondaryButtonClass } from "../lib/ui";
 
 function IndexPage() {
   const navigate = useNavigate({ from: "/" });
   const user = useQuery(api.auth.getCurrentUser);
   const leaderboard = useQuery(api.leaderboard.topScores);
-  const [selectedMode, setSelectedMode] =
-    useState<QuizMode>("flower-recognise");
+  const [selectedMode, setSelectedMode] = useState<QuizMode>("flower-recognise");
 
   const handleGoogleSignIn = () => {
     void authClient.signIn.social({
@@ -58,8 +52,7 @@ function IndexPage() {
                 Learn flowers like flashcards.
               </h1>
               <p className="text-sm leading-6 text-(--text-secondary)">
-                Study first: see a flower and pick the name, or see the name and
-                pick the picture.
+                Study first: see a flower and pick the name, or see the name and pick the picture.
               </p>
             </div>
 
@@ -73,9 +66,7 @@ function IndexPage() {
           <div className="grid gap-4">
             <div>
               <h2 className="font-display text-[1.95rem] font-semibold tracking-[-0.06em] text-(--text-primary)">
-                {user
-                  ? `Ready, ${user.name?.split(" ")[0] ?? "teammate"}?`
-                  : "Answer for score"}
+                {user ? `Ready, ${user.name?.split(" ")[0] ?? "teammate"}?` : "Answer for score"}
               </h2>
               <p className="text-sm leading-6 text-(--text-secondary)">
                 {user
@@ -104,9 +95,7 @@ function IndexPage() {
                           {mode.label}
                         </p>
                         <p className="text-sm leading-6 text-(--text-secondary)">
-                          {mode.id === "flower-recognise"
-                            ? "Picture quiz."
-                            : "Mixed scored quiz."}
+                          {mode.id === "flower-recognise" ? "Picture quiz." : "Mixed scored quiz."}
                         </p>
                       </div>
                     </div>
@@ -117,30 +106,15 @@ function IndexPage() {
 
             {user ? (
               <div className="grid gap-3">
-                <button
-                  className={primaryButtonClass}
-                  type="button"
-                  onClick={handleStartQuiz}
-                >
-                  Start{" "}
-                  {selectedMode === "flower-recognise"
-                    ? "Picture quiz"
-                    : "full quiz"}
+                <button className={primaryButtonClass} type="button" onClick={handleStartQuiz}>
+                  Start {selectedMode === "flower-recognise" ? "Picture quiz" : "full quiz"}
                 </button>
-                <button
-                  className={secondaryButtonClass}
-                  type="button"
-                  onClick={handleSignOut}
-                >
+                <button className={secondaryButtonClass} type="button" onClick={handleSignOut}>
                   Sign out
                 </button>
               </div>
             ) : (
-              <button
-                className={googleButtonClass}
-                type="button"
-                onClick={handleGoogleSignIn}
-              >
+              <button className={googleButtonClass} type="button" onClick={handleGoogleSignIn}>
                 <GoogleMark />
                 Continue with Google
               </button>
@@ -154,10 +128,7 @@ function IndexPage() {
           <h2 className="font-display mt-2 text-[1.6rem] font-semibold tracking-[-0.06em] text-(--text-primary)">
             Leaderboard
           </h2>
-          <Link
-            className="text-sm font-semibold text-(--accent-strong)"
-            to="/leaderboard"
-          >
+          <Link className="text-sm font-semibold text-(--accent-strong)" to="/leaderboard">
             See all
           </Link>
         </div>

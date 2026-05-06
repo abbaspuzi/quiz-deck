@@ -66,8 +66,7 @@ function QuizSessionPage() {
   }, [currentIndex, isFinished, revealed]);
 
   const score = answers.filter((a) => a.correct).length;
-  const scorePercent =
-    answers.length > 0 ? Math.round((score / answers.length) * 100) : 0;
+  const scorePercent = answers.length > 0 ? Math.round((score / answers.length) * 100) : 0;
 
   const confirmAnswer = useCallback(
     (option: string) => {
@@ -113,9 +112,7 @@ function QuizSessionPage() {
   const submitResult = useMutation(api.leaderboard.submitResult);
   const submitted = useRef(false);
 
-  const allTimed =
-    answers.length === total &&
-    answers.every((a) => a.questionMs !== undefined);
+  const allTimed = answers.length === total && answers.every((a) => a.questionMs !== undefined);
 
   useEffect(() => {
     if (!isFinished || answers.length === 0 || submitted.current) return;
@@ -123,10 +120,7 @@ function QuizSessionPage() {
 
     submitted.current = true;
 
-    const clusterMap = new Map<
-      string,
-      { correct: number; total: number; title: string }
-    >();
+    const clusterMap = new Map<string, { correct: number; total: number; title: string }>();
     for (const answer of answers) {
       const existing = clusterMap.get(answer.cluster) ?? {
         correct: 0,
@@ -135,9 +129,7 @@ function QuizSessionPage() {
       };
       existing.total++;
       if (answer.correct) existing.correct++;
-      const info = highRiskClusters.find(
-        (cluster) => cluster.id === answer.cluster,
-      );
+      const info = highRiskClusters.find((cluster) => cluster.id === answer.cluster);
       existing.title = info?.title ?? answer.cluster;
       clusterMap.set(answer.cluster, existing);
     }
@@ -167,8 +159,8 @@ function QuizSessionPage() {
               This quiz deck is for signed-in teammates.
             </h1>
             <p className={`${subtitleClass} mt-3 max-w-[56ch] mx-auto`}>
-              Sign in first so your answers and score are tracked correctly. You
-              can still browse the leaderboard without an account.
+              Sign in first so your answers and score are tracked correctly. You can still browse
+              the leaderboard without an account.
             </p>
           </div>
 
@@ -214,8 +206,8 @@ function QuizSessionPage() {
               Nice work, {playerName.split(" ")[0] ?? "teammate"}.
             </h1>
             <p className={`${subtitleClass} mt-3`}>
-              You scored {score}/{total} for {scorePercent}% accuracy. Open the
-              quiz recap for cluster detail.
+              You scored {score}/{total} for {scorePercent}% accuracy. Open the quiz recap for
+              cluster detail.
             </p>
           </div>
 
@@ -226,9 +218,7 @@ function QuizSessionPage() {
             search={{
               name: playerName,
               answers: JSON.stringify(answers),
-              questionTimings: JSON.stringify(
-                answers.map((a) => a.questionMs ?? 0),
-              ),
+              questionTimings: JSON.stringify(answers.map((a) => a.questionMs ?? 0)),
             }}
           >
             <span className={primaryButtonClass}>View quiz recap</span>
@@ -241,7 +231,6 @@ function QuizSessionPage() {
   if (!question) return null;
 
   const imageOptions = question.images ?? null;
-  const isImageDuel = Boolean(imageOptions);
 
   return (
     <div className="mx-auto grid w-full max-w-5xl gap-2 lg:grid-cols-[minmax(18rem,0.8fr)_minmax(0,1.2fr)] lg:items-start">
@@ -253,9 +242,7 @@ function QuizSessionPage() {
               Q{currentIndex + 1}/{total}
             </span>
             <div className="flex items-center gap-3">
-              <span className="text-xs font-semibold text-(--success)">
-                {score} correct
-              </span>
+              <span className="text-xs font-semibold text-(--success)">{score} correct</span>
               <span className="text-xs font-semibold text-(--danger)">
                 {answers.length - score} missed
               </span>
@@ -327,11 +314,15 @@ function QuizSessionPage() {
       </aside>
 
       <section className={`${cardClass} grid gap-5`}>
-        <QuestionTimer elapsedMs={elapsedMs} totalQuestions={total} />
-        <div className="grid gap-3">
-          <h2 className="font-display text-balance text-xl font-semibold leading-tight tracking-[-0.05em] text-(--text-primary)">
-            {question.prompt}
-          </h2>
+        <div className="grid grid-cols-5 items-center gap-3">
+          <div className="col-span-4">
+            <h2 className="font-display text-balance text-xl font-semibold leading-tight tracking-[-0.05em] text-(--text-primary)">
+              {question.prompt}
+            </h2>
+          </div>
+          <div className="col-span-1 flex justify-end">
+            <QuestionTimer elapsedMs={elapsedMs} totalQuestions={total} />
+          </div>
         </div>
 
         {question.image && (
@@ -349,14 +340,12 @@ function QuizSessionPage() {
             {(["Left", "Right"] as const).map((side, index) => {
               const selectedThis = selected === side;
               const correctThis = isCorrectSelection(question, side);
-              const incorrectSelected =
-                revealed && selectedThis && !correctThis;
+              const incorrectSelected = revealed && selectedThis && !correctThis;
 
               let cardTone = "border-[var(--border-soft)] bg-[var(--surface)]";
               if (revealed && correctThis)
                 cardTone = "border-[var(--success)] bg-[var(--success-soft)]";
-              if (incorrectSelected)
-                cardTone = "border-[var(--danger)] bg-[var(--danger-soft)]";
+              if (incorrectSelected) cardTone = "border-[var(--danger)] bg-[var(--danger-soft)]";
               if (!revealed && selectedThis)
                 cardTone =
                   "border-[var(--accent)] bg-[color:color-mix(in_oklab,var(--accent)_10%,white)]";
@@ -419,21 +408,15 @@ function QuizSessionPage() {
           <div
             className="rounded-[1.5rem] px-3 py-3"
             style={{
-              background: (
-                selected ? isCorrectSelection(question, selected) : false
-              )
+              background: (selected ? isCorrectSelection(question, selected) : false)
                 ? "var(--success-soft)"
                 : "color-mix(in oklab, var(--accent) 10%, white)",
             }}
           >
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--text-secondary)]">
-              {selected && isCorrectSelection(question, selected)
-                ? "Correct"
-                : "Review note"}
+              {selected && isCorrectSelection(question, selected) ? "Correct" : "Review note"}
             </p>
-            <p className="mt-2 text-sm leading-7 text-[var(--text-primary)]">
-              {question.explain}
-            </p>
+            <p className="mt-2 text-sm leading-7 text-[var(--text-primary)]">{question.explain}</p>
           </div>
         )}
 
@@ -464,12 +447,7 @@ function QuizSessionPage() {
 
 const QUESTION_TARGET_MS = 15_000;
 
-function QuestionTimer({
-  elapsedMs,
-}: {
-  elapsedMs: number;
-  totalQuestions: number;
-}) {
+function QuestionTimer({ elapsedMs }: { elapsedMs: number; totalQuestions: number }) {
   const cap = 10;
   const ratio = Math.max(0, 1 - elapsedMs / QUESTION_TARGET_MS);
   const bonus = ratio * cap;
@@ -477,31 +455,55 @@ function QuestionTimer({
   const expired = ratio === 0;
   const fillColor = expired ? "var(--text-muted)" : "var(--accent-strong)";
 
+  const radius = 45;
+  const circumference = 2 * Math.PI * radius;
+  const dashOffset = circumference * (1 - fillPercent / 100);
+
   return (
-    <div className="grid gap-2 rounded-[1.4rem] bg-(--surface) px-3 py-2.5">
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-baseline gap-2">
-          <span
-            className="font-display text-2xl font-semibold tabular-nums tracking-[-0.05em]"
-            style={{
-              color: expired ? "var(--text-muted)" : "var(--text-primary)",
-            }}
-          >
-            {(elapsedMs / 1000).toFixed(1)}s
-          </span>
-          <span
-            className="text-xs font-semibold tabular-nums"
-            style={{ color: fillColor }}
-          >
-            {expired ? "no bonus" : `+${bonus.toFixed(1)} bonus`}
-          </span>
-        </div>
-      </div>
-      <div className="h-1.5 overflow-hidden rounded-full bg-(--surface-strong)">
-        <div
-          className="h-full rounded-full transition-[width] duration-100 ease-linear"
-          style={{ width: `${fillPercent}%`, background: fillColor }}
+    <div
+      className="relative aspect-square h-17 w-17"
+      role="img"
+      aria-label={`Time elapsed ${(elapsedMs / 1000).toFixed(1)} seconds`}
+    >
+      <svg className="h-full w-full -rotate-90" viewBox="0 0 100 100">
+        <circle
+          cx="50"
+          cy="50"
+          r={radius}
+          stroke="var(--surface-strong)"
+          strokeWidth="8"
+          fill="none"
         />
+        <circle
+          cx="50"
+          cy="50"
+          r={radius}
+          stroke={fillColor}
+          strokeWidth="8"
+          fill="none"
+          strokeLinecap="round"
+          strokeDasharray={circumference}
+          strokeDashoffset={dashOffset}
+          style={{
+            transition: "stroke-dashoffset 100ms linear, stroke 200ms ease-out",
+          }}
+        />
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center leading-none">
+        <span
+          className="font-display text-base font-semibold tabular-nums tracking-[-0.04em]"
+          style={{
+            color: expired ? "var(--text-muted)" : "var(--text-primary)",
+          }}
+        >
+          {(elapsedMs / 1000).toFixed(1)}s
+        </span>
+        <span
+          className="mt-0.5 text-[0.6rem] font-semibold tabular-nums"
+          style={{ color: fillColor }}
+        >
+          {expired ? "0" : `+${bonus.toFixed(1)}`}
+        </span>
       </div>
     </div>
   );

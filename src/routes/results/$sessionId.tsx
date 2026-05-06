@@ -1,11 +1,6 @@
 import { useMemo } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import {
-  cardClass,
-  primaryButtonClass,
-  secondaryButtonClass,
-  subtitleClass,
-} from "../../lib/ui";
+import { cardClass, primaryButtonClass, secondaryButtonClass, subtitleClass } from "../../lib/ui";
 
 type AnswerRecord = {
   questionId: string;
@@ -32,11 +27,7 @@ function formatDuration(ms: number): string {
 }
 
 function ResultsPage() {
-  const {
-    name = "Guest",
-    answers: answersRaw,
-    questionTimings: timingsRaw,
-  } = Route.useSearch();
+  const { name = "Guest", answers: answersRaw, questionTimings: timingsRaw } = Route.useSearch();
 
   const answers: AnswerRecord[] = useMemo(() => {
     if (!answersRaw) return [];
@@ -51,9 +42,7 @@ function ResultsPage() {
     if (!timingsRaw) return [];
     try {
       const parsed = JSON.parse(timingsRaw);
-      return Array.isArray(parsed)
-        ? parsed.map((n) => (typeof n === "number" ? n : 0))
-        : [];
+      return Array.isArray(parsed) ? parsed.map((n) => (typeof n === "number" ? n : 0)) : [];
     } catch {
       return [];
     }
@@ -61,19 +50,15 @@ function ResultsPage() {
 
   const totalCorrect = answers.filter((a) => a.correct).length;
   const totalQuestions = answers.length;
-  const accuracy =
-    totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
+  const accuracy = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
 
-  const perQuestionCap =
-    totalQuestions > 0 ? MAX_SPEED_BONUS / totalQuestions : 0;
+  const perQuestionCap = totalQuestions > 0 ? MAX_SPEED_BONUS / totalQuestions : 0;
   const rawSpeed = questionTimings.reduce((sum, ms) => {
     const ratio = Math.max(0, 1 - ms / TARGET_MS_PER_QUESTION);
     return sum + ratio * perQuestionCap;
   }, 0);
   const speedBonus =
-    questionTimings.length > 0
-      ? Math.min(MAX_SPEED_BONUS, Math.round(rawSpeed))
-      : 0;
+    questionTimings.length > 0 ? Math.min(MAX_SPEED_BONUS, Math.round(rawSpeed)) : 0;
   const durationMs = questionTimings.reduce((sum, ms) => sum + ms, 0);
   const finalScore = accuracy + speedBonus;
   const avgPerQuestionMs = totalQuestions > 0 ? durationMs / totalQuestions : 0;
@@ -91,8 +76,7 @@ function ResultsPage() {
               No results yet
             </h1>
             <p className={`${subtitleClass} mt-2`}>
-              Complete a quiz round first, then come back for the full score
-              breakdown.
+              Complete a quiz round first, then come back for the full score breakdown.
             </p>
           </div>
           <Link className="mx-auto w-full sm:w-auto" to="/">
@@ -136,8 +120,8 @@ function ResultsPage() {
             {name}&apos;s result card
           </h1>
           <p className={`${subtitleClass} mt-3`}>
-            Review the clusters that felt sharp and the ones that need another
-            drill before the event.
+            Review the clusters that felt sharp and the ones that need another drill before the
+            event.
           </p>
         </div>
 
@@ -185,18 +169,14 @@ function ResultsPage() {
             <p className="font-display mt-2 text-3xl font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
               +{speedBonus}
             </p>
-            <p className="mt-1 text-xs text-[var(--text-secondary)]">
-              of {MAX_SPEED_BONUS}
-            </p>
+            <p className="mt-1 text-xs text-[var(--text-secondary)]">of {MAX_SPEED_BONUS}</p>
           </article>
           <article className="rounded-[1.4rem] bg-[var(--surface)] px-3 py-3 text-center">
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
               Avg / question
             </p>
             <p className="font-display mt-2 text-3xl font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
-              {avgPerQuestionMs > 0
-                ? `${(avgPerQuestionMs / 1000).toFixed(1)}s`
-                : "—"}
+              {avgPerQuestionMs > 0 ? `${(avgPerQuestionMs / 1000).toFixed(1)}s` : "—"}
             </p>
             <p className="mt-1 text-xs text-[var(--text-secondary)]">
               target {TARGET_MS_PER_QUESTION / 1000}s
@@ -295,9 +275,7 @@ export const Route = createFileRoute("/results/$sessionId")({
     name: typeof search.name === "string" ? search.name : undefined,
     answers: typeof search.answers === "string" ? search.answers : undefined,
     questionTimings:
-      typeof search.questionTimings === "string"
-        ? search.questionTimings
-        : undefined,
+      typeof search.questionTimings === "string" ? search.questionTimings : undefined,
   }),
   component: ResultsPage,
 });

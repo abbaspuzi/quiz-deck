@@ -135,8 +135,11 @@ function QuizSessionPage() {
         correct: data.correct,
         total: data.total,
       })),
-    }).catch(() => {
-      // Results still render locally when submission fails.
+    }).catch((error) => {
+      // Results still render locally when submission fails — but log so the
+      // failure shows up in DevTools instead of disappearing silently.
+      console.error("submitResult failed", error);
+      submitted.current = false;
     });
   }, [answers, isFinished, playerName, score, submitResult, total, allTimed]);
 

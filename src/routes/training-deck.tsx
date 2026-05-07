@@ -65,7 +65,7 @@ function TrainingDeckPage() {
         </div>
 
         <div className="grid gap-3">
-          <h1 className="font-display text-balance text-[clamp(1.95rem,3.9vw,3rem)] font-semibold leading-[0.98] tracking-[-0.06em] text-(--text-primary)">
+          <h1 className="font-display text-balance text-xl font-semibold leading-[0.98] tracking-[-0.06em] text-(--text-primary)">
             {card.prompt}
           </h1>
         </div>
@@ -77,7 +77,7 @@ function TrainingDeckPage() {
                 <img
                   src={card.image}
                   alt={card.answer}
-                  className="mx-auto aspect-4/5 max-h-[min(56svh,28rem)] w-full max-w-104 rounded-[1.2rem] object-cover object-center"
+                  className="mx-auto aspect-4/5 max-h-80 w-full rounded-[1.2rem] object-contain object-center rouded"
                 />
               </div>
             )}
@@ -134,7 +134,7 @@ function TrainingDeckPage() {
                   <img
                     src={option.image}
                     alt={option.name}
-                    className="aspect-square max-h-[min(24svh,11rem)] w-full rounded-[1.2rem] object-cover object-center sm:aspect-4/5 sm:max-h-[min(16rem,34vh)]"
+                    className="aspect-square max-h-40 w-full rounded-[1.2rem] object-contain object-center sm:aspect-4/5 sm:max-h-[min(16rem,34vh)]"
                   />
                 </button>
               );

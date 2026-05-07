@@ -79,7 +79,7 @@ function LeaderboardPage() {
                     <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
                       Rank {index + 1}
                     </p>
-                    <h2 className="font-display mt-2 text-[1.7rem] font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
+                    <h2 className="font-display text-[1.7rem] font-semibold tracking-[-0.06em] text-[var(--text-primary)]">
                       {entry.name}
                     </h2>
                   </div>
@@ -88,7 +88,7 @@ function LeaderboardPage() {
                   </div>
                 </div>
 
-                <div className="mt-8 flex items-end justify-between gap-4">
+                <div className="mt-2 flex items-end justify-between gap-4">
                   <div>
                     <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
                       Score

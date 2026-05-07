@@ -40,7 +40,7 @@ function IndexPage() {
     });
   };
 
-  const topPreview = leaderboard?.slice(0, 3) ?? [];
+  const topPreview = leaderboard?.slice(0, 5) ?? [];
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">

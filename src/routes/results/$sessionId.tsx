@@ -31,11 +31,7 @@ function formatDuration(ms: number): string {
 }
 
 function ResultsPage() {
-  const {
-    name = "Guest",
-    answers = [],
-    questionResults = [],
-  } = Route.useSearch();
+  const { name = "Guest", answers = [], questionResults = [] } = Route.useSearch();
 
   const totalCorrect = answers.filter((a) => a.correct).length;
   const totalQuestions = answers.length;
@@ -263,9 +259,7 @@ function ResultsPage() {
 export const Route = createFileRoute("/results/$sessionId")({
   validateSearch: (search: Record<string, unknown>): ResultsSearch => ({
     name: typeof search.name === "string" ? search.name : undefined,
-    answers: Array.isArray(search.answers)
-      ? (search.answers as AnswerRecord[])
-      : undefined,
+    answers: Array.isArray(search.answers) ? (search.answers as AnswerRecord[]) : undefined,
     questionResults: Array.isArray(search.questionResults)
       ? (search.questionResults as QuestionResult[])
       : undefined,

@@ -515,7 +515,7 @@ function QuizSessionPage() {
 
 const QUESTION_TARGET_MS = 30_000;
 const SCORE_TARGET_MS_PER_QUESTION = 15_000;
-const MAX_SPEED_BONUS = 100;
+const MAX_SPEED_BONUS = 50;
 
 function formatRoundDuration(ms: number): string {
   const totalSeconds = Math.max(0, Math.round(ms / 1000));
